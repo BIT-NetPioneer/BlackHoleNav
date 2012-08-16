@@ -58,9 +58,23 @@ class Url_m extends CI_Model {
         return $query->result();
     }
 
-    function update_heat($urlid, $newheat){
+    function update_heat($urlid, $newheat) {
         $this->db->query("UPDATE `urllist` SET `heat`= $newheat ,`heattimestamp` = NOW() WHERE `id`= $urlid");
     }
+
+    function get_by_heat($num = 8, $all = 0) {
+        if ($all == 0) {
+            $this->db->where('`status` > 0');
+        }
+        $this->db->limit($num);
+        $this->db->select('*');
+        $this->db->order_by('heat', 'desc');
+        $this->db->order_by('rank', 'asc');
+        $query = $this->db->get('urllist');
+
+        return $query->result();
+    }
+
 }
 
 ?>

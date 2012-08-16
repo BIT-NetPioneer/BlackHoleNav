@@ -55,7 +55,7 @@ class Nav extends CI_Controller {
             $tmpCommon = $this->common_m->get_by_status($i);
             $commonCount = 0;
             foreach ($tmpCommon as $row) {
-                if ($commonCount == $rowMax[$i]) {
+                if ($commonCount == $rowMax[$i-1]) {
                     $commonCount = 0;
                     $rowCount++;
                 }

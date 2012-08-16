@@ -81,10 +81,42 @@ theEnd;
             $heat = $row->heat * exp(-0.0231 * $time) + $num;
             $contont .= "<p>$row->url --- $time --- $num --- $heat</p>";
         }
-        
+
         $this->load->view('blank', array('content' => $contont));
 
         $this->load->view('all_footer');
+    }
+
+    function generatecommon() {
+        $this->load->model('url_m');
+        $this->load->model('common_m');
+        $topurl = $this->url_m->get_by_heat(12);
+
+        foreach ($topurl as $row) {
+            $tmp = array();
+            $tmp['url'] = $row->url;
+            $tmp['name'] = $row->name;
+            $tmp['rank'] = ceil(log1p($row->heat) * 10);
+            
+            $this->common_m->insert_url($tmp);
+            //echo "<p>{$tmp['url']}------{$tmp['name']}------{$tmp['rank']}</p>";
+        }
+    }
+    
+    function generatecommonpreview() {
+        $this->load->model('url_m');
+        $this->load->model('common_m');
+        $topurl = $this->url_m->get_by_heat(12);
+
+        foreach ($topurl as $row) {
+            $tmp = array();
+            $tmp['url'] = $row->url;
+            $tmp['name'] = $row->name;
+            $tmp['rank'] = ceil(log1p($row->heat) * 10);
+            
+            //$this->common_m->insert_url($tmp);
+            echo "<p>{$tmp['url']}------{$tmp['name']}------{$tmp['rank']}</p>";
+        }
     }
 
 }

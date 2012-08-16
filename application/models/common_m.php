@@ -46,6 +46,27 @@ class Common_m extends CI_Model {
         return $query->result();
     }
 
+    function insert_url($url_a) {
+        $this->db->where('url', $url_a['url']);
+        $this->db->select('status');
+        $query = $this->db->get('common');
+
+        if ($query->num_rows() != 0) {
+            $this->db->where('url', $url_a['url']);
+            $this->db->set('rank', $url_a['rank']);
+            $this->db->update('common');
+            return $query->row->status;
+        } else {
+            $data = array(
+                'url' => $url_a['url'],
+                'name' => $url_a['name'],
+                'rank' => $url_a['rank'],
+                'status' => 4
+            );
+            $this->db->insert('common', $data);
+        }
+    }
+
 }
 
 ?>
