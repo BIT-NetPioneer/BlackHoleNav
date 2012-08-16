@@ -11,9 +11,8 @@ if (!defined('BASEPATH'))
 class C extends CI_Controller {
 
     function jmp() {
-        parse_str($_SERVER['QUERY_STRING'], $_GET);
-        $urlid = $_GET['uid'];
-        $url = $_GET['url'];
+        $urlid = $this->input->get('uid', TRUE);
+        $url = $this->input->get('url', TRUE);
 
         $this->load->model('statistics_m');
         $this->statistics_m->save_click($urlid, $url);
@@ -22,9 +21,9 @@ class C extends CI_Controller {
     }
 
     function jmpc() {
-        parse_str($_SERVER['QUERY_STRING'], $_GET);
-        $urlid = $_GET['uid'];
-        $url = $_GET['url'];
+        $urlid = $this->input->get('uid', TRUE);
+        $url = $this->input->get('url', TRUE);
+        
         $this->load->model('statistics_m');
         $this->statistics_m->save_click($urlid, $url, 1);
 
