@@ -150,37 +150,7 @@ class Nav extends CI_Controller {
     }
 
     function test() {
-        $this->load->model('common_m');
-        $allcommon = array();
-
-        //$commons = $this->common_m->get_all();
-        $rowCount = 0;
-        for ($i = 1; $i <= 4; $i++) {
-            if ($i == 3) {
-                $allcommon[$rowCount]['style'] = 'hr';
-                $rowCount++;
-            }
-            $tmpCommon = $this->common_m->get_by_status($i);
-            $commonCount = 0;
-            foreach ($tmpCommon as $row) {
-                if ($commonCount == 6) {
-                    $commonCount = 0;
-                    $rowCount++;
-                }
-                if ($commonCount == 0) {
-                    $allcommon[$rowCount]['style'] = 'row' . $i;
-                }
-                $tmp = array(
-                    'name' => $row->name,
-                    'url' => $row->url,
-                    'uid' => $row->id
-                );
-                $allcommon[$rowCount]['urls'][$commonCount] = $tmp;
-                $commonCount++;
-            }
-            $rowCount++;
-        }
-        var_dump($allcommon);
+        
     }
 
 }
