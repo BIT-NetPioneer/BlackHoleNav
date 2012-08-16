@@ -10,7 +10,7 @@
         <?php else: ?>
             <link href="<?php echo base_url("css/$csses.css"); ?>" type="text/css" rel="stylesheet" />
         <?php endif; ?>
-        <? if (is_array($jses)): ?>
+        <?php if (is_array($jses)): ?>
             <?php foreach ($jses as $js): ?>
                 <script src="<?php echo base_url("js/$js.js"); ?>" type="text/javascript"></script>
             <?php endforeach; ?>
