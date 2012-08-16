@@ -88,6 +88,9 @@ theEnd;
     }
 
     function generatecommon() {
+        $do = $this->input->get('do', TRUE);
+        echo "<p>$do</p>";
+
         $this->load->model('url_m');
         $this->load->model('common_m');
         $topurl = $this->url_m->get_by_heat(12);
@@ -96,26 +99,12 @@ theEnd;
             $tmp = array();
             $tmp['url'] = $row->url;
             $tmp['name'] = $row->name;
-            $tmp['rank'] = ceil(log1p($row->heat) * 10);
-            
-            $this->common_m->insert_url($tmp);
-            //echo "<p>{$tmp['url']}------{$tmp['name']}------{$tmp['rank']}</p>";
-        }
-    }
-    
-    function generatecommonpreview() {
-        $this->load->model('url_m');
-        $this->load->model('common_m');
-        $topurl = $this->url_m->get_by_heat(12);
+            $tmp['rank'] = ceil(200 - log1p($row->heat) * 10);
 
-        foreach ($topurl as $row) {
-            $tmp = array();
-            $tmp['url'] = $row->url;
-            $tmp['name'] = $row->name;
-            $tmp['rank'] = ceil(log1p($row->heat) * 10);
-            
-            //$this->common_m->insert_url($tmp);
-            echo "<p>{$tmp['url']}------{$tmp['name']}------{$tmp['rank']}</p>";
+            if ($do)
+                $this->common_m->insert_url($tmp);
+            else
+                echo "<p>{$tmp['url']}------{$tmp['name']}------{$tmp['rank']}</p>";
         }
     }
 

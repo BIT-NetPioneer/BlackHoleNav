@@ -55,7 +55,7 @@ class Common_m extends CI_Model {
             $this->db->where('url', $url_a['url']);
             $this->db->set('rank', $url_a['rank']);
             $this->db->update('common');
-            return $query->row->status;
+            return $query->row()->status; // 返回已存在链接的分类
         } else {
             $data = array(
                 'url' => $url_a['url'],
