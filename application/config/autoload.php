@@ -80,7 +80,7 @@ $autoload['helper'] = array('security','url');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('NAV_config');
 
 
 /*

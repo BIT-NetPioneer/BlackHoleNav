@@ -17,14 +17,6 @@ class Nav extends CI_Controller {
         $data_l = '';
         $data_r = '';
 
-        $head_data['title'] = "BlackHole导航";
-        $head_data['date_info'] = date("Y年m月d日");
-
-        $dayOfYear = $d = date("z") + 1;
-        $w = ceil($dayOfYear / 7);
-        $d = 244 - $dayOfYear;
-        $head_data['week'] = "今年第{$w}周，据开学还有{$d}天";
-
         $csses = array(
             'reset',
             'header',

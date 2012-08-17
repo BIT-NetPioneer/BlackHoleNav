@@ -1,8 +1,14 @@
+<?php
+$dayOfYear = $d = date("z") + 1;
+$w = ceil($dayOfYear / 7);
+$d = 244 - $dayOfYear;
+$week = "今年第{$w}周，据开学还有{$d}天";
+?>
 <!DOCTYPE HTML>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><?php echo $title; ?></title>
+        <title><?php echo $this->config->item('nav_title'); ?></title>
         <?php if (is_array($csses)): ?>
             <?php foreach ($csses as $css): ?>
                 <link href="<?php echo base_url("css/$css.css"); ?>" type="text/css" rel="stylesheet" />
@@ -79,9 +85,9 @@
     <!--[if ie 6]><script src="<?php echo base_url(); ?>js/letskillie6.zh_CN.pack.js" type=text/javascript></script><![endif]-->
     <div id="top">
         <div id="nav">
-            <p id="dateinfo"><?php echo $date_info; ?></p>
+            <p id="dateinfo"><?php echo date("Y年m月d日"); ?></p>
             <p id="weeks"><?php echo $week; ?></p>
-            <p id="welcomeinfo">欢迎来到BlackHole导航</p>
+            <p id="welcomeinfo">欢迎来到<?php echo $this->config->item('nav_name'); ?></p>
         </div>
     </div>
     <div id="header">
