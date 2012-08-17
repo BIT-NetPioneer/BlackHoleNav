@@ -10,6 +10,7 @@ if (!defined('BASEPATH'))
  */
 class Admin extends CI_Controller {
 
+    //验证session
     function check_session() {
         $this->load->library('session');
         if ($this->session->userdata('permission') > 2) {

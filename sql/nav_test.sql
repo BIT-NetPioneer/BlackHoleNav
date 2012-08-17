@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 08 月 16 日 10:18
+-- 生成日期: 2012 年 08 月 17 日 10:13
 -- 服务器版本: 5.5.20
 -- PHP 版本: 5.3.10
 
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 -- 数据库: `nav_test`
 --
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(16) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('112f58f347c6e44a8d7443ea156915c9', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', 1345189782, 'a:4:{s:9:"user_data";s:0:"";s:5:"uname";s:5:"bitnp";s:5:"upass";s:40:"28765716e195114d7ba9795a70b94be9d75ddfb6";s:10:"permission";s:1:"9";}'),
+('b0053062e606106d3b191193c76f7468', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', 1345189858, 'a:4:{s:9:"user_data";s:0:"";s:5:"uname";s:5:"bitnp";s:5:"upass";s:40:"28765716e195114d7ba9795a70b94be9d75ddfb6";s:10:"permission";s:1:"9";}');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `class`
+--
+
+CREATE TABLE IF NOT EXISTS `class` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `rank` int(4) NOT NULL,
+  `status` int(2) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
 --
 -- 转存表中的数据 `class`
 --
@@ -33,6 +71,23 @@ INSERT INTO `class` (`id`, `name`, `rank`, `status`) VALUES
 (6, '院系', 6, 1),
 (7, '实验', 7, 1),
 (8, '社团', 8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `common`
+--
+
+CREATE TABLE IF NOT EXISTS `common` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `rank` int(4) NOT NULL,
+  `heat` int(4) NOT NULL DEFAULT '0',
+  `heattimestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- 转存表中的数据 `common`
@@ -56,7 +111,36 @@ INSERT INTO `common` (`id`, `url`, `name`, `rank`, `heat`, `heattimestamp`, `sta
 (16, 'http://www.ifeng.com', '凤凰网', 9, 0, '2012-08-16 06:00:01', 2),
 (17, 'http://ele.me', '饿了么', 10, 0, '2012-08-16 06:00:01', 2),
 (18, 'http://www.cmbchina.com', '招商银行', 11, 0, '2012-08-16 06:00:01', 2),
-(19, 'http://up.mydrivers.com/welcome.htm', '驱动精灵', 12, 0, '2012-08-16 06:00:01', 2);
+(19, 'http://up.mydrivers.com/welcome.htm', '驱动精灵', 12, 0, '2012-08-16 06:00:01', 2),
+(21, 'http://jwc.bit.edu.cn/', '教务处', 160, 0, '2012-08-16 17:02:40', 4),
+(22, 'http://bbs.bitnp.net/', '京工社区', 200, 0, '2012-08-16 17:02:40', 4),
+(23, 'http://www.bitunion.org/', 'FTP联盟', 200, 0, '2012-08-16 17:02:40', 4),
+(24, 'http://music.bitnp.net/', '找乐网', 200, 0, '2012-08-16 17:02:40', 4),
+(25, 'http://jwc.bit.edu.cn/plus/view.php?aid=2114', '校历', 200, 0, '2012-08-16 17:02:40', 4),
+(26, 'http://www.bit.edu.cn/', '北理首页', 200, 0, '2012-08-16 17:02:41', 4),
+(27, 'http://grd.bit.edu.cn/', '研究生院', 200, 0, '2012-08-16 17:02:41', 4),
+(28, 'http://assn.bit.edu.cn/', '北理社联', 200, 0, '2012-08-16 17:02:41', 4),
+(29, 'http://www.bitfx.org/', '飞翔论坛', 200, 0, '2012-08-16 17:02:41', 4),
+(30, 'http://bbs.bitnp.net/nplive', 'NPLIVE', 200, 0, '2012-08-16 17:02:41', 4),
+(31, 'http://www.bit.edu.cn/ggfw/bgdh18/gljgdh/29084.htm', '办公电话', 200, 0, '2012-08-16 17:02:41', 4),
+(32, 'http://lib.bit.edu.cn/', '图书馆', 200, 0, '2012-08-16 17:02:41', 4);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `special`
+--
+
+CREATE TABLE IF NOT EXISTS `special` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `image` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `status` int(2) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `special`
@@ -67,6 +151,22 @@ INSERT INTO `special` (`id`, `name`, `url`, `description`, `image`, `date`, `sta
 (2, '《同校生》极限高压汉化版', 'http://www.baidu.com/', 'i社，Real-time引擎力作。经典3d游戏', '2', '2012-08-31', 1),
 (3, '《工口医3D》自由下载', 'http://www.qq.com/', '2008年F社作品，《工口医3D》XX医生！', '3', '2012-08-31', 1),
 (4, 'ABS-141!!!', 'http://115.com/file/e70ncwph', '90后 泷泽萝拉，你懂的。', '1-Medium_20120725135631125', '2012-08-31', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `statistics`
+--
+
+CREATE TABLE IF NOT EXISTS `statistics` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `uid` int(4) NOT NULL,
+  `ua` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `iscommon` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `statistics`
@@ -87,7 +187,28 @@ INSERT INTO `statistics` (`id`, `url`, `uid`, `ua`, `timestamp`, `iscommon`) VAL
 (12, 'http://bbs.bitnp.net/nplive', 8, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11', '2012-07-30 11:42:40', 0),
 (13, 'http://qgzx.bit.edu.cn/', 62, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)', '2012-07-30 11:49:34', 0),
 (14, 'http://lgfx.bit.edu.cn/', 37, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)', '2012-07-30 11:49:45', 0),
-(15, 'http://www.bilibili.tv', 15, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-16 06:20:37', 1);
+(15, 'http://www.bilibili.tv', 15, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-16 06:20:37', 1),
+(16, 'http://jwc.bit.edu.cn/', 59, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-16 17:24:23', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `urllist`
+--
+
+CREATE TABLE IF NOT EXISTS `urllist` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `class` int(4) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `rank` int(4) NOT NULL,
+  `is_direct` int(2) NOT NULL,
+  `heat` int(4) NOT NULL DEFAULT '0',
+  `heattimestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(2) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
 
 --
 -- 转存表中的数据 `urllist`
