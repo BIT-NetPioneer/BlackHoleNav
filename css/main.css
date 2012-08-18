@@ -204,13 +204,13 @@
     border-bottom: 1px solid #76bdfc;
 }
 .news-class-title{
-    padding-left: 24px;
+    padding-left: 10px;
     height: 14px;
     font-weight: bold;
-    background: url("../img/news-title.png") no-repeat scroll 0 0 transparent;
 }
 .news-class-more{
     float: right;
+    padding-right: 5px;
 }
 .news-class-more a{
     color: #2B2B2B;
