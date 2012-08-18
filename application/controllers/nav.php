@@ -32,12 +32,12 @@ class Nav extends CI_Controller {
         $head_data['jses'] = $jses;
         $this->load->view('all_header', $head_data);
 
-        // commonUrl
+// commonUrl
         $this->load->model('common_m');
         $rowMax = array(6, 8, 8, 8);
         $allcommon = array();
 
-        //$commons = $this->common_m->get_all();
+//$commons = $this->common_m->get_all();
         $rowCount = 0;
         for ($i = 1; $i <= 4; $i++) {
             if ($i == 3) {
@@ -47,7 +47,7 @@ class Nav extends CI_Controller {
             $tmpCommon = $this->common_m->get_by_status($i);
             $commonCount = 0;
             foreach ($tmpCommon as $row) {
-                if ($commonCount == $rowMax[$i-1]) {
+                if ($commonCount == $rowMax[$i - 1]) {
                     $commonCount = 0;
                     $rowCount++;
                 }
@@ -67,11 +67,11 @@ class Nav extends CI_Controller {
         $data_l['commons'] = $allcommon;
 
 
-        // getClass;
+// getClass;
         $this->load->model('class_m');
         $classes = $this->class_m->get_all();
 
-        // getUrlByClass
+// getUrlByClass
         $this->load->model('url_m');
 
         $classCount = 0;
@@ -82,7 +82,7 @@ class Nav extends CI_Controller {
             if (!empty($urls)) {
                 $tmpClass = null;
                 $tmpClass['name'] = $row->name;
-                //$tmpClass['urls'] = array();
+//$tmpClass['urls'] = array();
                 $urlCount = 0;
                 foreach ($urls as $url) {
                     $urlclass = "";
@@ -117,7 +117,7 @@ class Nav extends CI_Controller {
 
 
         $data_r['specials'] = '';
-        // getSpecial
+// getSpecial
         $this->load->model('special_m');
         $specials = $this->special_m->get_normal();
         if (!empty($specials)) {
@@ -135,6 +135,22 @@ class Nav extends CI_Controller {
             }
         }
 
+        // getNews
+        $this->load->model('news_m');
+        $data_r['allnews'] = array();
+
+        for ($i = 1; $i <= 3; $i++) {
+            $newses = $this->news_m->get_by_source($i);
+            $newsCount = 0;
+            foreach ($newses as $row) {
+                $tmp = array(
+                    'title' => $row->title,
+                    'url' => $row->url
+                );
+                $data_r['allnews'][$i - 1][$newsCount] = $tmp;
+                $newsCount++;
+            }
+        }
 
         $this->load->view('mainleft', $data_l);
         $this->load->view('mainright', $data_r);
@@ -142,7 +158,23 @@ class Nav extends CI_Controller {
     }
 
     function test() {
-        
+        $this->load->model('news_m');
+        $data_r['allnews'] = array();
+
+        for ($i = 1; $i <= 3; $i++) {
+            $newses = $this->news_m->get_by_source($i);
+            $newsCount = 0;
+            foreach ($newses as $row) {
+                $tmp = array(
+                    'title' => $row->title,
+                    'url' => $row->url
+                );
+                $data_r['allnews'][$i - 1][$newsCount] = $tmp;
+                $newsCount++;
+            }
+        }
+
+        var_dump($data_r);
     }
 
 }
