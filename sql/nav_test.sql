@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 08 月 17 日 10:13
+-- 生成日期: 2012 年 08 月 18 日 13:38
 -- 服务器版本: 5.5.20
 -- PHP 版本: 5.3.10
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- 表的结构 `ci_sessions`
 --
 
+DROP TABLE IF EXISTS `ci_sessions`;
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
@@ -50,6 +51,7 @@ INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activ
 -- 表的结构 `class`
 --
 
+DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -78,6 +80,7 @@ INSERT INTO `class` (`id`, `name`, `rank`, `status`) VALUES
 -- 表的结构 `common`
 --
 
+DROP TABLE IF EXISTS `common`;
 CREATE TABLE IF NOT EXISTS `common` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
@@ -128,9 +131,48 @@ INSERT INTO `common` (`id`, `url`, `name`, `rank`, `heat`, `heattimestamp`, `sta
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `date` datetime NOT NULL,
+  `source` int(2) NOT NULL,
+  `status` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+
+--
+-- 转存表中的数据 `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `url`, `date`, `source`, `status`) VALUES
+(18, '2012年本科生秋季售书时间安排(新)', 'http://jwc.bit.edu.cn/plus/view.php?aid=2866', '2012-08-18 17:35:00', 1, 1),
+(19, '关于对李某考试作弊的通报', 'http://jwc.bit.edu.cn/plus/view.php?aid=2864', '2012-08-18 17:35:00', 1, 1),
+(20, '关于2012年暑假期间教务管理系统关闭的通知', 'http://jwc.bit.edu.cn/plus/view.php?aid=2863', '2012-08-18 17:35:00', 1, 1),
+(21, '2012-2013学年第一学期各专业接收学生情况表', 'http://jwc.bit.edu.cn/plus/view.php?aid=2862', '2012-08-18 17:35:00', 1, 1),
+(22, '关于对王某、?p某、闻某、马某及吕某五人考试作弊的通报', 'http://jwc.bit.edu.cn/plus/view.php?aid=2861', '2012-08-18 17:35:00', 1, 1),
+(23, 'QS亚洲大学排名公布，北理工位居亚洲100强', 'http://www.bit.edu.cn/xww/xwtt/77913.htm', '2012-08-18 17:35:00', 2, 1),
+(24, '北理工能源与环境政策研究中心发布《中国能源报告（2012', 'http://www.bit.edu.cn/xww/xwtt/78108.htm', '2012-08-18 17:35:00', 2, 1),
+(25, '北理工学子夺得第五届全国大学生信息安全大赛多个奖项', 'http://www.bit.edu.cn/xww/xwtt/78107.htm', '2012-08-18 17:35:00', 2, 1),
+(26, '北理工学子在第三届“飞向未来”亚洲区太空探索竞赛中喜获佳', 'http://www.bit.edu.cn/xww/xwtt/78098.htm', '2012-08-18 17:35:00', 2, 1),
+(27, '郭大成书记胡海岩校长关心良乡校区汛期安全工作', 'http://www.bit.edu.cn/xww/xwtt/78089.htm', '2012-08-18 17:35:00', 2, 1),
+(28, '中教大厅：良乡校区职工住宅沙盘展介', 'http://www.bit.edu.cn/ggfw/tzgg17/78068.htm', '2012-08-18 17:35:00', 3, 1),
+(29, '关于组织申报2012年度“教育部-中国移动科研基金”项目的通知', 'http://www.bit.edu.cn/ggfw/tzgg17/78210.htm', '2012-08-18 17:35:00', 3, 1),
+(30, '关于做好全国教育科学“十二五”规划2012年度课题组织申报工作的通知', 'http://www.bit.edu.cn/ggfw/tzgg17/78185.htm', '2012-08-18 17:35:00', 3, 1),
+(31, '“创新与成长”――北理工第二届校友论坛专题', 'http://www.bit.edu.cn/ggfw/tzgg17/78161.htm', '2012-08-18 17:35:00', 3, 1),
+(32, '物理学院“博约学术论坛”系列报告第24期', 'http://www.bit.edu.cn/ggfw/tzgg17/78163.htm', '2012-08-18 17:35:00', 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `special`
 --
 
+DROP TABLE IF EXISTS `special`;
 CREATE TABLE IF NOT EXISTS `special` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -158,6 +200,7 @@ INSERT INTO `special` (`id`, `name`, `url`, `description`, `image`, `date`, `sta
 -- 表的结构 `statistics`
 --
 
+DROP TABLE IF EXISTS `statistics`;
 CREATE TABLE IF NOT EXISTS `statistics` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
@@ -196,6 +239,7 @@ INSERT INTO `statistics` (`id`, `url`, `uid`, `ua`, `timestamp`, `iscommon`) VAL
 -- 表的结构 `urllist`
 --
 
+DROP TABLE IF EXISTS `urllist`;
 CREATE TABLE IF NOT EXISTS `urllist` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `class` int(4) NOT NULL,
