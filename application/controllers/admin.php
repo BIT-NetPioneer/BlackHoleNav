@@ -52,7 +52,7 @@ class Admin extends CI_Controller {
     function checklogin() {
         $uname = $this->input->post('uname');
         $uname = str_replace(' ', null, $uname);
-        $uname = strtolower($uname);
+        $uname = strtolower(trim($uname));
 
         $upass = $this->input->post('upass');
 
