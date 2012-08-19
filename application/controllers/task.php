@@ -108,6 +108,59 @@ theEnd;
         }
     }
 
+    function get_news_from_bit() {
+        $this->load->helper('htmldom');
+        try {
+            $addtime = date('Y:m:d H:i:d');
+            $this->load->model('news_m');
+            $html = file_get_html("http://www.bit.edu.cn");
+            $i1 = 0; // 校园新闻计数
+            $i2 = 0; // 学校公告计数
+            //$this->news_m->empty_news();
+            foreach ($html->find('a[class=huizi]') as $element) {
+                echo $element->href . "---" . trim($element->innertext);
+                echo '===' . substr($element->href, 0, 3);
+                
+                switch (substr($element->href, 0, 3)) {
+                    case 'xww' :
+                        if ($i1++ >= 5)
+                            break;
+                        $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 2);
+                        echo '*';
+                        break;
+                    case 'ggf' :
+                        if ($i2++ >= 5)
+                            break;
+                        $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 3);
+                        echo '*';
+                        break;
+                }
+                echo "<br />";
+                if ($i1 >= 5 && $i2 >= 5)
+                    break;
+            }
+
+            // 学校公告
+            //foreach ($html->find)
+        } catch (Exception $e) {
+            echo "<p>貌似出了点错误</p>";
+        }
+    }
+
+    function get_news_test() {
+        $this->load->helper('htmldom');
+        try {
+            $html = file_get_html("http://www.bit.edu.cn");
+            foreach ($html->find('a[class=huizi]') as $element) {
+                echo $element->href . "---" . trim($element->innertext) . '<br />';
+                //$this->load->model('news_m');
+                //$this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 2);
+            }
+        } catch (Exception $e) {
+            echo "<p>貌似出了点错误</p>";
+        }
+    }
+
 }
 
 ?>
