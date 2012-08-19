@@ -4,12 +4,12 @@
             <p>常用网站</p>
         </div>
         <div class="commonurls">
-            <?php foreach ($commons as $common_row): ?>
+            <?php foreach ($commons as &$common_row): ?>
                 <?php if ($common_row['type'] == 'hr'): ?>
                     <hr />
                 <?php else: ?>
                     <p class="<?php echo $common_row['type']; ?>">
-                        <?php foreach ($common_row['urls'] as $common_url): ?>
+                        <?php foreach ($common_row['urls'] as &$common_url): ?>
                             <span class="urlspan" >
                                 <a href="<?php echo $common_url['url']; ?>" target="_blank" onmousedown="$(this).attr('href','<?php echo base_url();?>index.php/c/jmpc?uid=<?php echo $common_url['uid']; ?>&url=<?php echo $common_url['url']; ?>')">
                                     <?php if ($common_row['type'] == 'row1'): ?>
@@ -31,13 +31,13 @@
         </div>
         <div class="urls">
             <ul>
-                <?php foreach ($classes as $class): ?>
+                <?php foreach ($classes as &$class): ?>
                     <li class="urlclass">
                         <div class="url-class-title">
                             <span class="urlspantitle"><?php echo $class['name']; ?></span>
                         </div>
                         <div class="url-class-area">
-                            <?php foreach ($class['urls'] as $url): ?>
+                            <?php foreach ($class['urls'] as &$url): ?>
                                 <span class="urlspan2 <?php echo $url['style']; ?>" title="<?php echo $url['content']; ?>">
                                     <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="$(this).attr('href','<?php echo base_url();?>index.php/c/jmp?uid=59&url=<?php echo $url['url']; ?>')"><?php echo $url['name']; ?></a>
                                 </span>

@@ -8,7 +8,7 @@
             <div id="slider">
                 <ul id="sliderContent">
 
-                    <?php foreach ($specials as $special): ?>
+                    <?php foreach ($specials as &$special): ?>
                         <li class="sliderImage">
                             <a href="<?php echo $special['url'] ?>" target="_blank">
                                 <img src="<?php echo $special['image'] ?>" />
@@ -43,7 +43,7 @@
             </dt>
             <dd>
                 <ul class="news-list">
-                    <?php foreach ($allnews[0] as $news): ?>
+                    <?php foreach ($allnews[0] as &$news): ?>
                         <li class="newsitem">
                             <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
                                 <?php echo $news['title']; ?>
@@ -60,7 +60,7 @@
             </dt>
             <dd>
                 <ul class="news-list">
-                    <?php foreach ($allnews[1] as $news): ?>
+                    <?php foreach ($allnews[1] as &$news): ?>
                         <li class="newsitem">
                             <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
                                 <?php echo $news['title']; ?>
@@ -77,7 +77,7 @@
             </dt>
             <dd>
                 <ul class="news-list">
-                    <?php foreach ($allnews[2] as $news): ?>
+                    <?php foreach ($allnews[2] as &$news): ?>
                         <li class="newsitem">
                             <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
                                 <?php echo $news['title']; ?>
