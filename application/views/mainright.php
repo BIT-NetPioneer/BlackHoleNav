@@ -20,11 +20,11 @@
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
-                            <li class="sliderImage">
-                                <a href="http://www.bitnp.net" target="_blank">
-                                    <img src="<?php echo base_url('img/bitnp.jpg');?>" />
-                                </a>
-                            </li>
+                        <li class="sliderImage">
+                            <a href="http://www.bitnp.net" target="_blank">
+                                <img src="<?php echo base_url('img/bitnp.jpg'); ?>" />
+                            </a>
+                        </li>
                     <?php endif; ?>
                     <div class="clear sliderImage"></div>
                 </ul>
@@ -97,3 +97,9 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    $.get("./index.php/task?do=1", function(data){
+        console.log(data);
+    });
+</script>
