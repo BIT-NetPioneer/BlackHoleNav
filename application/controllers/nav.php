@@ -12,6 +12,11 @@ class Nav extends CI_Controller {
 
     function index() {
         // view缓存
+        //$this->output->cache(30);
+        
+        if($this->uri->total_segments()>2){
+            show_404();
+        }
         $this->output->cache(30);
         
         $baseurl = base_url();
@@ -162,6 +167,7 @@ class Nav extends CI_Controller {
 
     function test() {
        //echo urlencode("http://localhost/BlackHoleNav/index.php");
+        var_dump($this->uri->total_segments());
     }
 
 }
