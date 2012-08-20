@@ -76,8 +76,9 @@ $week = "今年第{$w}周，据开学还有{$d}天";
                         $('#search-form').attr('action', 'http://star.bit.edu.cn/ipsearch/ip.php')
                         break;
                 }
-                $('#search_selects').children('dd').css("display", "none");
+                $('#search_selects').children('dd').css("display", "none"); 
             })
+            $('.keywords').focus();
         });
     </script>
 </head>

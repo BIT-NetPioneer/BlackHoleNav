@@ -7,18 +7,25 @@
         <div id="specialcontent">
             <div id="slider">
                 <ul id="sliderContent">
-
-                    <?php foreach ($specials as &$special): ?>
-                        <li class="sliderImage">
-                            <a href="<?php echo $special['url'] ?>" target="_blank">
-                                <img src="<?php echo $special['image'] ?>" />
-                            </a>
-                            <span class="bottom">
-                                <strong><?php echo $special['name'] ?></strong><br />
-                                <?php echo $special['description'] ?>
-                            </span>
-                        </li>
-                    <?php endforeach; ?>
+                    <?php if (!isset($specials)) : ?>
+                        <?php foreach ($specials as &$special): ?>
+                            <li class="sliderImage">
+                                <a href="<?php echo $special['url'] ?>" target="_blank">
+                                    <img src="<?php echo $special['image'] ?>" />
+                                </a>
+                                <span class="bottom">
+                                    <strong><?php echo $special['name'] ?></strong><br />
+                                    <?php echo $special['description'] ?>
+                                </span>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                            <li class="sliderImage">
+                                <a href="http://www.bitnp.net" target="_blank">
+                                    <img src="<?php echo base_url('img/bitnp.jpg');?>" />
+                                </a>
+                            </li>
+                    <?php endif; ?>
                     <div class="clear sliderImage"></div>
                 </ul>
             </div>
