@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 08 月 18 日 13:38
+-- 生成日期: 2012 年 08 月 20 日 14:10
 -- 服务器版本: 5.5.20
 -- PHP 版本: 5.3.10
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- 表的结构 `ci_sessions`
 --
 
-DROP TABLE IF EXISTS `ci_sessions`;
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
@@ -51,7 +50,6 @@ INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activ
 -- 表的结构 `class`
 --
 
-DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -80,7 +78,6 @@ INSERT INTO `class` (`id`, `name`, `rank`, `status`) VALUES
 -- 表的结构 `common`
 --
 
-DROP TABLE IF EXISTS `common`;
 CREATE TABLE IF NOT EXISTS `common` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
@@ -131,10 +128,29 @@ INSERT INTO `common` (`id`, `url`, `name`, `rank`, `heat`, `heattimestamp`, `sta
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `config`
+--
+
+CREATE TABLE IF NOT EXISTS `config` (
+  `item` varchar(255) NOT NULL,
+  `value` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`item`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `config`
+--
+
+INSERT INTO `config` (`item`, `value`) VALUES
+('bit_news_time', '{"time":1345461831}'),
+('jwc_news_time', '{"time":1345461831}');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `news`
 --
 
-DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -143,28 +159,29 @@ CREATE TABLE IF NOT EXISTS `news` (
   `source` int(2) NOT NULL,
   `status` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `news`
 --
 
 INSERT INTO `news` (`id`, `title`, `url`, `date`, `source`, `status`) VALUES
-(18, '2012年本科生秋季售书时间安排(新)', 'http://jwc.bit.edu.cn/plus/view.php?aid=2866', '2012-08-18 17:35:00', 1, 1),
-(19, '关于对李某考试作弊的通报', 'http://jwc.bit.edu.cn/plus/view.php?aid=2864', '2012-08-18 17:35:00', 1, 1),
-(20, '关于2012年暑假期间教务管理系统关闭的通知', 'http://jwc.bit.edu.cn/plus/view.php?aid=2863', '2012-08-18 17:35:00', 1, 1),
-(21, '2012-2013学年第一学期各专业接收学生情况表', 'http://jwc.bit.edu.cn/plus/view.php?aid=2862', '2012-08-18 17:35:00', 1, 1),
-(22, '关于对王某、?p某、闻某、马某及吕某五人考试作弊的通报', 'http://jwc.bit.edu.cn/plus/view.php?aid=2861', '2012-08-18 17:35:00', 1, 1),
-(23, 'QS亚洲大学排名公布，北理工位居亚洲100强', 'http://www.bit.edu.cn/xww/xwtt/77913.htm', '2012-08-18 17:35:00', 2, 1),
-(24, '北理工能源与环境政策研究中心发布《中国能源报告（2012', 'http://www.bit.edu.cn/xww/xwtt/78108.htm', '2012-08-18 17:35:00', 2, 1),
-(25, '北理工学子夺得第五届全国大学生信息安全大赛多个奖项', 'http://www.bit.edu.cn/xww/xwtt/78107.htm', '2012-08-18 17:35:00', 2, 1),
-(26, '北理工学子在第三届“飞向未来”亚洲区太空探索竞赛中喜获佳', 'http://www.bit.edu.cn/xww/xwtt/78098.htm', '2012-08-18 17:35:00', 2, 1),
-(27, '郭大成书记胡海岩校长关心良乡校区汛期安全工作', 'http://www.bit.edu.cn/xww/xwtt/78089.htm', '2012-08-18 17:35:00', 2, 1),
-(28, '中教大厅：良乡校区职工住宅沙盘展介', 'http://www.bit.edu.cn/ggfw/tzgg17/78068.htm', '2012-08-18 17:35:00', 3, 1),
-(29, '关于组织申报2012年度“教育部-中国移动科研基金”项目的通知', 'http://www.bit.edu.cn/ggfw/tzgg17/78210.htm', '2012-08-18 17:35:00', 3, 1),
-(30, '关于做好全国教育科学“十二五”规划2012年度课题组织申报工作的通知', 'http://www.bit.edu.cn/ggfw/tzgg17/78185.htm', '2012-08-18 17:35:00', 3, 1),
-(31, '“创新与成长”――北理工第二届校友论坛专题', 'http://www.bit.edu.cn/ggfw/tzgg17/78161.htm', '2012-08-18 17:35:00', 3, 1),
-(32, '物理学院“博约学术论坛”系列报告第24期', 'http://www.bit.edu.cn/ggfw/tzgg17/78163.htm', '2012-08-18 17:35:00', 3, 1);
+(1, '2012年本科生秋季售书时间安排(新)', 'http://jwc.bit.edu.cn/plus/view.php?aid=2866', '2012-08-21 00:00:00', 1, 1),
+(2, '关于对李某考试作弊的通报', 'http://jwc.bit.edu.cn/plus/view.php?aid=2864', '2012-08-20 00:00:00', 1, 1),
+(3, '关于2012年暑假期间教务管理系统关闭的通', 'http://jwc.bit.edu.cn/plus/view.php?aid=2862', '2012-08-20 00:00:00', 1, 1),
+(4, '2012-2013学年第一学期各专业接收学生情况', 'http://jwc.bit.edu.cn/plus/view.php?aid=2862', '2012-08-20 00:00:00', 1, 1),
+(5, '关于对王某、?p某、闻某、马某及吕某五人', 'http://jwc.bit.edu.cn/plus/view.php?aid=2861', '2012-08-20 00:00:00', 1, 1),
+(6, 'QS亚洲大学排名公布 北理工位居亚洲100强', 'http://www.bit.edu.cn/xww/xwtt/77913.htm', '2012-08-20 00:34:20', 2, 1),
+(7, '北理工人文学院第六届天桥大学生主任助理暑期社会实践团结业...', 'http://www.bit.edu.cn/xww/xwtt/78212.htm', '2012-08-20 00:34:20', 2, 1),
+(8, '北理工软件科技创新创业基地隆重召开2012年暑期集训总结...', 'http://www.bit.edu.cn/xww/xwtt/78213.htm', '2012-08-20 00:34:20', 2, 1),
+(9, '北京理工大学徐特立科学营活动胜利闭幕', 'http://www.bit.edu.cn/xww/xwtt/78189.htm', '2012-08-20 00:34:20', 2, 1),
+(10, '北理工软件科技创新创业基地举办“科技创新之夜”文艺晚会', 'http://www.bit.edu.cn/xww/xwtt/78214.htm', '2012-08-20 00:34:20', 2, 1),
+(11, '中教大厅：良乡校区职工住宅沙盘展介', 'http://www.bit.edu.cn/ggfw/tzgg17/78068.htm', '2012-08-20 00:34:20', 3, 1),
+(12, '关于组织申报2012年度“教育部-中国移动科研基金”项目...', 'http://www.bit.edu.cn/ggfw/tzgg17/78210.htm', '2012-08-20 00:34:20', 3, 1),
+(13, '关于做好全国教育科学“十二五”规划2012年度课题组织申...', 'http://www.bit.edu.cn/ggfw/tzgg17/78185.htm', '2012-08-20 00:34:20', 3, 1),
+(14, '“创新与成长”——北理工第二届校友论坛专题', 'http://www.bit.edu.cn/ggfw/tzgg17/78161.htm', '2012-08-20 00:34:20', 3, 1),
+(15, '物理学院“博约学术论坛”系列报告第24期', 'http://www.bit.edu.cn/ggfw/tzgg17/78163.htm', '2012-08-20 00:34:20', 3, 1),
+(16, '“2012多智能体分布式协调与控制国际学术研讨会“在北理...', 'http://www.bit.edu.cn/xww/xwtt/78220.htm', '2012-08-20 19:04:20', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +189,6 @@ INSERT INTO `news` (`id`, `title`, `url`, `date`, `source`, `status`) VALUES
 -- 表的结构 `special`
 --
 
-DROP TABLE IF EXISTS `special`;
 CREATE TABLE IF NOT EXISTS `special` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -189,10 +205,10 @@ CREATE TABLE IF NOT EXISTS `special` (
 --
 
 INSERT INTO `special` (`id`, `name`, `url`, `description`, `image`, `date`, `status`) VALUES
-(1, '《电车之狼R》校内PT下载', 'http://www.3dmgame.com/', '《电车之狼R》校内PT下载！10MB/s哦亲！', '1', '2012-08-31', 1),
-(2, '《同校生》极限高压汉化版', 'http://www.baidu.com/', 'i社，Real-time引擎力作。经典3d游戏', '2', '2012-08-31', 1),
-(3, '《工口医3D》自由下载', 'http://www.qq.com/', '2008年F社作品，《工口医3D》XX医生！', '3', '2012-08-31', 1),
-(4, 'ABS-141!!!', 'http://115.com/file/e70ncwph', '90后 泷泽萝拉，你懂的。', '1-Medium_20120725135631125', '2012-08-31', 1);
+(1, '《电车之狼R》校内PT下载', 'http://www.3dmgame.com/', '《电车之狼R》校内PT下载！10MB/s哦亲！', '1', '2012-08-31', 0),
+(2, '《同校生》极限高压汉化版', 'http://www.baidu.com/', 'i社，Real-time引擎力作。经典3d游戏', '2', '2012-08-31', 0),
+(3, '《工口医3D》自由下载', 'http://www.qq.com/', '2008年F社作品，《工口医3D》XX医生！', '3', '2012-08-31', 0),
+(4, 'ABS-141!!!', 'http://115.com/file/e70ncwph', '90后 泷泽萝拉，你懂的。', '1-Medium_20120725135631125', '2012-08-31', 0);
 
 -- --------------------------------------------------------
 
@@ -200,7 +216,6 @@ INSERT INTO `special` (`id`, `name`, `url`, `description`, `image`, `date`, `sta
 -- 表的结构 `statistics`
 --
 
-DROP TABLE IF EXISTS `statistics`;
 CREATE TABLE IF NOT EXISTS `statistics` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
@@ -209,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `iscommon` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- 转存表中的数据 `statistics`
@@ -231,7 +246,10 @@ INSERT INTO `statistics` (`id`, `url`, `uid`, `ua`, `timestamp`, `iscommon`) VAL
 (13, 'http://qgzx.bit.edu.cn/', 62, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)', '2012-07-30 11:49:34', 0),
 (14, 'http://lgfx.bit.edu.cn/', 37, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)', '2012-07-30 11:49:45', 0),
 (15, 'http://www.bilibili.tv', 15, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-16 06:20:37', 1),
-(16, 'http://jwc.bit.edu.cn/', 59, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-16 17:24:23', 0);
+(16, 'http://jwc.bit.edu.cn/', 59, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-16 17:24:23', 0),
+(17, 'http://www.baidu.com/s?wd=测试', 59, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0', '2012-08-20 11:24:01', 0),
+(18, 'http://www.baidu.com/s?wd=测试', 59, 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)', '2012-08-20 11:24:37', 0),
+(19, 'http://www.baidu.com/s?wd=测试', 59, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.2 Safari/537.4', '2012-08-20 11:24:57', 0);
 
 -- --------------------------------------------------------
 
@@ -239,7 +257,6 @@ INSERT INTO `statistics` (`id`, `url`, `uid`, `ua`, `timestamp`, `iscommon`) VAL
 -- 表的结构 `urllist`
 --
 
-DROP TABLE IF EXISTS `urllist`;
 CREATE TABLE IF NOT EXISTS `urllist` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `class` int(4) NOT NULL,
@@ -252,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `urllist` (
   `heattimestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(2) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=72 ;
 
 --
 -- 转存表中的数据 `urllist`
@@ -328,7 +345,8 @@ INSERT INTO `urllist` (`id`, `class`, `url`, `name`, `content`, `rank`, `is_dire
 (67, 8, 'http://vol.bit.edu.cn/', '延河之星志愿者', '延河之星志愿者', 9, 0, 0, '0000-00-00 00:00:00', 1),
 (68, 8, 'http://www.9news.org.cn/', '九歌新闻', '九歌新闻', 10, 0, 0, '0000-00-00 00:00:00', 1),
 (69, 8, 'http://jgyjt.at.bitunion.org/', '京工演讲团', '京工演讲团', 11, 0, 0, '0000-00-00 00:00:00', 1),
-(70, 8, 'http://lx.bitsu.org/', '基础教育学院学生会', '基础教育学院学生会', 12, 0, 0, '0000-00-00 00:00:00', 1);
+(70, 8, 'http://lx.bitsu.org/', '基础教育学院学生会', '基础教育学院学生会', 12, 0, 0, '0000-00-00 00:00:00', 1),
+(71, 1, 'http://www.baidu.com/s?wd=测试', '测试', '测试', -1, 1, 0, '2012-08-20 11:23:47', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

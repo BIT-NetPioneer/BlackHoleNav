@@ -11,6 +11,9 @@ if (!defined('BASEPATH'))
 class Nav extends CI_Controller {
 
     function index() {
+        // view缓存
+        $this->output->cache(30);
+        
         $baseurl = base_url();
         $baseurlwithindex = $baseurl . "index.php";
         $head_data = '';
@@ -158,23 +161,7 @@ class Nav extends CI_Controller {
     }
 
     function test() {
-        $this->load->model('news_m');
-        $data_r['allnews'] = array();
-
-        for ($i = 1; $i <= 3; $i++) {
-            $newses = $this->news_m->get_by_source($i);
-            $newsCount = 0;
-            foreach ($newses as $row) {
-                $tmp = array(
-                    'title' => $row->title,
-                    'url' => $row->url
-                );
-                $data_r['allnews'][$i - 1][$newsCount] = $tmp;
-                $newsCount++;
-            }
-        }
-
-        var_dump($data_r);
+       //echo urlencode("http://localhost/BlackHoleNav/index.php");
     }
 
 }
