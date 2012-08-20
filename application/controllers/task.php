@@ -11,13 +11,33 @@ if (!defined('BASEPATH'))
 class Task extends CI_Controller {
 
     function index() {
-        $this->load->model('url_m');
-        $this->load->model('statistics_m');
+        $do = $this->input->get('do', TRUE);
+        if ($do == 1) {
+            $this->load->model('config_m');
 
-        $urls = $this->url_m->get_all();
-        foreach ($urls as $row) {
-            $num = $this->statistics_m->count_by_url($row->url, 2, $row->heattimestamp);
-            echo "<p>$row->url -------- $num</p>";
+            $tmp = $this->config_m->get_config('bit_news_time');
+            $bit_news_time = json_decode($tmp, true);
+            $tmp_date = $bit_news_time['time'];
+            echo $tmp_date;
+            if ((time() - $tmp_date) > $this->config->item('bit_ttl')) {
+                if ($this->get_news_from_bit(1)) {
+                    $bit_news_time['time'] = time();
+                    $tmp = json_encode($bit_news_time);
+                    $this->config_m->set_config('bit_news_time', $tmp);
+                }
+            }
+
+            $tmp = $this->config_m->get_config('jwc_news_time');
+            $jwc_news_time = json_decode($tmp, true);
+            $tmp_date = $jwc_news_time['time'];
+            echo $tmp_date;
+            if ((time() - $tmp_date) > $this->config->item('jwc_ttl')) {
+                if ($this->get_news_from_jwc(1)) {
+                    $jwc_news_time['time'] = time();
+                    $tmp = json_encode($jwc_news_time);
+                    $this->config_m->set_config('jwc_news_time', $tmp);
+                }
+            }
         }
     }
 
@@ -44,22 +64,19 @@ class Task extends CI_Controller {
 
     function heatpreview() {
         $baseurl = base_url();
-        $baseurlwithindex = $baseurl . "index.php";
 
-        $head_data['title'] = "Hentai的XX导航";
-        $head_data['date_info'] = "2012年11月11日";
-        $head_data['week'] = '9';
+        $csses = array(
+            'reset',
+            'header',
+            'main',
+            'footer');
 
-        $head_data['csses'] = <<<theEnd
-        <link href="{$baseurl}css/reset.css" type="text/css" rel="stylesheet" />
-        <link href="{$baseurl}css/css.css" type="text/css" rel="stylesheet" />
-        <link href="{$baseurl}css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
-theEnd;
-        $head_data['jses'] = <<<theEnd
-        <script src="{$baseurl}js/html5.js"></script> 
-        <script src="{$baseurl}js/jquery-1.7.2.min.js"></script> 
-        <script src="{$baseurl}js/jquery-ui-1.8.22.custom.min.js"></script> 
-theEnd;
+        $jses = array(
+            'jquery-1.7.2.min',
+            's3Slider'
+        );
+        $head_data['csses'] = $csses;
+        $head_data['jses'] = $jses;
         $this->load->view('all_header', $head_data);
 
         $this->load->model('url_m');
@@ -108,7 +125,9 @@ theEnd;
         }
     }
 
-    function get_news_from_bit() {
+    function get_news_from_bit($check = 0) {
+        if (!$check)
+            exit;
         $this->load->helper('htmldom');
         try {
             $addtime = date('Y:m:d H:i:d');
@@ -118,9 +137,9 @@ theEnd;
             $i2 = 0; // 学校公告计数
             //$this->news_m->empty_news();
             foreach ($html->find('a[class=huizi]') as $element) {
-                echo $element->href . "---" . trim($element->innertext);
-                echo '===' . substr($element->href, 0, 3);
-                
+                //echo $element->href . "---" . trim($element->innertext);
+                //echo '===' . substr($element->href, 0, 3);
+
                 switch (substr($element->href, 0, 3)) {
                     case 'xww' :
                         if ($i1++ >= 5)
@@ -135,15 +154,32 @@ theEnd;
                         echo '*';
                         break;
                 }
-                echo "<br />";
+                //echo "<br />";
                 if ($i1 >= 5 && $i2 >= 5)
                     break;
             }
-
-            // 学校公告
-            //foreach ($html->find)
+            return true;
         } catch (Exception $e) {
-            echo "<p>貌似出了点错误</p>";
+            return FALSE;
+        }
+    }
+
+    function get_news_from_jwc($check = 0) {
+        if (!$check)
+            exit;
+        $this->load->helper('htmldom');
+        try {
+            return true;
+            $addtime = date('Y:m:d H:i:d');
+            $this->load->model('news_m');
+            $html = file_get_html("http://www.bit.edu.cn");
+
+            //$this->news_m->empty_news();
+            foreach ($html->find('a[class=huizi]') as $element) {
+                
+            }
+        } catch (Exception $e) {
+            return FALSE;
         }
     }
 
