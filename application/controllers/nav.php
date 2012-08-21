@@ -12,11 +12,11 @@ class Nav extends CI_Controller {
 
     function index() {
         // view缓存
-        if($this->uri->total_segments()>2){
+        if ($this->uri->total_segments() > 2) {
             show_404();
         }
-        $this->output->cache(30);
-        
+        //$this->output->cache(30);
+
         $baseurl = base_url();
         $baseurlwithindex = $baseurl . "index.php";
         $head_data = '';
@@ -27,7 +27,8 @@ class Nav extends CI_Controller {
             'reset',
             'header',
             'main',
-            'footer');
+            'footer'
+        );
 
         $jses = array(
             'jquery-1.7.2.min',
@@ -40,19 +41,15 @@ class Nav extends CI_Controller {
 
 // commonUrl
         $this->load->model('common_m');
-        $rowMax = array(6, 8, 8, 8);
+        $rowMax = array(6, 8);
         $allcommon = array();
 
 //$commons = $this->common_m->get_all();
         $rowCount = 0;
-        for ($i = 1; $i <= 4; $i++) {
-            if ($i == 3) {
-                $allcommon[$rowCount]['type'] = 'hr';
-                $rowCount++;
-            }
+        for ($i = 1; $i <= 2; $i++) {
             $tmpCommon = $this->common_m->get_by_status($i);
             $commonCount = 0;
-            foreach ($tmpCommon as $row) {
+            foreach ($tmpCommon as &$row) {
                 if ($commonCount == $rowMax[$i - 1]) {
                     $commonCount = 0;
                     $rowCount++;
@@ -72,6 +69,25 @@ class Nav extends CI_Controller {
         }
         $data_l['commons'] = $allcommon;
 
+        // getHotUrl
+        $hotUrl = null;
+        $commonCount = 0;
+        $sumAll = 8;
+        $sumStatic = 0;
+        for ($i = 3; $i <= 4; $i++) {
+            $tmpCommon = $this->common_m->get_by_status($i, $sumStatic);
+            $sumStatic = $sumAll - $sumStatic;
+            foreach ($tmpCommon as &$row) {
+                $tmp = array(
+                    'name' => $row->name,
+                    'url' => $row->url,
+                    'uid' => $row->id
+                );
+                $hotUrl[$commonCount] = $tmp;
+                $commonCount++;
+            }
+        }
+        $data_l['hoturl'] = $hotUrl;
 
 // getClass;
         $this->load->model('class_m');
@@ -83,14 +99,14 @@ class Nav extends CI_Controller {
         $classCount = 0;
         $data_l['classes'] = array();
 
-        foreach ($classes as $row) {
+        foreach ($classes as &$row) {
             $urls = $this->url_m->get_by_class($row->id);
             if (!empty($urls)) {
                 $tmpClass = null;
                 $tmpClass['name'] = $row->name;
 //$tmpClass['urls'] = array();
                 $urlCount = 0;
-                foreach ($urls as $url) {
+                foreach ($urls as &$url) {
                     $urlclass = "";
                     switch ($url->status) {
                         case 2:
@@ -128,7 +144,7 @@ class Nav extends CI_Controller {
         $specials = $this->special_m->get_normal();
         if (!empty($specials)) {
             $specialCount = 0;
-            foreach ($specials as $row) {
+            foreach ($specials as &$row) {
                 $tmpSpecial = array(
                     'name' => $row->name,
                     'url' => $row->url,
@@ -148,7 +164,7 @@ class Nav extends CI_Controller {
         for ($i = 1; $i <= 3; $i++) {
             $newses = $this->news_m->get_by_source($i);
             $newsCount = 0;
-            foreach ($newses as $row) {
+            foreach ($newses as &$row) {
                 $tmp = array(
                     'title' => $row->title,
                     'url' => $row->url
@@ -164,7 +180,7 @@ class Nav extends CI_Controller {
     }
 
     function test() {
-       //echo urlencode("http://localhost/BlackHoleNav/index.php");
+        //echo urlencode("http://localhost/BlackHoleNav/index.php");
         var_dump($this->uri->total_segments());
     }
 

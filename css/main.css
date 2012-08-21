@@ -17,7 +17,7 @@
 }
 
 #common{
-    height: 163px;
+    height: 133px;
 }
 .title{
     margin-left: 5px;
@@ -96,6 +96,9 @@
     font-weight: bold;
     font-size: 12px;
     text-align: center;
+}
+.hot span{
+    color: red;
 }
 
 .url-class-area{

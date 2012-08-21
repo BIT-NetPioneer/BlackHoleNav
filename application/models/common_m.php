@@ -37,11 +37,14 @@ class Common_m extends CI_Model {
         return $query->result();
     }
 
-    function get_by_status($status) {
+    function get_by_status($status, &$count = 0) {
         $this->db->where('status', $status);
         $this->db->select('*');
         $this->db->order_by('rank', 'asc');
+        if ($count != 0)
+            $this->db->limit($count);
         $query = $this->db->get('common');
+        $count = $query->num_rows();
 
         return $query->result();
     }
