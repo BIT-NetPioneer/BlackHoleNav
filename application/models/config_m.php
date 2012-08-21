@@ -22,6 +22,7 @@ class Config_m extends CI_Model {
         } else {
             $data = array('item' => $item);
             $this->db->insert($data);
+            return null;
         }
     }
 
