@@ -15,7 +15,7 @@ class Nav extends CI_Controller {
         if ($this->uri->total_segments() > 2) {
             show_404();
         }
-        //$this->output->cache(30);
+        //$this->output->cache($this->config->item('index_cache_ttl'));
 
         $baseurl = base_url();
         $baseurlwithindex = $baseurl . "index.php";
