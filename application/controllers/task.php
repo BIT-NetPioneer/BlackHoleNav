@@ -7,12 +7,13 @@ if (!defined('BASEPATH'))
  * Description of admin
  *
  * @author HacRi
- * @todo 常用链接生成
+ * @todo Clean_data
+ * 
  * 
  */
 class Task extends CI_Controller {
-    
-    function test(){
+
+    function test() {
         $this->load->model('config_m');
         echo $this->config_m->get_config('on_task');
     }
@@ -80,6 +81,20 @@ class Task extends CI_Controller {
                     $this->config_m->set_config('common_url_time', $tmp);
                 }
             }
+
+            // 清理奇怪的垃圾
+            $tmp = $this->config_m->get_config('clean_data_time');
+            $clean_data_time = json_decode($tmp, true);
+            $tmp_date = $clean_data_time['time'];
+            //echo $tmp_date;
+            if ((time() - $tmp_date) > ($this->config->item('clean_data_ttl') * 60)) {
+                if ($this->clean_data(1)) {
+                    $clean_data_time['time'] = time();
+                    $tmp = json_encode($clean_data_time);
+                    $this->config_m->set_config('clean_data_time', $tmp);
+                }
+            }
+
             // 取消全局锁
             $this->config_m->set_config('on_task', 0);
         }
@@ -87,7 +102,7 @@ class Task extends CI_Controller {
 
     function count_heat($check = 0) {
         if (!$check)
-            exit;
+            show_404();
 
         $this->load->model('url_m');
         $this->load->model('statistics_m');
@@ -155,7 +170,7 @@ class Task extends CI_Controller {
 
     function generate_common($check = 0) {
         if (!$check)
-            exit;
+            show_404();
 
         $this->load->model('url_m');
         $this->load->model('common_m');
@@ -177,7 +192,8 @@ class Task extends CI_Controller {
 
     function get_news_from_bit($check = 0) {
         if (!$check)
-            exit;
+            show_404();
+        
         $this->load->helper('htmldom');
         try {
             $addtime = date('Y:m:d H:i:d');
@@ -187,9 +203,6 @@ class Task extends CI_Controller {
             $i2 = 0; // 学校公告计数
             //$this->news_m->empty_news();
             foreach ($html->find('a[class=huizi]') as $element) {
-                //echo $element->href . "---" . trim($element->innertext);
-                //echo '===' . substr($element->href, 0, 3);
-
                 switch (substr($element->href, 0, 3)) {
                     case 'xww' :
                         if ($i1++ >= 5)
@@ -216,7 +229,7 @@ class Task extends CI_Controller {
 
     function get_news_from_jwc($check = 0) {
         if (!$check)
-            exit;
+            show_404();
         $this->load->helper('htmldom');
         try {
             return true;
@@ -232,6 +245,15 @@ class Task extends CI_Controller {
         } catch (Exception $e) {
             return FALSE;
         }
+    }
+
+    function clean_data($check = 0) {
+        if (!$check)
+            show_404();
+        
+        // 清理过期一个月以上的特别推荐
+        // 清理六个月以前的统计数据
+        // 清理无效申请
     }
 
     function get_news_test() {

@@ -32,9 +32,8 @@ class Nav extends CI_Controller {
         );
 
         $jses = array(
-            'jquery-1.7.2.min',
+            $this->config->item('jquery'),
             'jquery.autocomplete.min',
-            'http://localhost/BlackHoleNav/index.php/urlsug/urls',
             's3Slider'
         );
 
