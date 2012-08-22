@@ -74,6 +74,18 @@ class Url_m extends CI_Model {
 
         return $query->result();
     }
+    
+    function search_url($match){
+        $this->db->like('url', $match);
+        $this->db->or_like('content', $match);
+        
+        $this->db->where('`status` > 0');
+        $this->db->limit(9);
+        $this->db->select(array('url', 'content', 'name'));
+        $query = $this->db->get('urllist');
+        
+        return $query->result();
+    }
 
 }
 

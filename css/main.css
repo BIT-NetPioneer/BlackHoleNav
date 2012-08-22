@@ -66,8 +66,20 @@
 }
 
 #urllist{
-    margin-top: 10px;
-    height: 400px;
+    margin-top: 10px;    
+}
+.urllist-title p{
+    display: inline-block;
+    line-height: 15px;
+    width: 100px;
+}
+.url-search{
+    float:right;
+}
+.url-search input{
+    font-size: 12px;
+    line-height: 12px;
+    padding: 0;
 }
 .urls{
     background-color: #FFFFFF;

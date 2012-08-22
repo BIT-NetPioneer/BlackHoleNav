@@ -21,7 +21,7 @@ $week = "今年第{$w}周，据开学还有{$d}天";
                 <script src="<?php echo base_url("js/$js.js"); ?>" type="text/javascript"></script>
             <?php endforeach; ?>
         <?php else: ?>
-            <link href="<?php echo base_url("js/$jses.js"); ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url("js/$jses.js"); ?>" type="text/javascript"></script>
     <?php endif; ?>
 
     <script type="text/javascript">

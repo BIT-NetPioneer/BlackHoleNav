@@ -21,7 +21,7 @@ class Config_m extends CI_Model {
             return $row->value;
         } else {
             $data = array('item' => $item);
-            $this->db->insert($data);
+            $this->db->insert('config', $data);
             return null;
         }
     }

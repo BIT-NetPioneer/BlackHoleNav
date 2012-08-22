@@ -7,18 +7,33 @@ if (!defined('BASEPATH'))
  * Description of admin
  *
  * @author HacRi
+ * @todo 常用链接生成
+ * 
  */
 class Task extends CI_Controller {
+    
+    function test(){
+        $this->load->model('config_m');
+        echo $this->config_m->get_config('on_task');
+    }
 
     function index() {
         $do = $this->input->get('do', TRUE);
         if ($do == 1) {
             $this->load->model('config_m');
 
+            // 检查全局锁
+            if ($this->config_m->get_config('on_task') == 1) {
+                exit;
+            }
+            // 上全局锁
+            $this->config_m->set_config('on_task', 1);
+
+            // bit主页新闻更新
             $tmp = $this->config_m->get_config('bit_news_time');
             $bit_news_time = json_decode($tmp, true);
             $tmp_date = $bit_news_time['time'];
-            echo $tmp_date;
+            //echo $tmp_date;
             if ((time() - $tmp_date) > $this->config->item('bit_ttl')) {
                 if ($this->get_news_from_bit(1)) {
                     $bit_news_time['time'] = time();
@@ -27,10 +42,11 @@ class Task extends CI_Controller {
                 }
             }
 
+            // jwc新闻更新
             $tmp = $this->config_m->get_config('jwc_news_time');
             $jwc_news_time = json_decode($tmp, true);
             $tmp_date = $jwc_news_time['time'];
-            echo $tmp_date;
+            //echo $tmp_date;
             if ((time() - $tmp_date) > $this->config->item('jwc_ttl')) {
                 if ($this->get_news_from_jwc(1)) {
                     $jwc_news_time['time'] = time();
@@ -38,10 +54,41 @@ class Task extends CI_Controller {
                     $this->config_m->set_config('jwc_news_time', $tmp);
                 }
             }
+
+            // 统计热度
+            $tmp = $this->config_m->get_config('count_heat_time');
+            $count_heat_time = json_decode($tmp, true);
+            $tmp_date = $count_heat_time['time'];
+            //echo $tmp_date;
+            if ((time() - $tmp_date) > ($this->config->item('count_heat_ttl') * 60)) {
+                if ($this->count_heat(1)) {
+                    $count_heat_time['time'] = time();
+                    $tmp = json_encode($count_heat_time);
+                    $this->config_m->set_config('count_heat_time', $tmp);
+                }
+            }
+
+            // 生成常用链接
+            $tmp = $this->config_m->get_config('common_url_time');
+            $common_url_time = json_decode($tmp, true);
+            $tmp_date = $common_url_time['time'];
+            //echo $tmp_date;
+            if ((time() - $tmp_date) > ($this->config->item('common_url_ttl') * 60)) {
+                if ($this->generate_common(1)) {
+                    $common_url_time['time'] = time();
+                    $tmp = json_encode($common_url_time);
+                    $this->config_m->set_config('common_url_time', $tmp);
+                }
+            }
+            // 取消全局锁
+            $this->config_m->set_config('on_task', 0);
         }
     }
 
-    function countheat() {
+    function count_heat($check = 0) {
+        if (!$check)
+            exit;
+
         $this->load->model('url_m');
         $this->load->model('statistics_m');
 
@@ -56,10 +103,12 @@ class Task extends CI_Controller {
                 $time /= 86400;
             }
             $heat = $row->heat * exp(-0.0231 * $time) + $num;
-            echo "<p>$row->url --- $time --- $num --- $heat</p>";
+            //echo "<p>$row->url --- $time --- $num --- $heat</p>";
 
             $this->url_m->update_heat($row->id, $heat);
         }
+
+        return TRUE;
     }
 
     function heatpreview() {
@@ -104,13 +153,15 @@ class Task extends CI_Controller {
         $this->load->view('all_footer');
     }
 
-    function generatecommon() {
-        $do = $this->input->get('do', TRUE);
-        echo "<p>$do</p>";
+    function generate_common($check = 0) {
+        if (!$check)
+            exit;
 
         $this->load->model('url_m');
         $this->load->model('common_m');
-        $topurl = $this->url_m->get_by_heat(12);
+        $topurl = $this->url_m->get_by_heat(8);
+
+        $this->common_m->clean(4);
 
         foreach ($topurl as $row) {
             $tmp = array();
@@ -118,11 +169,10 @@ class Task extends CI_Controller {
             $tmp['name'] = $row->name;
             $tmp['rank'] = ceil(200 - log1p($row->heat) * 10);
 
-            if ($do)
-                $this->common_m->insert_url($tmp);
-            else
-                echo "<p>{$tmp['url']}------{$tmp['name']}------{$tmp['rank']}</p>";
+            $this->common_m->insert_url($tmp);
         }
+
+        return TRUE;
     }
 
     function get_news_from_bit($check = 0) {
@@ -145,20 +195,20 @@ class Task extends CI_Controller {
                         if ($i1++ >= 5)
                             break;
                         $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 2);
-                        echo '*';
+                        //echo '*';
                         break;
                     case 'ggf' :
                         if ($i2++ >= 5)
                             break;
                         $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 3);
-                        echo '*';
+                        //echo '*';
                         break;
                 }
                 //echo "<br />";
                 if ($i1 >= 5 && $i2 >= 5)
                     break;
             }
-            return true;
+            return TRUE;
         } catch (Exception $e) {
             return FALSE;
         }
@@ -178,6 +228,7 @@ class Task extends CI_Controller {
             foreach ($html->find('a[class=huizi]') as $element) {
                 
             }
+            return TRUE;
         } catch (Exception $e) {
             return FALSE;
         }
@@ -193,7 +244,7 @@ class Task extends CI_Controller {
                 //$this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 2);
             }
         } catch (Exception $e) {
-            echo "<p>貌似出了点错误</p>";
+            return FALSE;
         }
     }
 

@@ -11,7 +11,7 @@ if (!defined('BASEPATH'))
 class Nav extends CI_Controller {
 
     function index() {
-        // view缓存
+        // 缓存
         if ($this->uri->total_segments() > 2) {
             show_404();
         }
@@ -27,11 +27,14 @@ class Nav extends CI_Controller {
             'reset',
             'header',
             'main',
-            'footer'
+            'footer',
+            'jquery.autocomplete'
         );
 
         $jses = array(
             'jquery-1.7.2.min',
+            'jquery.autocomplete.min',
+            'http://localhost/BlackHoleNav/index.php/urlsug/urls',
             's3Slider'
         );
 
@@ -177,11 +180,6 @@ class Nav extends CI_Controller {
         $this->load->view('mainleft', $data_l);
         $this->load->view('mainright', $data_r);
         $this->load->view('all_footer');
-    }
-
-    function test() {
-        //echo urlencode("http://localhost/BlackHoleNav/index.php");
-        var_dump($this->uri->total_segments());
     }
 
 }

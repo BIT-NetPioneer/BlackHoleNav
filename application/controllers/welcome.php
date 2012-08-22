@@ -20,12 +20,6 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//$this->load->view('welcome_message');
-            $test = array(
-                'title' =>'test',
-                'date_info'=>'2012年11月11日 节日快乐',
-                'week'=>'9'
-            );
-            $this->load->view('test',$test);
 	}
 }
 

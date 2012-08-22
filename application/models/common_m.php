@@ -70,6 +70,12 @@ class Common_m extends CI_Model {
         }
     }
 
+    //
+    function clean($status) {
+        $this->db->where('status', $status);
+        $this->db->delete('common');
+    }
+
 }
 
 ?>

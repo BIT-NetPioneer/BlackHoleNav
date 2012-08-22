@@ -15,7 +15,8 @@ class statistics_m extends CI_Model {
         $data = array(
             'uid' => $urlid,
             'url' => $url,
-            'ua' => $_SERVER['HTTP_USER_AGENT'],
+            'ua' => $this->input->user_agent(),
+            'ip' => $this->input->ip_address(),
             'iscommon' => $iscommon
         );
         $this->db->insert('statistics', $data);
