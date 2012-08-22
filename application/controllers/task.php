@@ -19,16 +19,22 @@ class Task extends CI_Controller {
     }
 
     function index() {
+        //$this->output->enable_profiler(TRUE);
         $do = $this->input->get('do', TRUE);
         if ($do == 1) {
             $this->load->model('config_m');
 
             // 检查全局锁
             if ($this->config_m->get_config('on_task') == 1) {
+                echo "Locked\n";
                 exit;
             }
+
             // 上全局锁
+            echo "Lock\n";
             $this->config_m->set_config('on_task', 1);
+
+            $this->benchmark->mark('start');
 
             // bit主页新闻更新
             $tmp = $this->config_m->get_config('bit_news_time');
@@ -36,6 +42,7 @@ class Task extends CI_Controller {
             $tmp_date = $bit_news_time['time'];
             //echo $tmp_date;
             if ((time() - $tmp_date) > $this->config->item('bit_ttl')) {
+                echo "do-bit\n";
                 if ($this->get_news_from_bit(1)) {
                     $bit_news_time['time'] = time();
                     $tmp = json_encode($bit_news_time);
@@ -43,12 +50,16 @@ class Task extends CI_Controller {
                 }
             }
 
+            $this->benchmark->mark('bit_end');
+            echo $this->benchmark->elapsed_time('start', 'bit_end'). "s: bit_end\n";
+
             // jwc新闻更新
             $tmp = $this->config_m->get_config('jwc_news_time');
             $jwc_news_time = json_decode($tmp, true);
             $tmp_date = $jwc_news_time['time'];
             //echo $tmp_date;
             if ((time() - $tmp_date) > $this->config->item('jwc_ttl')) {
+                echo "do-jwc\n";
                 if ($this->get_news_from_jwc(1)) {
                     $jwc_news_time['time'] = time();
                     $tmp = json_encode($jwc_news_time);
@@ -56,12 +67,16 @@ class Task extends CI_Controller {
                 }
             }
 
+            $this->benchmark->mark('jwc_end');
+            echo $this->benchmark->elapsed_time('start', 'jwc_end'). "s: jwc_end\n";
+
             // 统计热度
             $tmp = $this->config_m->get_config('count_heat_time');
             $count_heat_time = json_decode($tmp, true);
             $tmp_date = $count_heat_time['time'];
             //echo $tmp_date;
             if ((time() - $tmp_date) > ($this->config->item('count_heat_ttl') * 60)) {
+                echo "do-heat\n";
                 if ($this->count_heat(1)) {
                     $count_heat_time['time'] = time();
                     $tmp = json_encode($count_heat_time);
@@ -69,12 +84,16 @@ class Task extends CI_Controller {
                 }
             }
 
+            $this->benchmark->mark('heat_end');
+            echo $this->benchmark->elapsed_time('start', 'heat_end'). "s: heat_end\n";
+
             // 生成常用链接
             $tmp = $this->config_m->get_config('common_url_time');
             $common_url_time = json_decode($tmp, true);
             $tmp_date = $common_url_time['time'];
             //echo $tmp_date;
             if ((time() - $tmp_date) > ($this->config->item('common_url_ttl') * 60)) {
+                echo "do-common\n";
                 if ($this->generate_common(1)) {
                     $common_url_time['time'] = time();
                     $tmp = json_encode($common_url_time);
@@ -82,12 +101,16 @@ class Task extends CI_Controller {
                 }
             }
 
+            $this->benchmark->mark('common_end');
+            echo $this->benchmark->elapsed_time('start', 'common_end'). "s: common_end\n";
+
             // 清理奇怪的垃圾
             $tmp = $this->config_m->get_config('clean_data_time');
             $clean_data_time = json_decode($tmp, true);
             $tmp_date = $clean_data_time['time'];
             //echo $tmp_date;
             if ((time() - $tmp_date) > ($this->config->item('clean_data_ttl') * 60)) {
+                echo "do-clean\n";
                 if ($this->clean_data(1)) {
                     $clean_data_time['time'] = time();
                     $tmp = json_encode($clean_data_time);
@@ -95,7 +118,11 @@ class Task extends CI_Controller {
                 }
             }
 
+            $this->benchmark->mark('clean_end');
+            echo $this->benchmark->elapsed_time('start', 'clean_end'). "s: clean_end\n";
+
             // 取消全局锁
+            echo "Unlock\n";
             $this->config_m->set_config('on_task', 0);
         }
     }
@@ -193,7 +220,7 @@ class Task extends CI_Controller {
     function get_news_from_bit($check = 0) {
         if (!$check)
             show_404();
-        
+
         $this->load->helper('htmldom');
         try {
             $addtime = date('Y:m:d H:i:d');
@@ -250,10 +277,12 @@ class Task extends CI_Controller {
     function clean_data($check = 0) {
         if (!$check)
             show_404();
-        
+
         // 清理过期一个月以上的特别推荐
         // 清理六个月以前的统计数据
         // 清理无效申请
+        
+        return TRUE;
     }
 
     function get_news_test() {

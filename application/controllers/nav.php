@@ -11,6 +11,8 @@ if (!defined('BASEPATH'))
 class Nav extends CI_Controller {
 
     function index() {
+        //$this->output->enable_profiler(TRUE);
+        
         // 缓存
         if ($this->uri->total_segments() > 2) {
             show_404();
