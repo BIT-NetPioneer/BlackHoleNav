@@ -99,5 +99,5 @@
 </div>
 
 <script type="text/javascript">
-    $.get("./index.php/task?do=1");
+    $.get("<?php echo base_url('index.php/task?do=1');?>");
 </script>
