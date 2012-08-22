@@ -69,26 +69,30 @@
         </div>
     </div>
     <script type="text/javascript">
-        $('.urlclass:odd').addClass("urlclass-s");
-        $("#url-search-input").autocomplete({
-            data: urls,
-            remoteDataType: 'json',
-            processData: function(data) {
-                var i, processed = [];
-                for (i=0; i < data.length; i++) {
-                    processed.push([data[i][0]+data[i][1]+data[i][2], data[i][0], data[i][1], data[i][2], data[i][3]]);
+        $(document).ready(function() {
+            $('.urlclass:odd').addClass("urlclass-s");
+            $("#url-search-input").autocomplete({
+                data: urls,
+                remoteDataType: 'json',
+                processData: function(data) {
+                    var i, processed = [];
+                    for (i=0; i < data.length; i++) {
+                        processed.push([data[i][0]+data[i][1]+data[i][2], data[i][0], data[i][1], data[i][2], data[i][3]]);
+                    }
+                    return processed;
+                },
+                selectFirst: true,
+                delay: 150,
+                onItemSelect: function(item){
+                    //console.log( '<?php echo base_url('index.php/c/jmp'); ?>?uid=' + item.data[3] + '&url=' + encodeURIComponent(item.data[1]));
+                    $('#url-search-input').attr('value', '');
+                    location.href = '<?php echo base_url('index.php/c/jmp'); ?>?uid=' + item.data[3] + '&url=' + encodeURIComponent(item.data[1]);
+                },
+                showResult: function(value, data) {
+                    return data[0] + '<br/>' + data[1];
                 }
-                return processed;
-            },
-            selectFirst: true,
-            delay: 100,
-            onItemSelect: function(item){
-                console.log( '<?php echo base_url('index.php/c/jmp'); ?>?uid=' + item.data[3] + '&url=' + encodeURIComponent(item.data[1]));
-                location.href = '<?php echo base_url('index.php/c/jmp'); ?>?uid=' + item.data[3] + '&url=' + encodeURIComponent(item.data[1]);
-            },
-            showResult: function(value, data) {
-                return data[0] + '<br/>' + data[1];
-            }
+            });
         });
+ 
     </script>
 </div>

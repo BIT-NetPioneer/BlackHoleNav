@@ -99,7 +99,5 @@
 </div>
 
 <script type="text/javascript">
-    $.get("./index.php/task?do=1", function(data){
-        console.log(data);
-    });
+    $.get("./index.php/task?do=1");
 </script>

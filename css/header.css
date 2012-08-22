@@ -1,6 +1,6 @@
 body{
     background-color: #F9F9F9;
-    font-family: "SimSun",Arial;
+    font-family: Arial,Helvetica,sans-serif;
 }
 a{cursor: pointer;}
 
@@ -17,7 +17,6 @@ a{cursor: pointer;}
     color: black;
     font-size: .8em;
     line-height: 1.25em;
-    font-family: "Microsoft YaHei", sans-serif;
 }
 #dateinfo{
     float: left;
@@ -40,6 +39,7 @@ a{cursor: pointer;}
 #header img{
     margin: 0px 0 0 20px;
     float: left;
+    border: none;
 }
 #searchbox{
     float: right;
