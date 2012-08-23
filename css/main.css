@@ -120,13 +120,14 @@
 
 .url-class-area{
     width: 90%;
+    padding: 3px 3px;
     float: left;
 }
 .urlspan2{
     display: inline-block; 
     white-space: nowrap;
     float: left;
-    margin: 6px 10px;
+    margin: 3px 10px;
 }
 .urlspan2 a{
     font-size: 12px;
