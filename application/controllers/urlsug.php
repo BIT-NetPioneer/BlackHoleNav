@@ -55,7 +55,7 @@ class urlsug extends CI_Controller {
             $tmp = array(
                 $row->name,
                 $row->url,
-                Pinyin($row->name),
+                Pinyin($row->name,1),
                 $row->id
             );
             $sug[$i] = $tmp;

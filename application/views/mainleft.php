@@ -73,7 +73,7 @@
             $('.urlclass:odd').addClass("urlclass-s");
             $("#url-search-input").autocomplete({
                 data: urls,
-                remoteDataType: 'json',
+                //remoteDataType: 'json',
                 processData: function(data) {
                     var i, processed = [];
                     for (i=0; i < data.length; i++) {
@@ -84,7 +84,6 @@
                 selectFirst: true,
                 delay: 150,
                 onItemSelect: function(item){
-                    //console.log( '<?php echo base_url('index.php/c/jmp'); ?>?uid=' + item.data[3] + '&url=' + encodeURIComponent(item.data[1]));
                     $('#url-search-input').attr('value', '');
                     location.href = '<?php echo base_url('index.php/c/jmp'); ?>?uid=' + item.data[3] + '&url=' + encodeURIComponent(item.data[1]);
                 },
