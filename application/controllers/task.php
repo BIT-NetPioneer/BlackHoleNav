@@ -22,17 +22,22 @@ class Task extends CI_Controller {
         //$this->output->enable_profiler(TRUE);
         $do = $this->input->get('do', TRUE);
         if ($do == 1) {
+            $this->load->driver('cache', array('adapter' => 'file'));
             $this->load->model('config_m');
 
             // 检查全局锁
-            if ($this->config_m->get_config('on_task') == 1) {
+            if ($this->cache->get('task_lock')) {
                 echo "Locked\n";
                 exit;
             }
 
             // 上全局锁
-            echo "Lock\n";
-            $this->config_m->set_config('on_task', 1);
+            if($this->cache->save('task_lock', 1, 180)){
+                echo "Lock\n";
+            }else{
+                echo "Lock failed\n";
+                exit;
+            }
 
             $this->benchmark->mark('start');
 
@@ -51,7 +56,7 @@ class Task extends CI_Controller {
             }
 
             $this->benchmark->mark('bit_end');
-            echo $this->benchmark->elapsed_time('start', 'bit_end'). "s: bit_end\n";
+            echo $this->benchmark->elapsed_time('start', 'bit_end') . "s: bit_end\n";
 
             // jwc新闻更新
             $tmp = $this->config_m->get_config('jwc_news_time');
@@ -68,7 +73,7 @@ class Task extends CI_Controller {
             }
 
             $this->benchmark->mark('jwc_end');
-            echo $this->benchmark->elapsed_time('start', 'jwc_end'). "s: jwc_end\n";
+            echo $this->benchmark->elapsed_time('start', 'jwc_end') . "s: jwc_end\n";
 
             // 统计热度
             $tmp = $this->config_m->get_config('count_heat_time');
@@ -85,7 +90,7 @@ class Task extends CI_Controller {
             }
 
             $this->benchmark->mark('heat_end');
-            echo $this->benchmark->elapsed_time('start', 'heat_end'). "s: heat_end\n";
+            echo $this->benchmark->elapsed_time('start', 'heat_end') . "s: heat_end\n";
 
             // 生成常用链接
             $tmp = $this->config_m->get_config('common_url_time');
@@ -102,7 +107,7 @@ class Task extends CI_Controller {
             }
 
             $this->benchmark->mark('common_end');
-            echo $this->benchmark->elapsed_time('start', 'common_end'). "s: common_end\n";
+            echo $this->benchmark->elapsed_time('start', 'common_end') . "s: common_end\n";
 
             // 清理奇怪的垃圾
             $tmp = $this->config_m->get_config('clean_data_time');
@@ -119,11 +124,18 @@ class Task extends CI_Controller {
             }
 
             $this->benchmark->mark('clean_end');
-            echo $this->benchmark->elapsed_time('start', 'clean_end'). "s: clean_end\n";
+            echo $this->benchmark->elapsed_time('start', 'clean_end') . "s: clean_end\n";
 
             // 取消全局锁
-            echo "Unlock\n";
-            $this->config_m->set_config('on_task', 0);
+            //echo "Unlock\n";
+            //$this->config_m->set_config('on_task', 0);
+        }else if($do == 2){
+            $this->load->driver('cache', array('adapter' => 'file'));
+            if($this->cache->delete('task_lock')){
+                echo 'Force Unlock is successed\n';
+            }else{
+                echo 'Unknow Error\n';
+            }
         }
     }
 
@@ -225,7 +237,16 @@ class Task extends CI_Controller {
         try {
             $addtime = date('Y:m:d H:i:d');
             $this->load->model('news_m');
-            $html = file_get_html("http://www.bit.edu.cn");
+            $opts = array(
+                'http' => array(
+                    'method' => "GET",
+                    'timeout' => 5,
+                )
+            );
+            $context = stream_context_create($opts);
+            $html = file_get_html("http://www.bit.edu.cn", false, $context);
+            if (!$html)
+                return false;
             $i1 = 0; // 校园新闻计数
             $i2 = 0; // 学校公告计数
             //$this->news_m->empty_news();
@@ -262,8 +283,16 @@ class Task extends CI_Controller {
             return true;
             $addtime = date('Y:m:d H:i:d');
             $this->load->model('news_m');
-            $html = file_get_html("http://www.bit.edu.cn");
-
+            $opts = array(
+                'http' => array(
+                    'method' => "GET",
+                    'timeout' => 5,
+                )
+            );
+            $context = stream_context_create($opts);
+            $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
+            if (!$html)
+                return false;
             //$this->news_m->empty_news();
             foreach ($html->find('a[class=huizi]') as $element) {
                 
@@ -281,19 +310,23 @@ class Task extends CI_Controller {
         // 清理过期一个月以上的特别推荐
         // 清理六个月以前的统计数据
         // 清理无效申请
-        
+
         return TRUE;
     }
 
     function get_news_test() {
         $this->load->helper('htmldom');
         try {
-            $html = file_get_html("http://www.bit.edu.cn");
-            foreach ($html->find('a[class=huizi]') as $element) {
-                echo $element->href . "---" . trim($element->innertext) . '<br />';
-                //$this->load->model('news_m');
-                //$this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 2);
-            }
+            $opts = array(
+                'http' => array(
+                    'method' => "GET",
+                    'timeout' => 1,
+                )
+            );
+            $html = file_get_contents('http://www.bit.edu.cn', false, $opts);
+            if (!$html)
+                echo 'error';
+            return TRUE;
         } catch (Exception $e) {
             return FALSE;
         }
