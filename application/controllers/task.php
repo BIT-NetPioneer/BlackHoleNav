@@ -32,9 +32,9 @@ class Task extends CI_Controller {
             }
 
             // 上全局锁
-            if($this->cache->save('task_lock', 1, 180)){
+            if ($this->cache->save('task_lock', 1, 180)) {
                 echo "Lock\n";
-            }else{
+            } else {
                 echo "Lock failed\n";
                 exit;
             }
@@ -129,11 +129,11 @@ class Task extends CI_Controller {
             // 取消全局锁
             //echo "Unlock\n";
             //$this->config_m->set_config('on_task', 0);
-        }else if($do == 2){
+        } else if ($do == 2) {
             $this->load->driver('cache', array('adapter' => 'file'));
-            if($this->cache->delete('task_lock')){
+            if ($this->cache->delete('task_lock')) {
                 echo 'Force Unlock is successed\n';
-            }else{
+            } else {
                 echo 'Unknow Error\n';
             }
         }
@@ -280,7 +280,6 @@ class Task extends CI_Controller {
             show_404();
         $this->load->helper('htmldom');
         try {
-            return true;
             $addtime = date('Y:m:d H:i:d');
             $this->load->model('news_m');
             $opts = array(
@@ -292,10 +291,18 @@ class Task extends CI_Controller {
             $context = stream_context_create($opts);
             $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
             if (!$html)
-                return false;
-            //$this->news_m->empty_news();
-            foreach ($html->find('a[class=huizi]') as $element) {
-                
+                return FALSE;
+            $i = 0;
+            foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
+                if (substr($element->href, 6, 4) == 'view') {
+                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK');
+                    $news_url = 'http://jwc.bit.edu.cn/' . $element->href;
+                    //echo $news_title . '---' . $news_url . "<br/>";
+                    $this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
+                    $i++;
+                }
+                if ($i == 5)
+                    break;
             }
             return TRUE;
         } catch (Exception $e) {
@@ -317,15 +324,30 @@ class Task extends CI_Controller {
     function get_news_test() {
         $this->load->helper('htmldom');
         try {
+            $addtime = date('Y:m:d H:i:d');
+            $this->load->model('news_m');
             $opts = array(
                 'http' => array(
                     'method' => "GET",
-                    'timeout' => 1,
+                    'timeout' => 5,
                 )
             );
-            $html = file_get_contents('http://www.bit.edu.cn', false, $opts);
+            $context = stream_context_create($opts);
+            $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
             if (!$html)
-                echo 'error';
+                return FALSE;
+            $i = 0;
+            foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
+                if (substr($element->href, 6, 4) == 'view') {
+                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK');
+                    $news_url = 'http://jwc.bit.edu.cn/' . $element->href;
+                    echo $news_title . '---' . $news_url . "<br/>";
+                    $this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
+                    $i++;
+                }
+                if ($i == 5)
+                    break;
+            }
             return TRUE;
         } catch (Exception $e) {
             return FALSE;
