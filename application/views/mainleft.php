@@ -89,7 +89,8 @@
                 },
                 showResult: function(value, data) {
                     return data[0] + '<br/>' + data[1];
-                }
+                },
+                minChars: 1
             });
         });
  
