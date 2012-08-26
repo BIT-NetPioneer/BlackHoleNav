@@ -1,12 +1,10 @@
 #pageleft{
     float: left;
     width: 700px;
-    overflow: hidden;
 }
 #pageright{
     width: 260px;
     float: right;
-    overflow: hidden;
 }
 
 .block{
@@ -216,7 +214,6 @@
 }
 #newscontent{
     padding: 0 3px;
-    overflow: hidden;
 }
 #newscontent dd{
     margin: 0 0 15px;
@@ -249,12 +246,20 @@
     line-height: 15px;
     overflow: hidden;
     text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     margin: 8px 3px;
+    z-index: 100;
+}
+.newsitem:hover{
+    overflow: visible;
 }
 .newsitem a{
     color: #333333;
     font-size: 12px;
     text-decoration: none;
     padding: 0 0 0 15px;
+    height: 16px;
+    line-height: 16px;
 }
 

@@ -115,4 +115,4 @@ $week = "今年第{$w}周，据开学还有{$d}天";
             </div>
         </div>
 
-        <div style="width: 960px; margin: 0 auto; overflow: hidden;">
+        <div id="wrap">
