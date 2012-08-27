@@ -57,7 +57,7 @@
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <li class="newsitem">
+                        <li class="newsitem newsitem-empty">
                             <a href="#" title="">没有新闻</a>
                         </li>
                     <?php endif; ?>
@@ -78,7 +78,7 @@
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <li class="newsitem">
+                        <li class="newsitem newsitem-empty">
                             <a href="#" title="">没有新闻</a>
                         </li>
                     <?php endif; ?>
@@ -99,7 +99,7 @@
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <li class="newsitem">
+                        <li class="newsitem newsitem-empty">
                             <a href="#" title="">没有新闻</a>
                         </li>
                     <?php endif; ?>

@@ -26,7 +26,6 @@
         <div class="title urllist-title">
             <p>校内导航</p>
             <form class="url-search" action="">
-                快速搜索
                 <input type="text" id="url-search-input"/>
             </form>
         </div>
@@ -61,7 +60,6 @@
                             <?php endforeach; ?>
                         </div>
                         <div class="clear"> </div>
-                        <hr/>
                     </li>
                 <?php endforeach; ?>
             </ul>

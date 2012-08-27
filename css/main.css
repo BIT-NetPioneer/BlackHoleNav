@@ -8,40 +8,49 @@
 }
 
 .block{
-    background: url("../img/cat_bg.gif") repeat-x scroll 0 0 #FFFFFF;
+    background: #FFFFFF;
     padding: 8px;
-    border: #CAD9EA solid 1px;
+    border: 1px solid #D2D2D2;
     margin: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 #common{}
 
 .title{
-    margin-left: 5px;
-    font-size: 12px;
-    line-height: 14px;
-    height: 20px;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 16px;
+    height: 24px;
     font-weight: bold;
-    color: #555555;
+    color: #709F11;
 }
 .commonurls{
-    padding: 10px 1px;
+    padding: 8px 8px 3px;
     background-color: #FFFFFF;
 }
 .commonurls p{
     display: block;
-    height: 20px;
-    padding: 3px 3px;
     overflow: hidden;
 }
-.row1{width: 100%;background-color: #EDF5FC;}
+.row1{
+    width: 100%;
+    background-color: #F5F5F5;
+    background: -moz-linear-gradient(center top , #fAfAfA 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
 .row2{width: 100%;}
 .row3{width: 100%;}
 .row4{width: 100%;}
-.row1 span{width: 16%;}
-.row2 span{width: 12%;}
-.row3 span{width: 12%;}
-.row4 span{width: 12%;}
+.row1 span{width: 15%;}
+.row2 span{width: 10%;}
+.row3 span{width: 10%;}
+.row4 span{width: 10%;}
 .commonurls hr{
     margin: 5px 0 1px;
     border-color: #CAD9EA;
@@ -49,10 +58,11 @@
 
 .urlspan{
     display: inline-block;
-    height: 16px;
+    height: 31px;
     text-align: left;
     float: left;
-    line-height: 20px;
+    line-height: 31px;
+    margin: 0 0 0 10px;
     white-space: nowrap;
 }
 .urlspan a{
@@ -76,11 +86,21 @@
     width: 100px;
 }
 .url-search{
+    background: url("../img/searchbox.png") no-repeat scroll 0 0;
     float:right;
+    font-size: 12px;
+    padding: 4px 11px 11px 22px;
+    width: 120px;
+    margin: 0px 10px 0 0;
+    z-index: 100;
 }
 .url-search input{
-    font-size: 12px;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
     line-height: 12px;
+    height: 14px;
+    width: 119px;
+    outline: medium none;
     padding: 0;
 }
 .urls{
@@ -88,29 +108,29 @@
 }
 .urlclass{
     display: block;
-    padding: 1px;
     width: 100%;
+    padding: 3px 0;
     overflow: hidden;
 }
-.urlclass hr{
-    margin: 2px 0 2px 0;
-    display: none;
-}
 .urlclass-s{
-    background-color: #edf5fc;
+    background-color: #F5F5F5;
+    background: -moz-linear-gradient(center top , #F5F5F5 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 .url-class-title{
-    width: 7%;
+    width: 9%;
     float: left;
+    text-align: center;
 }
 .url-class-title span{
     display: inline-block;
-    margin: 8px;
     color: #0134c5;
     font-weight: bold;
     font-size: 12px;
-    line-height: 14px;
-    text-align: center;
+    line-height: 20px;
+
 }
 .hot span{
     color: red;
@@ -118,18 +138,18 @@
 
 .url-class-area{
     width: 90%;
-    padding: 3px 3px;
     float: left;
 }
 .urlspan2{
     display: inline-block; 
     white-space: nowrap;
     float: left;
-    margin: 3px 10px;
+    height: 23px;
+    line-height: 20px;
+    margin: 0 18px 0 0;
 }
 .urlspan2 a{
     font-size: 12px;
-    line-height: 14px;
     color: #000;
     text-decoration: none;
 }
@@ -157,7 +177,7 @@
 }
 
 #specialcontent{
-    padding: 7px 0 0;
+    padding: 0;
     background-color: #FFFFFF;
 
 }
@@ -219,36 +239,39 @@
     margin: 0 0 15px;
 }
 .news-titlebar{
-    width: 100%;
+    width: 95%;
     font-size: 12px;
     line-height: 14px;
     height: 14px;
     padding: 5px 5px;
-    border-bottom: 1px solid #76bdfc;
+    border-bottom: 1px solid #E6E6E6;
 }
 .news-class-title{
     padding-left: 10px;
     height: 14px;
     font-weight: bold;
     float:left;
+    color: #709F11;
 }
 .news-class-more{
     float: right;
     padding-right: 5px;
 }
 .news-class-more a{
-    color: #2B2B2B;
+    color: #6EA502;
     text-decoration: none;   
 }
 .newsitem{
-    background: url("../img/list.png") no-repeat scroll 0 7px transparent;
-    height: 15px;
-    line-height: 15px;
+    background: url("../img/list.png") no-repeat scroll 0 10px transparent;
+    width: 220px;
+    height: 22px;
+    line-height: 22px;
     overflow: hidden;
     text-align: left;
-    margin: 8px 3px;
+    margin: 0 3px;
     z-index: 100;
     display: block;
+    text-overflow:ellipsis;
 }
 .newsitem:hover{
     overflow: visible;
@@ -257,9 +280,13 @@
     color: #333333;
     font-size: 12px;
     text-decoration: none;
-    padding: 0 0 0 15px;
+    padding: 0 0 0 13px;
     height: 16px;
     white-space: pre;
-    line-height: 16px;
+    line-height: 14px;
+
+}
+.newsitem-empty a{
+    color: #929292;
 }
 

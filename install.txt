@@ -1,0 +1,11 @@
+1、复制
+将
+2、设置权限
+/application/cache 777
+/upload 777
+/upload/special 777
+3、设置数据库
+/application/config/database.php
+设置数据库地址、用户名、密码、数据库名字
+4、导入数据库
+将/sql/nav.sql导入数据库文件
