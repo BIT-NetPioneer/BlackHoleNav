@@ -53,16 +53,12 @@
                     <?php if ($allnews[0] != null): ?>
                         <?php foreach ($allnews[0] as &$news): ?>
                             <li class="newsitem">
-                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
-                                    <?php echo $news['title']; ?>
-                                </a>
+                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank"><?php echo $news['title']; ?></a>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <li class="newsitem">
-                            <a href="#" title="">
-                                没有新闻
-                            </a>
+                            <a href="#" title="">没有新闻</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -78,16 +74,12 @@
                     <?php if ($allnews[1] != null): ?>
                         <?php foreach ($allnews[1] as &$news): ?>
                             <li class="newsitem">
-                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
-                                    <?php echo $news['title']; ?>
-                                </a>
+                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank"><?php echo $news['title']; ?></a>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <li class="newsitem">
-                            <a href="#" title="">
-                                没有新闻
-                            </a>
+                            <a href="#" title="">没有新闻</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -103,16 +95,12 @@
                     <?php if ($allnews[2] != null): ?>
                         <?php foreach ($allnews[2] as &$news): ?>
                             <li class="newsitem">
-                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
-                                    <?php echo $news['title']; ?>
-                                </a>
+                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank"><?php echo $news['title']; ?></a>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <li class="newsitem">
-                            <a href="#" title="">
-                                没有新闻
-                            </a>
+                            <a href="#" title="">没有新闻</a>
                         </li>
                     <?php endif; ?>
                 </ul>

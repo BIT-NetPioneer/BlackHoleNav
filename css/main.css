@@ -246,10 +246,9 @@
     line-height: 15px;
     overflow: hidden;
     text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     margin: 8px 3px;
     z-index: 100;
+    display: block;
 }
 .newsitem:hover{
     overflow: visible;
@@ -260,6 +259,7 @@
     text-decoration: none;
     padding: 0 0 0 15px;
     height: 16px;
+    white-space: pre;
     line-height: 16px;
 }
 
