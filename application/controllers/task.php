@@ -21,7 +21,9 @@ class Task extends CI_Controller {
     function index() {
         //$this->output->enable_profiler(TRUE);
         $do = $this->input->get('do', TRUE);
-        if ($do == 1) {
+        if ($do == 0) // 没有参数
+            return;
+        else if ($do == 1) { // 正常执行
             $this->load->driver('cache', array('adapter' => 'file'));
             $this->load->model('config_m');
 
@@ -129,12 +131,41 @@ class Task extends CI_Controller {
             // 取消全局锁
             //echo "Unlock\n";
             //$this->config_m->set_config('on_task', 0);
-        } else if ($do == 2) {
+        } else if ($do == 2) { // 强制解锁
             $this->load->driver('cache', array('adapter' => 'file'));
             if ($this->cache->delete('task_lock')) {
-                echo 'Force Unlock is successed\n';
+                echo "Force Unlock is successed\n";
             } else {
-                echo 'Unknow Error\n';
+                echo "Unknow Error\n";
+            }
+        } else if ($do == 3) { // 查看锁信息
+            $this->load->driver('cache', array('adapter' => 'file'));
+            $tmp = $this->cache->cache_info();
+            $cache_file = @file_get_contents($tmp["task_lock"]["server_path"]);
+            if ($cache_file != null) {
+                $ttl_data_o = null;
+                preg_match('/"ttl";i:\w+/', $cache_file, $ttl_data_o);
+                $ttl_data = str_replace('"ttl";i:', '', $ttl_data_o[0]);
+                echo 'Time after lock: ' . (time() - ($tmp["task_lock"]["date"])) . "s\n";
+                echo "ttl = $ttl_data\n";
+                if (time() - ($tmp["task_lock"]["date"]) > $ttl_data) {
+                    echo "Lock is disable\n";
+                } else {
+                    echo "Locked\n";
+                }
+            }else{
+                echo "Missing Cache File\n";
+            }
+        } else if ($do == 4) { // 强制上锁
+            $ttl = $this->input->get('ttl', TRUE);
+            $this->load->driver('cache', array('adapter' => 'file'));
+            $ttl = (int) $ttl;
+            if ($ttl != 0) {
+                if ($this->cache->save('task_lock', 1, $ttl)) {
+                    echo "Locked; ttl = $ttl\n";
+                } else {
+                    echo "Lock failed\n";
+                }
             }
         }
     }
