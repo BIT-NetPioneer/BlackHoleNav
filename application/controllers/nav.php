@@ -12,7 +12,6 @@ class Nav extends CI_Controller {
 
     function index() {
         //$this->output->enable_profiler(TRUE);
-        
         // 缓存
         if ($this->uri->total_segments() > 2) {
             show_404();
@@ -164,7 +163,9 @@ class Nav extends CI_Controller {
         // getNews
         $this->load->model('news_m');
         $data_r['allnews'] = array();
-
+        $data_r['allnews'][0] = null;
+        $data_r['allnews'][1] = null;
+        $data_r['allnews'][2] = null;
         for ($i = 1; $i <= 3; $i++) {
             $newses = $this->news_m->get_by_source($i);
             $newsCount = 0;

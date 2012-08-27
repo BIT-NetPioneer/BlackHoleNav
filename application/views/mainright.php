@@ -50,13 +50,21 @@
             </dt>
             <dd>
                 <ul class="news-list">
-                    <?php foreach ($allnews[0] as &$news): ?>
+                    <?php if ($allnews[0] != null): ?>
+                        <?php foreach ($allnews[0] as &$news): ?>
+                            <li class="newsitem">
+                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
+                                    <?php echo $news['title']; ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <li class="newsitem">
-                            <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
-                                <?php echo $news['title']; ?>
+                            <a href="#" title="">
+                                没有新闻
                             </a>
                         </li>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
             </dd>
             <dt class="news-titlebar">
@@ -67,13 +75,21 @@
             </dt>
             <dd>
                 <ul class="news-list">
-                    <?php foreach ($allnews[1] as &$news): ?>
+                    <?php if ($allnews[1] != null): ?>
+                        <?php foreach ($allnews[1] as &$news): ?>
+                            <li class="newsitem">
+                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
+                                    <?php echo $news['title']; ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <li class="newsitem">
-                            <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
-                                <?php echo $news['title']; ?>
+                            <a href="#" title="">
+                                没有新闻
                             </a>
                         </li>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
             </dd>
             <dt class="news-titlebar">
@@ -84,13 +100,21 @@
             </dt>
             <dd>
                 <ul class="news-list">
-                    <?php foreach ($allnews[2] as &$news): ?>
+                    <?php if ($allnews[2] != null): ?>
+                        <?php foreach ($allnews[2] as &$news): ?>
+                            <li class="newsitem">
+                                <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
+                                    <?php echo $news['title']; ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <li class="newsitem">
-                            <a href="<?php echo $news['url']; ?>" title="<?php echo $news['title']; ?>" target="_blank">
-                                <?php echo $news['title']; ?>
+                            <a href="#" title="">
+                                没有新闻
                             </a>
                         </li>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
             </dd>
         </dl>
@@ -99,5 +123,5 @@
 </div>
 
 <script type="text/javascript">
-    $.get("<?php echo base_url('index.php/task?do=1');?>");
+    $.get("<?php echo base_url('index.php/task?do=1'); ?>");
 </script>
