@@ -133,10 +133,26 @@ class Task extends CI_Controller {
             //$this->config_m->set_config('on_task', 0);
         } else if ($do == 2) { // 强制解锁
             $this->load->driver('cache', array('adapter' => 'file'));
-            if ($this->cache->delete('task_lock')) {
-                echo "Force Unlock is successed\n";
+            if ($this->cache->get('task_lock')) {
+                if ($this->cache->delete('task_lock')) {
+                    echo "Force Unlock is successed\n";
+                } else {
+                    echo "Unknow Error\n";
+                }
             } else {
-                echo "Unknow Error\n";
+                echo "Not Locked\n";
+            }
+            $all = $this->input->get('all', TRUE);
+            if ($all == 1) {
+                $this->load->model('config_m');
+                $tmp['time'] = 0;
+                $tmp_json = json_encode($tmp);
+                $this->config_m->set_config('bit_news_time', $tmp_json);
+                $this->config_m->set_config('jwc_news_time', $tmp_json);
+                $this->config_m->set_config('count_heat_time', $tmp_json);
+                $this->config_m->set_config('common_url_time', $tmp_json);
+                $this->config_m->set_config('clean_data_time', $tmp_json);
+                echo "Unlock All\n";
             }
         } else if ($do == 3) { // 查看锁信息
             $this->load->driver('cache', array('adapter' => 'file'));
@@ -153,7 +169,7 @@ class Task extends CI_Controller {
                 } else {
                     echo "Locked\n";
                 }
-            }else{
+            } else {
                 echo "Missing Cache File\n";
             }
         } else if ($do == 4) { // 强制上锁
@@ -265,6 +281,7 @@ class Task extends CI_Controller {
             show_404();
 
         $this->load->helper('htmldom');
+
         try {
             $addtime = date('Y:m:d H:i:d');
             $this->load->model('news_m');
@@ -275,31 +292,34 @@ class Task extends CI_Controller {
                 )
             );
             $context = stream_context_create($opts);
-            $html = file_get_html("http://www.bit.edu.cn", false, $context);
-            if (!$html)
-                return false;
+
             $i1 = 0; // 校园新闻计数
             $i2 = 0; // 学校公告计数
-            //$this->news_m->empty_news();
-            foreach ($html->find('a[class=huizi]') as $element) {
-                switch (substr($element->href, 0, 3)) {
-                    case 'xww' :
-                        if ($i1++ >= 5)
-                            break;
-                        $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 2);
-                        //echo '*';
-                        break;
-                    case 'ggf' :
-                        if ($i2++ >= 5)
-                            break;
-                        $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/{$element->href}", $addtime, 3);
-                        //echo '*';
-                        break;
-                }
-                //echo "<br />";
-                if ($i1 >= 5 && $i2 >= 5)
+
+            $html = file_get_html("http://www.bit.edu.cn/xww/", false, $context);
+            if (!$html)
+                return false;
+            foreach ($html->find('a[class=biaozhun]') as $element) {
+                if ($i1 < 5) {
+                    //echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/xww/" . $element->href . '</br>';
+                    $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/xww/{$element->href}", $addtime, 2);
+                    $i1++;
+                }else
                     break;
             }
+
+            $html = file_get_html("http://www.bit.edu.cn/ggfw/tzgg17/index.htm", false, $context);
+            if (!$html)
+                return false;
+            foreach ($html->find('a[class=huizi]') as $element) {
+                if ($i2 < 5) {
+                    //echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/ggfw/tzgg17/" . $element->href . '</br>';
+                    $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/ggfw/tzgg17/{$element->href}", $addtime, 3);
+                    $i2++;
+                }else
+                    break;
+            }
+
             return TRUE;
         } catch (Exception $e) {
             return FALSE;
@@ -364,21 +384,33 @@ class Task extends CI_Controller {
                 )
             );
             $context = stream_context_create($opts);
-            $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
+
+            $i1 = 0; // 校园新闻计数
+            $i2 = 0; // 学校公告计数
+
+            $html = file_get_html("http://www.bit.edu.cn/xww/", false, $context);
             if (!$html)
-                return FALSE;
-            $i = 0;
-            foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
-                if (substr($element->href, 6, 4) == 'view') {
-                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK');
-                    $news_url = 'http://jwc.bit.edu.cn/' . $element->href;
-                    echo $news_title . '---' . $news_url . "<br/>";
-                    $this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
-                    $i++;
-                }
-                if ($i == 5)
+                return false;
+            foreach ($html->find('a[class=biaozhun]') as $element) {
+                if ($i1 < 5) {
+                    echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/xww/" . $element->href . '</br>';
+                    //$this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/xww/{$element->href}", $addtime, 2);
+                    $i1++;
+                }else
                     break;
             }
+
+            $html = file_get_html("http://www.bit.edu.cn/ggfw/tzgg17/index.htm", false, $context);
+            if (!$html)
+                return false;
+            foreach ($html->find('a[class=huizi]') as $element) {
+                if ($i2 < 5) {
+                    echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/ggfw/tzgg17/" . $element->href . '</br>';
+                    $i2++;
+                }else
+                    break;
+            }
+
             return TRUE;
         } catch (Exception $e) {
             return FALSE;
