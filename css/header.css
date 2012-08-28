@@ -1,6 +1,6 @@
 body{
     background-color: #F8F8F8;
-    font-family: "Microsoft Yahei",Verdana,Simsun,"Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue","BBAlpha Sans","S60 Sans",Arial,"sans-serif";
+    font-family: Helvetica,"Microsoft Yahei","微软雅黑",Verdana,Arial,STHeiti;
 }
 a{cursor: pointer;}
 
@@ -55,9 +55,10 @@ a{cursor: pointer;}
     font-size: 15px;
     height: 30px;
     line-height: 30px;
-    padding: 0 60px 0 3px;
+    padding: 0 60px 0 6px;
     vertical-align: middle;
     width: 316px;
+    font-family: Helvetica,"Microsoft Yahei","微软雅黑",Verdana,Arial,STHeiti;
 }
 #keyword_bnt{
     background: url("../img/kw_bnt.png") no-repeat scroll 0 0 transparent;

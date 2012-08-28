@@ -116,7 +116,7 @@
     display: inline-block;
     color: #0134c5;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 20px;
 
 }
@@ -132,24 +132,20 @@
     display: inline-block; 
     white-space: nowrap;
     float: left;
-    height: 23px;
+    height: 25px;
     line-height: 20px;
     margin: 0 18px 0 0;
 }
 .urlspan2 a{
-    font-size: 12px;
+    font-size: 14px;
     color: #000;
     text-decoration: none;
 }
-.urlspan2-red a{
-    color: red;
-}
-.urlspan2-gray a{
-    color: grey;
-}
-.urlspan2-blue a{
-    color: blue;
-}
+.urlspan2-red a{color: red;}
+.urlspan2-gray a{color: gray;}
+.urlspan2-blue a{color: blue;}
+.urlspan2-green a{color: green;}
+
 .urlspan2 a:hover{
     color: #FFFFFF;
     background-color: #6699FF;
