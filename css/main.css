@@ -12,10 +12,6 @@
     padding: 8px;
     border: 1px solid #D2D2D2;
     margin: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 #common{}
@@ -39,10 +35,6 @@
 .row1{
     width: 100%;
     background-color: #F5F5F5;
-    background: -moz-linear-gradient(center top , #fAfAfA 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 .row2{width: 100%;}
 .row3{width: 100%;}
@@ -114,10 +106,6 @@
 }
 .urlclass-s{
     background-color: #F5F5F5;
-    background: -moz-linear-gradient(center top , #F5F5F5 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 .url-class-title{
     width: 9%;

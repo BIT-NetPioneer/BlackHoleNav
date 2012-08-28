@@ -1,0 +1,29 @@
+/* 
+    Document   : oldie
+    Created on : 2012-8-28, 2:09:08
+    Author     : H
+    Description:
+        for HTML5
+*/
+
+.block{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    border: 0 none;
+}
+
+.row1{
+    background: -moz-linear-gradient(center top , #fAfAfA 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.urlclass-s{
+    background: -moz-linear-gradient(center top , #F5F5F5 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
