@@ -17,10 +17,10 @@ $week = "今年第{$w}周，开学还有{$d}天";
             <link href="<?php echo base_url("css/$csses.css"); ?>" type="text/css" rel="stylesheet" />
         <?php endif; ?>
         <!--[if !IE]><!-->
-            <link href="<?php echo base_url("css/html5.css"); ?>" type="text/css" rel="stylesheet" />
+            <link href="<?php echo base_url("css/css3.css"); ?>" type="text/css" rel="stylesheet" />
         <!--<![endif]-->
         <!--[if gte IE 9]>
-            <link href="<?php echo base_url("css/html5.css"); ?>" type="text/css" rel="stylesheet" />
+            <link href="<?php echo base_url("css/css3.css"); ?>" type="text/css" rel="stylesheet" />
         <![endif]-->
 
         <?php if (is_array($jses)): ?>

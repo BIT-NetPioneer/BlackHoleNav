@@ -278,3 +278,19 @@
     color: #929292;
 }
 
+#showip p{
+    font-size: 12px;
+    line-height: 21px;
+    height: 21px;
+    padding-left: 10px;
+}
+.ip_title{
+    font-weight: bold;
+}
+
+#ip_add{
+    font-weight: normal;
+}
+#ua_info{
+    font-weight: normal;
+}
