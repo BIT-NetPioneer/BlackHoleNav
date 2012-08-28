@@ -177,7 +177,7 @@
     border: 1px solid #CAD9EA;
 }
 #sliderContent {
-    width: 240px; /* important to be same as image width or wider */
+    width: 242px; /* important to be same as image width or wider */
     position: absolute;
     top: 0;
     margin-left: 0;

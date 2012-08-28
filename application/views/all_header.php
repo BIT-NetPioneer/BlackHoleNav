@@ -2,7 +2,7 @@
 $dayOfYear = $d = date("z") + 1;
 $w = ceil($dayOfYear / 7);
 $d = 244 - $dayOfYear;
-$week = "今年第{$w}周，据开学还有{$d}天";
+$week = "今年第{$w}周，开学还有{$d}天";
 ?>
 <!DOCTYPE HTML>
 <html>
