@@ -14,6 +14,10 @@
     border: 0 none;
 }
 
+#special{
+    padding: 8px 4px 5px;
+}
+
 .row1{
     background: -moz-linear-gradient(center top , #fAfAfA 50%, #F0F0F0 100%) repeat scroll 0 0 transparent;
     -moz-border-radius: 3px;
