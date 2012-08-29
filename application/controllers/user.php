@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 /**
  * Description of user
  *
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class User extends CI_Controller {
 

@@ -13,7 +13,7 @@ if (!defined('BASEPATH'))
  * |_.__/ |_| \__||_| |_|| .__/ 
  *                       | |    
  *                       |_|    
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class Nav extends CI_Controller {
 

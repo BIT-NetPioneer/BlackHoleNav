@@ -8,7 +8,7 @@
 /**
  * Description of user
  *
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class User_m extends CI_Model {
     function __construct() {

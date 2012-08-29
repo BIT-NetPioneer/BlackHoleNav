@@ -10,7 +10,7 @@
  * |_.__/ |_| \__||_| |_|| .__/ 
  *                       | |    
  *                       |_|    
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class Class_m extends CI_Model {
 

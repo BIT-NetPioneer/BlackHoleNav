@@ -13,7 +13,7 @@ if (!defined('BASEPATH'))
  * |_.__/ |_| \__||_| |_|| .__/ 
  *                       | |    
  *                       |_|    
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class Showip extends CI_Controller {
 
@@ -22,6 +22,7 @@ class Showip extends CI_Controller {
      * 
      * 返回客户端的IP地址和UA头中的操作系统、浏览器信息
      * @author HacRi <linleqi@gmail.com>
+     * @todo 增加地理位置转换？
      */
     function index() {
         $this->load->library('user_agent');

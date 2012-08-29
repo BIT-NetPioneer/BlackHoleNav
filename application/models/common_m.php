@@ -3,7 +3,7 @@
 /**
  * Description of url_m
  *
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class Common_m extends CI_Model {
 

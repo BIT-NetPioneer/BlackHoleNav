@@ -13,23 +13,47 @@ if (!defined('BASEPATH'))
  * |_.__/ |_| \__||_| |_|| .__/ 
  *                       | |    
  *                       |_|    
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  * @todo Clean_data
  * 
  * 
  */
 class Task extends CI_Controller {
 
+    /**
+     * 测试用
+     * 
+     * @todo 删掉
+     */
     function test() {
         $this->load->model('config_m');
         echo $this->config_m->get_config('on_task');
     }
 
+    /**
+     * 事务的引导页面
+     * 
+     * 引导导航站的周期性事务的，通过浏览器端访问触发。
+     * 分别分析各周期性任务的执行时间，然后运行各任务
+     * 通过get方式提交do参数来控制
+     *  do = 0
+     *      不做任何事情
+     *  do = 1
+     *      执行周期性任务
+     *  do = 2
+     *      强制解除全局锁。附加all=1参数则解除所有锁
+     *  do = 3
+     *      检查所有周期锁信息
+     *  do = 4
+     *      强制上锁。时间用ttl参数提交
+     * 
+     * @todo
+     */
     function index() {
         //$this->output->enable_profiler(TRUE);
         $do = $this->input->get('do', TRUE);
         if ($do == 0) // 没有参数
-            return;
+            exit;
         else if ($do == 1) { // 正常执行
             $this->load->driver('cache', array('adapter' => 'file'));
             $this->load->model('config_m');
@@ -193,6 +217,12 @@ class Task extends CI_Controller {
         }
     }
 
+    /**
+     * 统计各连接的热度
+     * 
+     * @param integer $check 保证不会由浏览器访问直接触发
+     * @return boolean 是否执行成功
+     */
     function count_heat($check = 0) {
         if (!$check)
             show_404();
@@ -219,6 +249,9 @@ class Task extends CI_Controller {
         return TRUE;
     }
 
+    /**
+     * @todo 重写，移植到后台
+     */
     function heatpreview() {
         $baseurl = base_url();
 
@@ -261,6 +294,12 @@ class Task extends CI_Controller {
         $this->load->view('all_footer');
     }
 
+    /**
+     * 根据链接热度信息生成常用链接
+     * 
+     * @param integer $check 保证不会由浏览器访问直接触发
+     * @return boolean 是否执行成功
+     */
     function generate_common($check = 0) {
         if (!$check)
             show_404();
@@ -283,6 +322,15 @@ class Task extends CI_Controller {
         return TRUE;
     }
 
+    /**
+     * 抓取www.bit.edu.cn域上的新闻
+     * 
+     * 抓取校园新闻和学校公告
+     * 
+     * @param integer $check 保证不会由浏览器访问直接触发
+     * @return boolean 是否执行成功
+     * @todo 错误记录
+     */
     function get_news_from_bit($check = 0) {
         if (!$check)
             show_404();
@@ -333,6 +381,13 @@ class Task extends CI_Controller {
         }
     }
 
+    /**
+     * 抓取jwc上的新闻
+     * 
+     * @param integer $check 保证不会由浏览器访问直接触发
+     * @return boolean 是否执行成功
+     * @todo 错误记录
+     */
     function get_news_from_jwc($check = 0) {
         if (!$check)
             show_404();
@@ -368,6 +423,13 @@ class Task extends CI_Controller {
         }
     }
 
+    /**
+     * 清理网站多余的数据
+     * 
+     * @param integer $check 保证不会由浏览器访问直接触发
+     * @return boolean 是否执行成功
+     * @todo 还什么都没写
+     */
     function clean_data($check = 0) {
         if (!$check)
             show_404();
@@ -379,6 +441,12 @@ class Task extends CI_Controller {
         return TRUE;
     }
 
+    /**
+     * 测试用
+     * 
+     * @todo 删掉
+     * @return boolean
+     */
     function get_news_test() {
         $this->load->helper('htmldom');
         try {

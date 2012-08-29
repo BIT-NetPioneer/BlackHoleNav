@@ -9,7 +9,7 @@
  * |_.__/ |_| \__||_| |_|| .__/ 
  *                       | |    
  *                       |_|    
- * @author HacRi
+ * @author HacRi <linleqi@gmail.com>
  */
 class Special_m extends CI_Model{
     function __construct() {
