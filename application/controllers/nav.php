@@ -5,11 +5,23 @@ if (!defined('BASEPATH'))
 
 /**
  * Description of Index
- *
+ *  _      _  _                 
+ * | |    (_)| |                
+ * | |__   _ | |_  _ __   _ __  
+ * | '_ \ | || __|| '_ \ | '_ \ 
+ * | |_) || || |_ | | | || |_) |
+ * |_.__/ |_| \__||_| |_|| .__/ 
+ *                       | |    
+ *                       |_|    
  * @author HacRi
  */
 class Nav extends CI_Controller {
 
+    /**
+     * 显示主页
+     * 
+     * @author HacRi <linleqi@gmail.com>
+     */
     function index() {
         //$this->output->enable_profiler(TRUE);
         // 缓存

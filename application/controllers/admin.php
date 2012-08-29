@@ -5,7 +5,14 @@ if (!defined('BASEPATH'))
 
 /**
  * Description of admin
- *
+ *  _      _  _                 
+ * | |    (_)| |                
+ * | |__   _ | |_  _ __   _ __  
+ * | '_ \ | || __|| '_ \ | '_ \ 
+ * | |_) || || |_ | | | || |_) |
+ * |_.__/ |_| \__||_| |_|| .__/ 
+ *                       | |    
+ *                       |_|    
  * @author HacRi
  */
 class Admin extends CI_Controller {

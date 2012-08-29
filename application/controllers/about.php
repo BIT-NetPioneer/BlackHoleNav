@@ -5,7 +5,14 @@ if (!defined('BASEPATH'))
 
 /**
  * Description of about
- *
+ *  _      _  _                 
+ * | |    (_)| |                
+ * | |__   _ | |_  _ __   _ __  
+ * | '_ \ | || __|| '_ \ | '_ \ 
+ * | |_) || || |_ | | | || |_) |
+ * |_.__/ |_| \__||_| |_|| .__/ 
+ *                       | |    
+ *                       |_|    
  * @author HacRi
  */
 class About extends CI_Controller {
