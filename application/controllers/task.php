@@ -409,7 +409,7 @@ class Task extends CI_Controller {
             foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
                 if (substr($element->href, 6, 4) == 'view') {
                     $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK');
-                    $news_url = 'http://jwc.bit.edu.cn/' . $element->href;
+                    $news_url = 'http://jwc.bit.edu.cn' . $element->href;
                     //echo $news_title . '---' . $news_url . "<br/>";
                     $this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
                     $i++;
