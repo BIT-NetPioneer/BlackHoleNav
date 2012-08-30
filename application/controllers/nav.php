@@ -35,7 +35,8 @@ class Nav extends CI_Controller {
         $jses = array(
             $this->config->item('jquery'),
             'jquery.autocomplete.min',
-            's3Slider'
+            's3Slider',
+            'title'
         );
 
         $head_data['csses'] = $csses;
