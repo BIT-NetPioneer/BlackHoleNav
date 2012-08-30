@@ -3,6 +3,9 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+/**
+ * @todo 删掉
+ */
 class Upload extends CI_Controller {
 
     function face() {

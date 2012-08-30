@@ -5,12 +5,24 @@ if (!defined('BASEPATH'))
 
 /**
  * Description of Index
- *
- * @author HacRi
+ *  _      _  _                 
+ * | |    (_)| |                
+ * | |__   _ | |_  _ __   _ __  
+ * | '_ \ | || __|| '_ \ | '_ \ 
+ * | |_) || || |_ | | | || |_) |
+ * |_.__/ |_| \__||_| |_|| .__/ 
+ *                       | |    
+ *                       |_|    
+ * @author HacRi <linleqi@gmail.com>
  * @todo 添加缓存设置
  */
 class urlsug extends CI_Controller {
 
+    /**
+     * 返回所有链接json数据
+     * 
+     * 返回json编码过的链接数据，用于页面的自动完成
+     */
     function index() {
         $keyword = $this->input->get('q');
         //echo $keyword;
@@ -37,6 +49,11 @@ class urlsug extends CI_Controller {
         }
     }
 
+   /**
+    * 返回包含所有链接json数据的js文件
+    * 
+    * 返回所有链接经过json加密过的数据。包含js的变量赋值语句
+    */
     function urls() {
         // 缓存
         if ($this->uri->total_segments() > 2) {
@@ -67,6 +84,11 @@ class urlsug extends CI_Controller {
         echo ";";
     }
 
+    /**
+     * 测试用
+     * 
+     * @todo 删掉
+     */
     function u() {
         $this->load->helper('pinyin');
         $this->load->model('url_m');

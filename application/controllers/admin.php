@@ -5,12 +5,24 @@ if (!defined('BASEPATH'))
 
 /**
  * Description of admin
- *
- * @author HacRi
+ *  _      _  _                 
+ * | |    (_)| |                
+ * | |__   _ | |_  _ __   _ __  
+ * | '_ \ | || __|| '_ \ | '_ \ 
+ * | |_) || || |_ | | | || |_) |
+ * |_.__/ |_| \__||_| |_|| .__/ 
+ *                       | |    
+ *                       |_|    
+ * @author HacRi <linleqi@gmail.com>
  */
 class Admin extends CI_Controller {
 
-    //验证session
+    /**
+     * 验证当前用户是否登录
+     * 
+     * 验证当前用户是否登录，由其他程序调用
+     * @return boolean
+     */
     function check_session() {
         $this->load->library('session');
         if ($this->session->userdata('permission') > 2) {
@@ -21,12 +33,18 @@ class Admin extends CI_Controller {
         }
     }
 
+    /**
+     * 后台管理的首页
+     */
     function index() {
         $this->check_session();
 
         echo '成功';
     }
 
+    /**
+     * 后台登录页面
+     */
     function login() {
         $baseurl = base_url();
         $baseurlwithindex = $baseurl . "index.php";
@@ -49,6 +67,12 @@ class Admin extends CI_Controller {
         $this->load->view('all_footer');
     }
 
+    /**
+     * 登录的验证页
+     * 
+     * 登录跳转到此验证，用户名密码通过post传送
+     * @todo 用户名密码存入数据库
+     */
     function checklogin() {
         $uname = $this->input->post('uname');
         $uname = str_replace(' ', null, $uname);
@@ -87,6 +111,9 @@ theEnd;
         }
     }
 
+    /**
+     * 登出页面
+     */
     function logout() {
         $this->load->library('session');
         $this->session->unset_userdata('permission');

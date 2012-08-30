@@ -2,8 +2,15 @@
 
 /**
  * Description of news
- *
- * @author HacRi
+ *  _      _  _                 
+ * | |    (_)| |                
+ * | |__   _ | |_  _ __   _ __  
+ * | '_ \ | || __|| '_ \ | '_ \ 
+ * | |_) || || |_ | | | || |_) |
+ * |_.__/ |_| \__||_| |_|| .__/ 
+ *                       | |    
+ *                       |_|    
+ * @author HacRi <linleqi@gmail.com>
  */
 class News_m extends CI_Model {
 
@@ -11,6 +18,12 @@ class News_m extends CI_Model {
         parent::__construct();
     }
 
+    /**
+     * 按照新闻来源抓取新闻
+     * 
+     * @param integer $source 新闻来源：1-教务处新闻，2-校园新闻，3-校园公告
+     * @return array ActiveRecord结果集
+     */
     function get_by_source($source) {
         $this->db->where('`status` > 0');
         $this->db->where('source', $source);
@@ -25,6 +38,14 @@ class News_m extends CI_Model {
         return $query->result();
     }
 
+    /**
+     * 插入新闻
+     * 
+     * @param string $title 新闻标题
+     * @param string $url 新闻链接
+     * @param mixed $addtime 插入时间
+     * @param integer $source 新闻来源：1-教务处新闻，2-校园新闻，3-校园公告
+     */
     function insert_news($title, $url, $addtime, $source) {
         $this->db->where('url', $url);
         //$this->db->where('source' , $source);
@@ -44,7 +65,9 @@ class News_m extends CI_Model {
     }
     
     
-    
+    /**
+     * 清楚全部新闻
+     */
     function empty_news(){
         $this->db->empty_table('news');
     }
