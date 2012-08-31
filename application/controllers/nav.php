@@ -53,7 +53,6 @@ class Nav extends CI_Controller {
 
         $head_data['csses'] = $csses;
         $head_data['jses'] = $jses;
-        $this->load->view('all_header', $head_data);
 
 // commonUrl
         $this->load->model('common_m');
@@ -191,9 +190,14 @@ class Nav extends CI_Controller {
                 $newsCount++;
             }
         }
+        
+        // 添加helper层
+        array_push($head_data['csses'], 'helper');
 
+        $this->load->view('all_header', $head_data);
         $this->load->view('mainleft', $data_l);
         $this->load->view('mainright', $data_r);
+        $this->load->view('nav_helper');
         $this->load->view('all_footer');
     }
 

@@ -1,0 +1,15 @@
+#helper{
+    z-index: 200;
+    position: absolute;
+    top: 0;
+}
+
+.helper-search2{
+    position: relative;
+    top: 265px;
+    left: 360px;
+    background: url("../img/helper/search-2.png") no-repeat scroll 0 0;
+    height: 30px;
+    width: 160px;
+    
+}
