@@ -1,5 +1,5 @@
 #helper{
-    z-index: 200;
+    z-index: 10;
     position: absolute;
     top: 0;
 }
@@ -24,5 +24,13 @@
     background: url("../img/helper/news.png") no-repeat scroll 0 0;
     height: 70px;
     width: 70px;
+}
 
+.helper-ip{
+    position: relative;
+    top: 380px;
+    left: 980px;
+    background: url("../img/helper/ip.png") no-repeat scroll 0 0;
+    height: 180px;
+    width: 90px;
 }
