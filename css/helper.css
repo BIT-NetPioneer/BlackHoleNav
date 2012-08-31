@@ -4,6 +4,10 @@
     top: 0;
 }
 
+.helper-hidden{
+    display: none;
+}
+
 .helper-search2{
     position: relative;
     top: 265px;
@@ -11,5 +15,14 @@
     background: url("../img/helper/search-2.png") no-repeat scroll 0 0;
     height: 30px;
     width: 160px;
-    
+}
+
+.helper-news{
+    position: relative;
+    top: 280px;
+    left: 960px;
+    background: url("../img/helper/news.png") no-repeat scroll 0 0;
+    height: 70px;
+    width: 70px;
+
 }

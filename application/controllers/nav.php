@@ -29,7 +29,7 @@ class Nav extends CI_Controller {
             show_404();
         }
         //$this->output->cache($this->config->item('index_cache_ttl'));
-
+        
         $baseurl = base_url();
         $baseurlwithindex = $baseurl . "index.php";
         $head_data = '';
@@ -190,7 +190,7 @@ class Nav extends CI_Controller {
                 $newsCount++;
             }
         }
-        
+
         // 添加helper层
         array_push($head_data['csses'], 'helper');
 
@@ -200,8 +200,8 @@ class Nav extends CI_Controller {
         $this->load->view('nav_helper');
         $this->load->view('all_footer');
     }
-    
-    function test(){
+
+    function test() {
         var_dump($_SERVER);
     }
 
