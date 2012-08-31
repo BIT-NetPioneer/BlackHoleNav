@@ -163,7 +163,7 @@ class Nav extends CI_Controller {
                 $tmpSpecial = array(
                     'name' => $row->name,
                     'url' => $row->url,
-                    'image' => "{$baseurl}upload/special/$row->image.jpg",
+                    'image' => "{$baseurl}upload/special/$row->image",
                     'description' => $row->description
                 );
 
@@ -199,6 +199,10 @@ class Nav extends CI_Controller {
         $this->load->view('mainright', $data_r);
         $this->load->view('nav_helper');
         $this->load->view('all_footer');
+    }
+    
+    function test(){
+        var_dump($_SERVER);
     }
 
 }
