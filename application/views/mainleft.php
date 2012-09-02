@@ -8,7 +8,7 @@
                 <p class="<?php echo $common_row['type']; ?>">
                     <?php foreach ($common_row['urls'] as &$common_url): ?>
                         <span class="urlspan" >
-                            <a href="<?php echo $common_url['url']; ?>" target="_blank" onmousedown="$(this).attr('href','<?php echo base_url(); ?>index.php/c/jmpc?uid=<?php echo $common_url['uid']; ?>&url=<?php echo urlencode($common_url['url']); ?>')">
+                            <a href="<?php echo $common_url['url']; ?>" target="_blank" onmousedown="$.get('<?php echo base_url(); ?>index.php/c/jmpc?uid=<?php echo $common_url['uid']; ?>&url=<?php echo urlencode($common_url['url']); ?>')">
                                 <?php if ($common_row['type'] == 'row1'): ?>
                                     <img src="<?php echo base_url("img/favicon/" . base64_encode($common_url['url']) . ".png"); ?>" height="16" width="16" />
                                 <?php endif; ?>
@@ -38,7 +38,7 @@
                     <div class="url-class-area">
                         <?php foreach ($hoturl as &$url): ?>
                             <span class="urlspan2">
-                                <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="$(this).attr('href','<?php echo base_url(); ?>index.php/c/jmpc?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
+                                <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="$.get('<?php echo base_url(); ?>index.php/c/jmp?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
                                     <?php echo $url['name']; ?>
                                 </a>
                             </span>
@@ -53,7 +53,7 @@
                         <div class="url-class-area">
                             <?php foreach ($class['urls'] as &$url): ?>
                                 <span class="urlspan2 <?php echo $url['style']; ?>" title="<?php echo $url['content']; ?>">
-                                    <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="$(this).attr('href','<?php echo base_url(); ?>index.php/c/jmp?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
+                                    <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="$.get('<?php echo base_url(); ?>index.php/c/jmp?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
                                         <?php echo $url['name']; ?>
                                     </a>
                                 </span>

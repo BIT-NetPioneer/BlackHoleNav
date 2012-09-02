@@ -16,6 +16,7 @@ $week = "今年第{$w}周，开学还有{$d}天";
         <?php else: ?>
             <link href="<?php echo base_url("css/$csses.css"); ?>" type="text/css" rel="stylesheet" />
         <?php endif; ?>
+        	<link href="<?php echo base_url("css/dynamic.css")?>" type="text/css" rel="stylesheet" />
         <!--[if !IE]><!-->
             <link href="<?php echo base_url("css/css3.css"); ?>" type="text/css" rel="stylesheet" />
         <!--<![endif]-->
@@ -30,64 +31,7 @@ $week = "今年第{$w}周，开学还有{$d}天";
         <?php else: ?>
             <script src="<?php echo base_url("js/$jses.js"); ?>" type="text/javascript"></script>
         <?php endif; ?>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                
-                $('#search_selects').hover(function(){
-                    $(this).children('dd').css("display", "block");
-                }, function(){
-                    $(this).children('dd').css("display", "none");
-                })
-                $('.search-select').hover(function(){
-                    $(this).addClass('cur-select');
-                }, function(){
-                    $(this).removeClass('cur-select');
-                })
-                $('.search-select').click(function(){
-                    $('.cur').removeClass('cur');
-                    switch($(this).attr('id')){
-                        case 'select_google':
-                            $('#search_selects>dt>a').attr('id', 'select_google');
-                            $('#search_selects>dt>a').html('Google');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'q')
-                            $('#search-form').attr('action', 'http://www.google.com.hk/search')
-                            break;
-                        case 'select_baidu':
-                            $('#search_selects>dt>a').attr('id', 'select_baidu');
-                            $('#search_selects>dt>a').html('百度');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'wd')
-                            $('#search-form').attr('action', 'http://www.baidu.com/s')
-                            break;
-                        case 'select_bing':
-                            $('#search_selects>dt>a').attr('id', 'select_bing');
-                            $('#search_selects>dt>a').html('必应');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'q')
-                            $('#search-form').attr('action', 'http://cn.bing.com/search')
-                            break;
-                        case 'select_lan':
-                            $('#search_selects>dt>a').attr('id', 'select_lan');
-                            $('#search_selects>dt>a').html('校内');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'wd')
-                            $('#search-form').attr('action', 'http://www.baidu.com/s')
-                            break;
-                        case 'select_ip':
-                            $('#search_selects>dt>a').attr('id', 'select_ip');
-                            $('#search_selects>dt>a').html('查询IP');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'ip')
-                            $('#search-form').attr('action', 'http://star.bit.edu.cn/ipsearch/ip.php')
-                            break;
-                    }
-                    $('#search_selects').children('dd').css("display", "none"); 
-                })
-                $('.keywords').focus();
-            });
-        </script>
+        <script src="<?php echo base_url("js/main.js")?>" type="text/javascript"></script>
     </head>
     <body>
         <!--[if ie 6]><script src="<?php echo base_url(); ?>js/letskillie6.zh_CN.pack.js" type=text/javascript></script><![endif]-->
@@ -102,24 +46,61 @@ $week = "今年第{$w}周，开学还有{$d}天";
             <a id="logo" href="<?php echo base_url(); ?>">
                 <img src="<?php echo base_url() . 'img/logo.png'; ?>" alt="BlackHole导航">
             </a>
-            <div id="searchbox">
-                <form method="get" name="search" action="http://www.baidu.com/s" id="search-form">
-                    <input id="keyword" class="keywords" type="text" name="wd" value="" placeholder="搜索" autocomplete="off" />
-                    <input id="keyword_bnt" type="submit" value="提交" />
-                </form>
-                <dl id="search_selects" class="d_list">
-                    <dt>
-                    <a id="select_baidu">百度</a>
-                    </dt>
-                    <dd style="display: none;">
-                        <a id="select_google" class="search-select">Google</a>
-                        <a id="select_baidu" class="search-select cur">百度</a>                    
-                        <a id="select_bing" class="search-select">必应</a>                   
-                        <a id="select_lan" class="search-select">校内</a>
-                        <a id="select_ip" class="search-select">查询IP</a>
-                    </dd>
-                </dl>
-            </div>
+            <div id="search">
+	            <div id="search_btn">
+	                <li class="btn1">谷歌</li>
+	                <li class="btn2">百度</li>
+	                <li class="btn1">校内</li>
+	                <li class="btn1">找乐</li>
+	                <li class="btn1">查IP</li>
+	            </div>
+	            <div class="clear"></div>
+	            <div id="search_contents">
+	                <div style="display: none;">
+	                    <form target="_blank" method="get" action="https://www.google.com.hk/search" id="searchform">
+	                        <input id="s_google" type="text" name="q" class="input_search" autocomplete="off" />
+	                        <button type="submit">Goggle搜索</button>
+	                    </form>
+	                </div>
+	                <div>
+	                    <form action="http://www.baidu.com/baidu" target="_blank">
+	                        <input name="tn" type="hidden" value="baidu" />
+	                        <input id="s_baidu" type="text" name="word" class="input_search" autocomplete="off" />
+	                        <button type="submit">百度一下</button>
+	                    </form>
+	                </div>
+	                <div style="display: none;">
+	                    <form target="_blank" method="get" action="#">
+	                        <!--个别搜索所需-->
+	                        <input type="hidden" name="act" value="ftp"/>
+	                        <!--个别搜索所需-->
+	                        <input type="text" name="keyword" class="input_search" />
+	                        <button hidefocus="ture" type="submit">校园网搜索</button>
+	                    </form>
+	                </div>
+	                <div style="display: none;">
+	                    <form target="_blank" method="get" action="http://mp3.baidu.com/m">
+	                        <!--个别搜索所需-->
+	                        <input type="hidden" value="baidu" name="tn"/>
+	                        <input type="hidden" value="ms" name="f"/>
+	                        <input type="hidden" value="10" name="rn"/>
+	                        <input type="hidden" value="134217728" name="ct"/>
+	                        <input type="hidden" value="-1" name="lm"/>
+	                        <input type=hidden name=ie value="UTF-8">
+	                        <!--个别搜索所需-->
+	                        <input type="text" name="word" class="input_search" />
+	                        <button type="submit">找音乐</button>
+	                    </form>
+	                </div>
+	                <div style="display: none;">
+	                    <form target="_blank" method="get" action="http://star.bit.edu.cn/ipsearch/ip.php">
+	                        <input type="text" name="ip" class="input_search" />
+	                        <button type="submit">IP查询</button>
+	                    </form>
+	                </div>
+	                <div id="listbox"> </div>
+	            </div>
+	        </div>
         </div>
 
         <div id="wrap">
