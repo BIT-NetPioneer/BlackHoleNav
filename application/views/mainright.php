@@ -38,7 +38,7 @@
             <dt class="news-titlebar">
             <span class="news-class-title">教务处公告</span>
             <span class="news-class-more">
-                <a href="http://jwc.bit.edu.cn">更多</a>
+                <a href="http://jwc.bit.edu.cn" target="_blank">更多</a>
             </span>
             </dt>
             <dd>
@@ -59,7 +59,7 @@
             <dt class="news-titlebar">
             <span class="news-class-title">学校新闻</span>
             <span class="news-class-more">
-                <a href="http://www.bit.edu.cn/xww/index.htm">更多</a>
+                <a href="http://www.bit.edu.cn/xww/index.htm" target="_blank">更多</a>
             </span>
             </dt>
             <dd>
@@ -78,9 +78,9 @@
                 </ul>
             </dd>
             <dt class="news-titlebar">
-            <span class="news-class-title">公告&通知</span>
+            <span class="news-class-title">通知公告</span>
             <span class="news-class-more">
-                <a href="http://www.bit.edu.cn/ggfw/tzgg17/index.htm">更多</a>
+                <a href="http://www.bit.edu.cn/ggfw/tzgg17/index.htm" target="_blank">更多</a>
             </span>
             </dt>
             <dd>

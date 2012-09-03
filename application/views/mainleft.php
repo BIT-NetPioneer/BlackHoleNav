@@ -25,7 +25,7 @@
     <div id="urllist" class="block">
         <div class="title urllist-title">
             <p>校内导航</p>
-            <form class="url-search" action="">
+            <form class="url-search" action="" target="_blank">
                 <input type="text" id="url-search-input"/>
             </form>
         </div>

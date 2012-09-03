@@ -58,6 +58,7 @@ function SearchSuggestGoogle() {
         
         var inputValue = $("#s_google").val();
         if(inputValue == "") {
+            g_listBox.css("display", "none");
             return ;
         }
         // 需要请求的按键，数字、字母、退格、删除、空格、shift
@@ -144,6 +145,7 @@ function SearchSuggestBaidu() {
         
         var inputValue = $("#s_baidu").val();
         if(inputValue == "") {
+            g_listBox.css("display", "none");
             return ;
         }
         // 需要请求的按键，数字、字母、退格、删除、空格、shift
