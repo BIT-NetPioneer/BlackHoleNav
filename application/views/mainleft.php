@@ -9,7 +9,7 @@
                     <?php foreach ($common_row['urls'] as &$common_url): ?>
                         <span class="urlspan" >
                             <a href="<?php echo $common_url['url']; ?>" target="_blank" onmousedown="$(this).attr('href','<?php echo base_url(); ?>index.php/c/jmpc?uid=<?php echo $common_url['uid']; ?>&url=<?php echo urlencode($common_url['url']); ?>')">
-                                <?php if ($common_row['type'] == 'row1'): ?>
+                                <?php if ($common_row['type'] == 'row1' || $common_row['type'] == 'row2'): ?>
                                     <img src="<?php echo base_url("img/favicon/" . base64_encode($common_url['url']) . ".png"); ?>" height="16" width="16" />
                                 <?php endif; ?>
                                 <?php echo $common_url['name']; ?>

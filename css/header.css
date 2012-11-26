@@ -24,7 +24,11 @@ a{cursor: pointer;}
 }
 #weeks{
     float: left;
-    margin: 3px 0 0 20px; 
+    margin: 3px 0 0 33px; 
+}
+.date-num{
+    color: red;
+    font-weight: bold;
 }
 #welcomeinfo{
     margin: 3px 20px 0 0;
@@ -43,7 +47,7 @@ a{cursor: pointer;}
 }
 #searchbox{
     float: right;
-    margin: 30px 100px 0 0;
+    margin: 15px 100px 0 0;
     z-index: 2;
     width: 482px;
     position: relative;
@@ -70,54 +74,59 @@ a{cursor: pointer;}
     vertical-align: middle;
     width: 92px;
 }
-#search_selects{
+#search-title-option{
+    height: 24px;
+    margin-bottom: 1px;
+    padding-left: 15px;
+}
+.search-option-item{
+    float: left;
+    height: 16px;
+    line-height: 15px;
+    font-size: 14px;
+    padding: 3px 10px 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.search-option-item-select{
+    background-color: #2C95C3;
+    color: white;
+}
+.option_hover{
+    color: #2C95C3;
+}
+.d_list{
     background: url("../img/sfd.png") no-repeat scroll 56px 8px transparent;
     font-size: 14px;
     left: 307px;
     position: absolute;
-    top: 6px;
+    top: 29px;
     width: 70px;
     z-index: 2013;
     text-align: right;
+    display: none;
 }
-#search_selects dt{
+.d_list dt{
     margin-right: 20px;
 }
-#search_selects dd{
+.d_list dd{
     background-color: white;
 }
-#select_google{
-    color: #656565;
+.cur-option{
     display: block;
+}
+.select_option_cur{
     height: 22px;
     line-height: 22px;
-}
-#select_baidu{
-    color: #656565;
     display: block;
-    height: 22px;
-    line-height: 22px;
 }
-#select_bing{
-    color: #656565;
-    display: block;
-    height: 22px;
-    line-height: 22px;
-}
-#select_lan{
-    color: #656565;
-    display: block;
-    height: 22px;
-    line-height: 22px;
-}
-#select_ip{
-    color: #656565;
-    display: block;
-    height: 22px;
-    line-height: 22px;
-}
+
 .search-select{
     text-align: center;
+    color: #656565;
+    display: block;
+    height: 22px;
+    line-height: 22px;
 }
 .cur{
     font-weight: bold;
@@ -131,4 +140,8 @@ a{cursor: pointer;}
 #wrap{
     width: 960px;
     margin: 0 auto;
+}
+
+.bdsug_copy{
+    display: none;
 }

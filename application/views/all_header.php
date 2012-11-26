@@ -1,14 +1,17 @@
 <?php
+// 定义时间点，按照年份
 $date_info = array();
-$year = date('Y');
+
 $date_info[2012]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2012);
 $date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 28, 1, 2013);
 $date_info[2013]['TERM_2ND_START'] = mktime(0, 0, 0, 2, 25, 2013);
 $date_info[2013]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 1, 2013);
 $date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2013);
 
+$year = date('Y');
 $dayOfYear = date("z") + 1;
 $w = ceil($dayOfYear / 7);
+$yw = $w;
 $d = 0;
 $d2 = 0;
 $timeOfNow = mktime();
@@ -19,18 +22,18 @@ try {
         $flag = 1;
         $d = ceil(($timeOfNow - $date_info[$year]['TERM_1ST_START']) / 86400);
         $w = ceil($d / 7);
-        
+
         // NEW YEAR
-        if ((mktime(0, 0, 0, 1, 1, $year+1) - $timeOfNow) < 2592000) {
+        if ((mktime(0, 0, 0, 1, 1, $year + 1) - $timeOfNow) < 2592000) {
             $flag = 12;
-            $d2 = ceil((mktime(0, 0, 0, 1, 1, $year+1) - $timeOfNow) / 86400);
+            $d2 = ceil((mktime(0, 0, 0, 1, 1, $year + 1) - $timeOfNow) / 86400);
         }
     } else if ($timeOfNow < $date_info[$year]['WINTER_VACATION_START']) {
 // in 1st term 2ND year
         $flag = 1;
         $d = ceil(($timeOfNow - $date_info[$year - 1]['TERM_1ST_START']) / 86400);
         $w = ceil($d / 7);
-        
+
         // WINTER VACATION
         if (($date_info[$year]['WINTER_VACATION_START'] - $timeOfNow) < 2592000) {
             $flag = 11;
@@ -45,7 +48,7 @@ try {
         $flag = 1;
         $d = ceil(($timeOfNow - $date_info[$year - 1]['TERM_2ND_START']) / 86400);
         $w = ceil($d / 7);
-        
+
         // SUMMER VACATION
         if (($date_info[$year]['SUMMER_VACATION_START'] - $timeOfNow) < 2592000) {
             $flag = 11;
@@ -63,16 +66,18 @@ try {
 $week = "";
 
 if ($flag == 1) {
-    $week = "开学第{$w}周";
+    $week = '开学第 <span class="date-num">' . "{$w}</span> 周";
 } else if ($flag == 11) {
-    $week = "开学第{$w}周，假期还有{$d2}天";
+    $week = '开学第 <span class="date-num">' . "{$w}</span> 周，假期还有{$d2}天";
 } else if ($flag == 12) {
-    $week = "开学第{$w}周，新年还有{$d2}天";
+    $week = '开学第 <span class="date-num">' . "{$w}</span> 周，新年还有{$d2}天";
 } else if ($flag == 2) {
-    $week = "今年第{$w}周，开学还有{$d}天";
+    $week = '开学还有 <span class="date-num">' . "{$d}</span> 天";
 } else {
-    $week = "今年第{$w}周，ERROR";
+    $week = "ERROR";
 }
+
+$datestr = date("Y年m月d日") . " 今年第{$yw}周";
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -101,10 +106,12 @@ if ($flag == 1) {
             <script src="<?php echo base_url("js/$jses.js"); ?>" type="text/javascript"></script>
         <?php endif; ?>
 
+        <script src="<?php echo base_url("js/searchbox.js"); ?>" type="text/javascript"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
-                        
-                $('#search_selects').hover(function(){
+
+                $('.d_list').hover(function(){
                     $(this).children('dd').css("display", "block");
                 }, function(){
                     $(this).children('dd').css("display", "none");
@@ -114,48 +121,10 @@ if ($flag == 1) {
                 }, function(){
                     $(this).removeClass('cur-select');
                 })
-                $('.search-select').click(function(){
-                    $('.cur').removeClass('cur');
-                    switch($(this).attr('id')){
-                        case 'select_google':
-                            $('#search_selects>dt>a').attr('id', 'select_google');
-                            $('#search_selects>dt>a').html('Google');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'q')
-                            $('#search-form').attr('action', 'http://www.google.com.hk/search')
-                            break;
-                        case 'select_baidu':
-                            $('#search_selects>dt>a').attr('id', 'select_baidu');
-                            $('#search_selects>dt>a').html('百度');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'wd')
-                            $('#search-form').attr('action', 'http://www.baidu.com/s')
-                            break;
-                        case 'select_bing':
-                            $('#search_selects>dt>a').attr('id', 'select_bing');
-                            $('#search_selects>dt>a').html('必应');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'q')
-                            $('#search-form').attr('action', 'http://cn.bing.com/search')
-                            break;
-                        case 'select_lan':
-                            $('#search_selects>dt>a').attr('id', 'select_lan');
-                            $('#search_selects>dt>a').html('校内');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'wd')
-                            $('#search-form').attr('action', 'http://www.baidu.com/s')
-                            break;
-                        case 'select_ip':
-                            $('#search_selects>dt>a').attr('id', 'select_ip');
-                            $('#search_selects>dt>a').html('查询IP');
-                            $(this).addClass('cur');
-                            $('#keyword').attr('name', 'ip')
-                            $('#search-form').attr('action', 'http://star.bit.edu.cn/ipsearch/ip.php')
-                            break;
-                    }
-                    $('#search_selects').children('dd').css("display", "none"); 
-                })
+
                 $('.keywords').focus();
+                
+                BaiduSuggestion.bind('keyword');
             });
         </script>
     </head>
@@ -163,7 +132,7 @@ if ($flag == 1) {
         <!--[if ie 6]><script src="<?php echo base_url(); ?>js/letskillie6.zh_CN.pack.js" type=text/javascript></script><![endif]-->
         <div id="top">
             <div id="nav">
-                <p id="dateinfo"><?php echo date("Y年m月d日"); ?></p>
+                <p id="dateinfo"><?php echo $datestr; ?></p>
                 <p id="weeks"><?php echo $week; ?></p>
                 <p id="welcomeinfo">欢迎来到<?php echo $this->config->item('nav_name'); ?></p>
             </div>
@@ -173,23 +142,79 @@ if ($flag == 1) {
                 <img src="<?php echo base_url() . 'img/logo.png'; ?>" alt="BlackHole导航">
             </a>
             <div id="searchbox">
+                <ol id="search-title-option">
+                    <li id="search-option-page" class="search-option-item search-option-item-select">网页</li>
+                    <li id="search-option-pic" class="search-option-item">图片</li>
+                    <li id="search-option-music" class="search-option-item">音乐</li>
+                    <li id="search-option-video" class="search-option-item">视频</li>
+                    <li id="search-option-map" class="search-option-item">地图</li>
+                    <li id="search-option-ip" class="search-option-item">查IP</li>
+                </ol>
                 <form method="get" name="search" action="http://www.baidu.com/s" id="search-form">
                     <input id="keyword" class="keywords" type="text" name="wd" value="" placeholder="搜索" autocomplete="off" />
                     <input id="keyword_bnt" type="submit" value="提交" />
                 </form>
-                <dl id="search_selects" class="d_list">
+                <dl id="search_selects-page" class="d_list cur-option">
                     <dt>
-                    <a id="select_baidu">百度</a>
+                    <a id="select_page_cur" class="select_option_cur">百度</a>
                     </dt>
                     <dd style="display: none;">
-                        <a id="select_google" class="search-select">Google</a>
-                        <a id="select_baidu" class="search-select cur">百度</a>                    
-                        <a id="select_bing" class="search-select">必应</a>                   
-                        <a id="select_lan" class="search-select">校内</a>
-                        <a id="select_ip" class="search-select">查询IP</a>
+                        <a id="select_google_page" class="search-select">Google</a>
+                        <a id="select_baidu_page" class="search-select cur">百度</a>
+                        <a id="select_bing_page" class="search-select">必应</a>                   
+                        <a id="select_lan_page" class="search-select">校内</a>
+                    </dd>
+                </dl>
+                <dl id="search_selects-pic" class="d_list">
+                    <dt>
+                    <a id="select_pic_cur" class="select_option_cur">百度</a>
+                    </dt>
+                    <dd style="display: none;">
+                        <!--<a id="select_google_pic" class="search-select">Google</a>-->
+                        <a id="select_baidu_pic" class="search-select cur">百度</a>
+                        <a id="select_bing_pic" class="search-select">必应</a>                   
+                    </dd>
+                </dl>
+                <dl id="search_selects-music" class="d_list">
+                    <dt>
+                    <a id="select_music_cur" class="select_option_cur">百度</a>
+                    </dt>
+                    <dd style="display: none;">
+                        <a id="select_baidu_music" class="search-select cur">百度</a>
+                        <a id="select_bing_music" class="search-select">QQ</a>                   
+                        <a id="select_zhaoyue_music" class="search-select">找乐</a>
+                    </dd>
+                </dl>
+                <dl id="search_selects-video" class="d_list">
+                    <dt>
+                    <a id="select_video_cur" class="select_option_cur">百度</a>
+                    </dt>
+                    <dd style="display: none;">
+                        <a id="select_baidu_video" class="search-select cur">百度</a>
+                        <a id="select_youku_video" class="search-select">优酷</a>                   
+                        <!--<a id="select_tudou_video" class="search-select">土豆</a>-->
+                    </dd>
+                </dl>
+                <dl id="search_selects-map" class="d_list">
+                    <dt>
+                    <a id="select_map_cur" class="select_option_cur">百度</a>
+                    </dt>
+                    <dd style="display: none;">
+                        <a id="select_google_map" class="search-select">Google</a>
+                        <a id="select_baidu_map" class="search-select cur">百度</a>
+                        <a id="select_bing_map" class="search-select">必应</a>                   
+                    </dd>
+                </dl>
+                <dl id="search_selects-ip" class="d_list">
+                    <dt>
+                    <a id="select_ip_cur" class="select_option_cur">校内IP</a>
+                    </dt>
+                    <dd style="display: none;">
+                        <a id="select_lan_ip" class="search-select cur">校内IP</a>
+                        <a id="select_ip138_ip" class="search-select">ip138</a>
                     </dd>
                 </dl>
             </div>
         </div>
-
+        <script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
         <div id="wrap">
