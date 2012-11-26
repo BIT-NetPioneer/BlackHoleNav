@@ -1,8 +1,78 @@
 <?php
-$dayOfYear = $d = date("z") + 1;
+$date_info = array();
+$year = date('Y');
+$date_info[2012]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2012);
+$date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 28, 1, 2013);
+$date_info[2013]['TERM_2ND_START'] = mktime(0, 0, 0, 2, 25, 2013);
+$date_info[2013]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 1, 2013);
+$date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2013);
+
+$dayOfYear = date("z") + 1;
 $w = ceil($dayOfYear / 7);
-$d = 244 - $dayOfYear;
-$week = "今年第{$w}周，开学还有{$d}天";
+$d = 0;
+$d2 = 0;
+$timeOfNow = mktime();
+$flag = 1;
+try {
+    if ($timeOfNow >= $date_info[$year]['TERM_1ST_START']) {
+// in 1st term 1ST year
+        $flag = 1;
+        $d = ceil(($timeOfNow - $date_info[$year]['TERM_1ST_START']) / 86400);
+        $w = ceil($d / 7);
+        
+        // NEW YEAR
+        if ((mktime(0, 0, 0, 1, 1, $year+1) - $timeOfNow) < 2592000) {
+            $flag = 12;
+            $d2 = ceil((mktime(0, 0, 0, 1, 1, $year+1) - $timeOfNow) / 86400);
+        }
+    } else if ($timeOfNow < $date_info[$year]['WINTER_VACATION_START']) {
+// in 1st term 2ND year
+        $flag = 1;
+        $d = ceil(($timeOfNow - $date_info[$year - 1]['TERM_1ST_START']) / 86400);
+        $w = ceil($d / 7);
+        
+        // WINTER VACATION
+        if (($date_info[$year]['WINTER_VACATION_START'] - $timeOfNow) < 2592000) {
+            $flag = 11;
+            $d2 = ceil(($date_info[$year]['WINTER_VACATION_START'] - $timeOfNow) / 86400);
+        }
+    } else if ($timeOfNow < $date_info[$year]['TERM_2ND_START']) {
+// in WINTER
+        $flag = 2;
+        $d = ceil(($date_info[$year]['TERM_2ND_START'] - $timeOfNow) / 86400);
+    } else if ($timeOfNow < $date_info[$year]['SUMMER_VACATION_START']) {
+// in 2nd term
+        $flag = 1;
+        $d = ceil(($timeOfNow - $date_info[$year - 1]['TERM_2ND_START']) / 86400);
+        $w = ceil($d / 7);
+        
+        // SUMMER VACATION
+        if (($date_info[$year]['SUMMER_VACATION_START'] - $timeOfNow) < 2592000) {
+            $flag = 11;
+            $d2 = ceil(($date_info[$year]['SUMMER_VACATION_START'] - $timeOfNow) / 86400);
+        }
+    } else {
+// in SUMMER
+        $flag = 2;
+        $d = ceil(($date_info[$year]['TERM_1ST_START'] - $timeOfNow) / 86400);
+    }
+} catch (Exception $e) {
+    $flag = 0;
+}
+
+$week = "";
+
+if ($flag == 1) {
+    $week = "开学第{$w}周";
+} else if ($flag == 11) {
+    $week = "开学第{$w}周，假期还有{$d2}天";
+} else if ($flag == 12) {
+    $week = "开学第{$w}周，新年还有{$d2}天";
+} else if ($flag == 2) {
+    $week = "今年第{$w}周，开学还有{$d}天";
+} else {
+    $week = "今年第{$w}周，ERROR";
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -17,7 +87,7 @@ $week = "今年第{$w}周，开学还有{$d}天";
             <link href="<?php echo base_url("css/$csses.css"); ?>" type="text/css" rel="stylesheet" />
         <?php endif; ?>
         <!--[if !IE]><!-->
-            <link href="<?php echo base_url("css/css3.css"); ?>" type="text/css" rel="stylesheet" />
+        <link href="<?php echo base_url("css/css3.css"); ?>" type="text/css" rel="stylesheet" />
         <!--<![endif]-->
         <!--[if gte IE 9]>
             <link href="<?php echo base_url("css/css3.css"); ?>" type="text/css" rel="stylesheet" />
@@ -33,7 +103,7 @@ $week = "今年第{$w}周，开学还有{$d}天";
 
         <script type="text/javascript">
             $(document).ready(function() {
-                
+                        
                 $('#search_selects').hover(function(){
                     $(this).children('dd').css("display", "block");
                 }, function(){
