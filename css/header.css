@@ -93,14 +93,14 @@ a{cursor: pointer;}
     color: white;
 }
 .option_hover{
-    color: #2C95C3;
+    color: #A5A5A5;
 }
 .d_list{
     background: url("../img/sfd.png") no-repeat scroll 56px 8px transparent;
     font-size: 14px;
     left: 307px;
     position: absolute;
-    top: 29px;
+    top: 30px;
     width: 70px;
     z-index: 2013;
     text-align: right;
@@ -110,7 +110,10 @@ a{cursor: pointer;}
     margin-right: 20px;
 }
 .d_list dd{
-    background-color: white;
+    background-color: #F4F4F4;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
 }
 .cur-option{
     display: block;
