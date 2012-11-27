@@ -408,13 +408,50 @@ class Task extends CI_Controller {
             $i = 0;
             foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
                 if (substr($element->href, 6, 4) == 'view') {
-                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK');
+                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK, UTF-8');
                     $news_url = 'http://jwc.bit.edu.cn' . $element->href;
                     //echo $news_title . '---' . $news_url . "<br/>";
                     $this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
                     $i++;
                 }
                 if ($i == 5)
+                    break;
+            }
+            return TRUE;
+        } catch (Exception $e) {
+            return FALSE;
+        }
+    }
+
+    /*
+     * 待删除
+     */
+    function get_news_from_jwc_test() {
+
+        $this->load->helper('htmldom');
+        try {
+            $addtime = date('Y:m:d H:i:d');
+            $this->load->model('news_m');
+            $opts = array(
+                'http' => array(
+                    'method' => "GET",
+                    'timeout' => 5,
+                )
+            );
+            $context = stream_context_create($opts);
+            $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
+            if (!$html)
+                return FALSE;
+            $i = 0;
+            foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
+                if (substr($element->href, 6, 4) == 'view') {
+                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK, UTF-8');
+                    $news_url = 'http://jwc.bit.edu.cn' . $element->href;
+                    echo $element->innertext . '---' . $news_title . '---' . $news_url . "<br/>";
+                    //$this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
+                    $i++;
+                }
+                if ($i == 10)
                     break;
             }
             return TRUE;
