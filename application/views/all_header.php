@@ -216,5 +216,5 @@ $datestr = date("Y年m月d日") . " 今年第{$yw}周";
                 </dl>
             </div>
         </div>
-        <script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
+        <script charset="gbk" src="<?php echo base_url('js/opensug.js');?>"></script>
         <div id="wrap">
