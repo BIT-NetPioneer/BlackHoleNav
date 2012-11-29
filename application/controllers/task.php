@@ -401,8 +401,9 @@ class Task extends CI_Controller {
                     'timeout' => 5,
                 )
             );
+            error_reporting(E_ERROR);
             $context = stream_context_create($opts);
-            $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
+            $html = file_get_html("http://jwc.bit.edu.cn", false, $context, -1, -1, true, true, 'GBK');
             if (!$html)
                 return FALSE;
             $i = 0;
@@ -426,6 +427,7 @@ class Task extends CI_Controller {
     /*
      * 待删除
      */
+
     function get_news_from_jwc_test() {
 
         $this->load->helper('htmldom');
@@ -439,15 +441,15 @@ class Task extends CI_Controller {
                 )
             );
             $context = stream_context_create($opts);
-            $html = file_get_html("http://jwc.bit.edu.cn", false, $context);
+            $html = file_get_html("http://jwc.bit.edu.cn", false, $context, -1, -1, true, true, 'GBK');
             if (!$html)
                 return FALSE;
             $i = 0;
             foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
                 if (substr($element->href, 6, 4) == 'view') {
-                    $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK, UTF-8');
+                    $news_title = strip_tags(mb_convert_encoding($element->innertext, 'UTF-8', 'GBK, UTF-8'));
                     $news_url = 'http://jwc.bit.edu.cn' . $element->href;
-                    echo $element->innertext . '---' . $news_title . '---' . $news_url . "<br/>";
+                    echo $element->innertext . '---' . $news_title . '---' . $news_url . '---' . mb_convert_encoding($element->innertext, 'UTF-8', 'GBK, UTF-8') . "<br/>";
                     //$this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
                     $i++;
                 }
