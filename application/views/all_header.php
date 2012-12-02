@@ -153,6 +153,8 @@ $datestr = date("Y年m月d日") . " 今年第{$yw}周";
                 <form method="get" name="search" action="http://www.baidu.com/s" id="search-form">
                     <input id="keyword" class="keywords" type="text" name="wd" value="" placeholder="搜索" autocomplete="off" />
                     <input id="keyword_bnt" type="submit" value="提交" />
+                    <input type=hidden name=ie value="UTF-8">
+                    <input type="hidden" value="utf8" name="oe"/>
                 </form>
                 <dl id="search_selects-page" class="d_list cur-option">
                     <dt>
