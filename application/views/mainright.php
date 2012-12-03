@@ -123,5 +123,6 @@
     });
     
     //task
-    $.get("<?php echo base_url('index.php/task?do=1'); ?>");
+    //$.get("<?php echo base_url('index.php/task?do=1'); ?>");
 </script>
+<img style="display: none; height: 0px; width: 0px" src="<?php echo base_url('index.php/task?do=1'); ?>" />
