@@ -56,7 +56,7 @@ class Nav extends CI_Controller {
 
 // commonUrl
         $this->load->model('common_m');
-        $rowMax = array(6, 8);
+        $rowMax = array(6, 6);
         $allcommon = array();
 
 //$commons = $this->common_m->get_all();
