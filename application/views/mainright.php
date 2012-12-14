@@ -103,13 +103,14 @@
     </div>
 
     <div class="block" id="showip">
-        <p class="ip_title">你的IP地址：<span id="ip_add">10.0.0.0</span></p>
+        <p class="ip_title">你的IP地址：<span id="ip_add">Unknow</span></p>
         <p class="ip_title">系统/浏览器：</p>
         <p id="ua_info"></p>
     </div>
 </div>
 
 <script type="text/javascript">
+    var isconnect=0;
     $(document).ready(function() {
         //特别推荐 
         $('#slider').s3Slider({
@@ -119,6 +120,7 @@
         $.getJSON("<?php echo base_url('index.php/showip'); ?>",function(json){
             $('#ip_add').html(json.ip);
             $('#ua_info').html(json.ua);
+            isconnect=1;
         });
     });
     
