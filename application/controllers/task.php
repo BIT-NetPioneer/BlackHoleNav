@@ -403,7 +403,7 @@ class Task extends CI_Controller {
             );
             error_reporting(E_ERROR);
             $context = stream_context_create($opts);
-            $html = file_get_html("http://jwc.bit.edu.cn", false, $context, -1, -1, true, true, 'GBK');
+            $html = file_get_html("http://jwc.bit.edu.cn/index.php", false, $context, -1, -1, true, true, 'GBK');
             if (!$html)
                 return FALSE;
             $i = 0;
