@@ -18,28 +18,31 @@ if (!defined('BASEPATH'))
 class Admin extends CI_Controller {
 
     /**
-     * 验证当前用户是否登录
-     * 
-     * 验证当前用户是否登录，由其他程序调用
-     * @return boolean
-     */
-    function check_session() {
-        $this->load->library('session');
-        if ($this->session->userdata('permission') > 2) {
-            return true;
-        } else {
-            redirect(base_url('index.php/admin/login'));
-            exit();
-        }
-    }
-
-    /**
      * 后台管理的首页
      */
     function index() {
-        $this->check_session();
+        $this->load->library('user_auth');
 
-        echo '成功';
+        $isuser = $this->user_auth->valid_user();
+        if (!$isuser)
+            redirect(base_url('index.php/admin/login'));
+
+        $csses = array(
+            'reset',
+            'header',
+            'admin',
+            'footer'
+        );
+
+        $jses = array(
+            'jquery-1.7.2.min',
+        );
+
+        $head_data['csses'] = $csses;
+        $head_data['jses'] = $jses;
+        $this->load->view('all_header', $head_data);
+        $this->load->view('admin/main');
+        $this->load->view('all_footer');
     }
 
     /**
@@ -52,8 +55,9 @@ class Admin extends CI_Controller {
         $csses = array(
             'reset',
             'header',
-            'main',
-            'footer');
+            'admin',
+            'footer'
+        );
 
         $jses = array(
             'jquery-1.7.2.min',
@@ -80,34 +84,15 @@ class Admin extends CI_Controller {
 
         $upass = $this->input->post('upass');
 
-        echo "<p>...获取用户名/密码：uname = $uname</p>";
-        echo "<p>...验证中</p>";
-        if ($uname == $this->config->item('nav_root_username') && $upass == $this->config->item('nav_root_password')) {
-            echo "<p>...通过</p>";
+        $this->load->library('user_auth');
 
-            $this->load->library('session');
-            echo "<p>...构建session</p>";
-            $data = array(
-                'uname' => $uname,
-                'upass' => sha1($upass),
-                'permission' => '9'
-            );
-            echo "<p>...写入session</p>";
-            $this->session->set_userdata($data);
+        $issucess = $this->user_auth->login($uname, $upass);
 
-            echo "<p>...显示权限</p>";
-            echo "权限:" . $this->session->userdata('permission');
-            $permissionDes[9] = '最高';
-            echo '---' . $permissionDes[$this->session->userdata('permission')];
-            $adminIndexurl = base_url('index.php/admin/');
-            echo <<<theEnd
-<p>
-   <a href={$adminIndexurl}>跳转到管理主页</a>
-</p>
-   
-theEnd;
+        if ($issucess) {
+            echo 'ok';
+            redirect(base_url('index.php/admin'));
         } else {
-            echo "<p>...验证失败</p>";
+            echo 'fail';
         }
     }
 
@@ -115,8 +100,48 @@ theEnd;
      * 登出页面
      */
     function logout() {
-        $this->load->library('session');
-        $this->session->unset_userdata('permission');
+        $this->load->library('user_auth');
+        $this->user_auth->logout();
+    }
+
+    /*
+     * 增加特别推荐
+     */
+
+    function addspecial() {
+        $this->load->library('user_auth');
+        $isuser = $this->user_auth->valid_user();
+        if (!$isuser)
+            redirect(base_url('index.php/admin/login'));
+
+        $csses = array(
+            'reset',
+            'header',
+            'admin',
+            'footer'
+        );
+
+        $jses = array(
+            'jquery-1.7.2.min',
+            's3Slider'
+        );
+
+        $head_data['csses'] = $csses;
+        $head_data['jses'] = $jses;
+        $this->load->view('all_header', $head_data);
+        $this->load->view('admin/addspecial');
+        $this->load->view('all_footer');
+    }
+
+    function doaddspecial() {
+        $this->load->library('user_auth');
+        $isuser = $this->user_auth->valid_user();
+        if (!$isuser)
+            redirect(base_url('index.php/admin/login'));
+        
+        var_dump($_POST);
+        
+        echo '<a href="javascript:history.go(-1);">后退</a>';
     }
 
 }

@@ -1,13 +1,13 @@
-<form action="<?php echo base_url('index.php/admin/checklogin')?>" method="post">
+<form id="login-box" action="<?php echo base_url('index.php/admin/checklogin')?>" method="post">
     <dl>
-        <dt>用户名</dt>
+        <dt class="login-box-title">用户名</dt>
         <dd>
-            <input name="uname" type="text" />
+            <input class="login-box-input" name="uname" type="text" />
         </dd>
-        <dt>密码</dt>
+        <dt class="login-box-title">密码</dt>
         <dd>
-            <input name="upass" type="password" />
+            <input class="login-box-input" name="upass" type="password" />
         </dd>
     </dl>
-    <input name="" type="submit" value="提交" />
+    <input id="login-box-submit" name="" type="submit" value="提交" />
 </form>

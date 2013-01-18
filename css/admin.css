@@ -1,0 +1,68 @@
+/* 
+    Document   : admin
+    Created on : 2013-1-18, 17:18:46
+    Author     : HacRi
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* Main Page */
+
+
+
+/*
+    Login Page
+*/
+
+#login-box{
+    margin: 100px auto;
+    width: 300px;
+    height: 125px;
+}
+
+.login-box-title{
+    float: left;
+    clear: left;
+    width: 80px;
+    margin-right: 20px;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.login-box-input{
+    float: left;
+    margin-top: 10px;
+}
+
+#login-box-submit{
+    clear: left;
+    margin: 20px 0 0 100px;
+    witdth: 32px;
+    float: left;
+}
+
+/*
+    Special Page
+*/
+
+#special-form{
+    width: 500px;
+    margin: 50px auto;
+}
+#special-form p{
+    height: 32px;
+}
+#special-form label{
+    display: block;
+    width: 100px;
+    float:left;
+    clear: left;
+}
+.special-form-input{
+    width: 300px;
+}
+#special-form-submit{
+    width: 100px;
+    margin-left: 150px;
+    height: 40px;
+}
