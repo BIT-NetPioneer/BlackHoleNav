@@ -21,7 +21,7 @@ class User_m extends CI_Model {
             1 => array(
                 'uid' => 1,
                 'uname' => 'admin',
-                'pwd' => 'Admin@Bitnp'
+                'pwd' => 'admin@bitnp'
             ),
             2 => array(
             )
