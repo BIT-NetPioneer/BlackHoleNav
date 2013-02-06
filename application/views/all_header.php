@@ -3,7 +3,7 @@
 $date_info = array();
 
 $date_info[2012]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2012);
-$date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 28, 1, 2013);
+$date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 1, 28, 2013);
 $date_info[2013]['TERM_2ND_START'] = mktime(0, 0, 0, 2, 25, 2013);
 $date_info[2013]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 1, 2013);
 $date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2013);
@@ -16,6 +16,7 @@ $d = 0;
 $d2 = 0;
 $timeOfNow = mktime();
 $flag = 1;
+
 try {
     if ($timeOfNow >= $date_info[$year]['TERM_1ST_START']) {
 // in 1st term 1ST year
