@@ -7,7 +7,7 @@
         <div id="specialcontent">
             <div id="slider">
                 <ul id="sliderContent">
-                    <?php if (!isset($specials)) : ?>
+                    <?php if (isset($specials)) : ?>
                         <?php foreach ($specials as &$special): ?>
                             <li class="sliderImage">
                                 <a href="<?php echo $special['url'] ?>" target="_blank">
