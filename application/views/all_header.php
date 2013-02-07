@@ -113,9 +113,11 @@ $datestr = date("Y年m月d日") . " 今年第{$yw}周";
             $(document).ready(function() {
 
                 $('.d_list').hover(function(){
-                    $(this).children('dd').css("display", "block");
+                    //$(this).children('dd').css("display", "block");
+                    $(this).children('dd').fadeIn(150);
                 }, function(){
-                    $(this).children('dd').css("display", "none");
+                    //$(this).children('dd').css("display", "none");
+                    $(this).children('dd').fadeOut(150);
                 })
                 $('.search-select').hover(function(){
                     $(this).addClass('cur-select');
