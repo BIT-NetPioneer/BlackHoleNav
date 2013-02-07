@@ -118,6 +118,14 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
+        $config['upload_path'] = './upload/special/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '100';
+        $config['encrypt_name'] = TRUE;
+        $config['max_width'] = '240';
+        $config['max_height'] = '180';
+        $this->load->library('upload', $config);
+
         $csses = array(
             'reset',
             'header',
@@ -137,29 +145,31 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('name', '标题', 'trim|required|max_length[30]');
         $this->form_validation->set_rules('url', '链接地址', 'trim|required');
         $this->form_validation->set_rules('description', '描述', 'trim|required|max_length[200]');
-        $this->form_validation->set_rules('date', '过期日期', 'trim|required');
-
+        $this->form_validation->set_rules('image', '图片', '');
+        $this->form_validation->set_rules('date', '过期日期', 'trim|required|callback_isdate_check');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin/addspecial');
         } else {
-            //$this->load->view('admin/addspecialsuccess');
-            echo '<p>success</p>';
-            echo '<a href="javascript:history.go(-1);">后退</a>';
-            #var_dump($_POST);
-            $config['upload_path'] = './upload/special/';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size'] = '100';
-            $config['encrypt_name'] = TRUE;
-            //$config['max_width'] = '240';
-            //$config['max_height'] = '180';
-
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('image')) {
-                echo 'upload fail';
-                echo $this->upload->display_errors();
+            $expire_date = strtotime($this->input->post('date'));
+            if ($expire_date == FALSE) {
+                // 感觉是多余的
+                $this->load->view('admin/addspecialfail', array('error_reason' => '日期错误'));
             } else {
-                $data = array('upload_data' => $this->upload->data());
-                var_dump($data);
+                //$out = '<p>success</p>';
+                //$out .= '<a href="javascript:history.go(-1);">后退</a>';
+
+                if (!$this->upload->do_upload('image')) {
+                    $this->load->view('admin/addspecialfail', array('error_reason' => $this->upload->display_errors()));
+                } else {
+                    $upload_data = $this->upload->data();
+                    //$this->load->view('blank', $data);
+                    $this->load->model('special_m');
+                    $form_data = $this->input->post();
+
+                    $this->special_m->insert_one($form_data['name'], $form_data['url'], $form_data['description'], $upload_data['file_name'], $expire_date);
+                    $img_addr = base_url('upload/special/' . $upload_data['file_name']);
+                    $this->load->view('admin/addspecialsuccess', array('img_addr' => $img_addr));
+                }
             }
         }
         $this->load->view('all_footer');
@@ -175,6 +185,15 @@ class Admin extends CI_Controller {
         var_dump($_POST);
 
         echo '<a href="javascript:history.go(-1);">后退</a>';
+    }
+
+    function isdate_check($str) {
+        if (strtotime($str) != FALSE) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('isdate_check', 'The %s field is not a date type');
+            return FALSE;
+        }
     }
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of special_m
  *  _      _  _                 
@@ -11,11 +12,12 @@
  *                       |_|    
  * @author HacRi <linleqi@gmail.com>
  */
-class Special_m extends CI_Model{
+class Special_m extends CI_Model {
+
     function __construct() {
         parent::__construct();
     }
-    
+
     /**
      * 返回三条特别推荐
      * 
@@ -24,17 +26,32 @@ class Special_m extends CI_Model{
      * 
      * @todo 修改排序方式
      */
-    function get_normal($count = 3){
+    function get_normal($count = 3) {
         $this->db->where('`date` >= CURDATE()');
         //$this->db->where('status', 1);
-        
+
         $this->db->select('*');
-        $this->db->order_by('id','random');
+        $this->db->order_by('id', 'random');
         $this->db->limit($count);
-        
+
         $query = $this->db->get('special');
         return $query->result();
     }
+
+    /**
+     * 插入一个特别推荐
+     */
+    function insert_one($name, $url, $des, $image_add, $expire_date) {
+        $data = array(
+            'name' => $name,
+            'url' => $url,
+            'description' => $des,
+            'image' => $image_add,
+            'date' => date('Y-m-d', $expire_date)
+        );
+        $this->db->insert('special', $data);
+    }
+
 }
 
 ?>

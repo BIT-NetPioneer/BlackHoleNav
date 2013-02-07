@@ -11,7 +11,7 @@
                 | 
                 <a href="<?php echo base_url('index.php/about/np_tech');?>">关于网协技术</a>
             </div>
-            <div class="footer-line2">2012 bitNP Tech. {elapsed_time}s</div>
+            <div class="footer-line2">2012 bitNP Tech. {elapsed_time}s {memory_usage}</div>
             
         </div>
     </body>
