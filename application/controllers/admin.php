@@ -41,7 +41,13 @@ class Admin extends CI_Controller {
         $head_data['csses'] = $csses;
         $head_data['jses'] = $jses;
         $this->load->view('all_header', $head_data);
-        $this->load->view('admin/main');
+        $maindata = array(
+            'adminfuncs' => array(
+                '添加新特别推荐' => base_url('index.php/admin/addspecial'),
+                '注销登录' => base_url('index.php/admin/logout')
+            )
+        );
+        $this->load->view('admin/main', $maindata);
         $this->load->view('all_footer');
     }
 

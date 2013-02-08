@@ -7,8 +7,14 @@
 */
 
 /* Main Page */
-
-
+#func-list{
+    width: 400px;
+    margin: 100px auto;
+}
+.func-list-item{
+    text-align: center;
+    margin: 10px auto;
+}
 
 /*
     Login Page

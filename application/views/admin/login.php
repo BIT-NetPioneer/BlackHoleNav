@@ -9,5 +9,5 @@
             <input class="login-box-input" name="upass" type="password" />
         </dd>
     </dl>
-    <input id="login-box-submit" name="" type="submit" value="提交" />
+    <input id="login-box-submit" name="" type="submit" value="登录" />
 </form>
