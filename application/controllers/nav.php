@@ -202,7 +202,7 @@ class Nav extends CI_Controller {
     }
 
     function test() {
-        var_dump($_SERVER);
+        var_dump($this->input->get());
     }
 
 }

@@ -44,6 +44,7 @@ class Admin extends CI_Controller {
         $maindata = array(
             'adminfuncs' => array(
                 '添加新特别推荐' => base_url('index.php/admin/addspecial'),
+                '链接添加申请' => base_url('index.php/admin/submiturl'),
                 '注销登录' => base_url('index.php/admin/logout')
             )
         );
@@ -95,7 +96,6 @@ class Admin extends CI_Controller {
         $issucess = $this->user_auth->login($uname, $upass);
 
         if ($issucess) {
-            echo 'ok';
             redirect(base_url('index.php/admin'));
         } else {
             echo 'fail';
@@ -141,16 +141,15 @@ class Admin extends CI_Controller {
 
         $jses = array(
             'jquery-1.7.2.min',
-            's3Slider'
         );
 
         $head_data['csses'] = $csses;
         $head_data['jses'] = $jses;
         $this->load->view('all_header', $head_data);
 
-        $this->form_validation->set_rules('name', '标题', 'trim|required|max_length[30]');
-        $this->form_validation->set_rules('url', '链接地址', 'trim|required');
-        $this->form_validation->set_rules('description', '描述', 'trim|required|max_length[200]');
+        $this->form_validation->set_rules('name', '标题', 'trim|required|max_length[20]|xss_clean');
+        $this->form_validation->set_rules('url', '链接地址', 'trim|required|prep_url');
+        $this->form_validation->set_rules('description', '描述', 'trim|required|max_length[100]|xss_clean');
         $this->form_validation->set_rules('image', '图片', '');
         $this->form_validation->set_rules('date', '过期日期', 'trim|required|callback_isdate_check');
         if ($this->form_validation->run() == FALSE) {
@@ -181,16 +180,35 @@ class Admin extends CI_Controller {
         $this->load->view('all_footer');
     }
 
-    function doaddspecial() {
+    function submiturl() {
         $this->load->library('user_auth');
         $isuser = $this->user_auth->valid_user();
         if (!$isuser)
             redirect(base_url('index.php/admin/login'));
 
+        $pages = (int) $this->input->post('p');
+        if (!$pages > 0)
+            return;
 
-        var_dump($_POST);
+        $csses = array(
+            'reset',
+            'header',
+            'admin',
+            'footer'
+        );
 
-        echo '<a href="javascript:history.go(-1);">后退</a>';
+        $jses = array(
+            'jquery-1.7.2.min',
+        );
+
+        $head_data['csses'] = $csses;
+        $head_data['jses'] = $jses;
+        $this->load->view('all_header', $head_data);
+
+
+
+
+        $this->load->view('all_footer');
     }
 
     function isdate_check($str) {

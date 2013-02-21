@@ -26,4 +26,4 @@
 <p>
     <input id="special-form-submit" class="" type="submit" name="" value="提交" />
 </p>
-<?php form_close(); ?>
+<?php echo form_close(); ?>
