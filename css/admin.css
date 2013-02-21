@@ -72,3 +72,19 @@
     margin-left: 150px;
     height: 40px;
 }
+
+.submit-table{
+    border: 1px solid #888888;
+    width: 550px;
+    margin: 20px auto;
+}
+
+.submit-table thead{
+    border: 1px solid #888888;
+    
+}
+
+.submit-table th{
+    border: 1px solid #888888;
+    height: 20px;
+}

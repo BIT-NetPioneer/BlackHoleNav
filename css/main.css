@@ -290,3 +290,20 @@
 #ua_info{
     font-weight: normal;
 }
+#func-panel-list{
+    background: url("../img/list.png") no-repeat scroll 0 10px transparent;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    margin: 0 3px;
+}
+.func-panel-item{
+}
+.func-panel-item a{
+    color: blue;
+    font-size: 12px;
+    padding: 0 0 0 13px;
+    height: 16px;
+    line-height: 14px;
+    text-decoration: none;
+}

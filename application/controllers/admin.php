@@ -188,7 +188,7 @@ class Admin extends CI_Controller {
 
         $pages = (int) $this->input->post('p');
         if (!$pages > 0)
-            return;
+            $pages = 1;
 
         $csses = array(
             'reset',
@@ -206,8 +206,25 @@ class Admin extends CI_Controller {
         $this->load->view('all_header', $head_data);
 
 
+        $this->load->model('submit_url_m');
+        $result = $this->submit_url_m->getall($pages);
 
+        #var_dump($this->submit_url_m->getall());
 
+        $submit_url_data = array();
+        $subcount = 0;
+        foreach ($result as &$row) {
+            $submit_url_data[$subcount] = array(
+                'url' => $row->url,
+                'time' => $row->submit_time,
+                'ip' => $row->ip_addr
+            );
+            $subcount++;
+        }
+
+        $data['submit'] = $submit_url_data;
+
+        $this->load->view('admin/showsubmit', $data);
         $this->load->view('all_footer');
     }
 

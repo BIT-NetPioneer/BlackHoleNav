@@ -1,0 +1,1 @@
+<p style="text-align: center;margin: 100px;">OK <a href="<?php echo base_url();?>">返回首页</a></p>

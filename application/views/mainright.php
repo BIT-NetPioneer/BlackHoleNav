@@ -107,6 +107,17 @@
         <p class="ip_title">系统/浏览器：</p>
         <p id="ua_info"></p>
     </div>
+
+    <div class="block" id="func-panel">
+        <div class="title">
+            <p>相关功能</p>
+        </div>
+        <ul id="func-panel-list">
+            <li class="func-panel-item">
+                <a href="<?php echo base_url('index.php/submit/url'); ?>">申请网址收录</a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <script type="text/javascript">
