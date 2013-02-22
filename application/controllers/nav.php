@@ -25,11 +25,12 @@ class Nav extends CI_Controller {
     function index() {
         //$this->output->enable_profiler(TRUE);
         // 缓存
-        if ($this->uri->total_segments() > 2) {
-            show_404();
+        if ((current_url() != base_url()) && (current_url() != base_url('index.php'))) {
+            #show_404();
+            redirect(base_url('index.php'));
         }
-        //$this->output->cache($this->config->item('index_cache_ttl'));
-        
+        $this->output->cache($this->config->item('index_cache_ttl'));
+
         $baseurl = base_url();
         $baseurlwithindex = $baseurl . "index.php";
         $head_data = '';

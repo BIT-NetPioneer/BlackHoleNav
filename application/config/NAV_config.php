@@ -17,7 +17,7 @@ $config['bit_ttl'] = 600; //bit主页缓存时间
 $config['jwc_ttl'] = 600; //jwc
 
 // 周期任务设置 单位：min
-$config['index_cache_ttl'] = 30; // 主页缓存时间
+$config['index_cache_ttl'] = 0; // 主页缓存时间
 $config['check_apply'] = 30; // 检查申请时间
 // 10080 min = 7 days
 $config['clean_data_ttl'] = 10080; // 清理垃圾
