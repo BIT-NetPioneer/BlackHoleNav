@@ -28,12 +28,25 @@ class Special_m extends CI_Model {
      */
     function get_normal($count = 3) {
         $this->db->where('`date` >= CURDATE()');
-        //$this->db->where('status', 1);
+        $this->db->where('status', 1);
 
-        $this->db->select('*');
+        $this->db->select('name, url, description, image');
         $this->db->order_by('id', 'random');
         $this->db->limit($count);
 
+        $query = $this->db->get('special');
+        return $query->result();
+    }
+    
+    function get_normal_b($count = 9){
+        $this->db->where('`status` = 1 OR `status` = 10');
+        $this->db->where('`date` >= CURDATE()');
+        
+        $this->db->order_by('status', 'asc');
+        $this->db->order_by('id', 'random');
+        $this->db->select('name, url, description, image');
+        $this->db->limit($count);
+        
         $query = $this->db->get('special');
         return $query->result();
     }

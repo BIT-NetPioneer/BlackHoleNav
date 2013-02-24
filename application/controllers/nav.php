@@ -207,9 +207,31 @@ class Nav extends CI_Controller {
     function test() {
         var_dump($this->input->get());
     }
-    
-    function specialpage(){
-        $this->load->view('specialpage');
+
+    function specialpage() {
+        // 缓存
+        if ((current_url() != base_url('index.php/nav/specialpage'))) {
+            #show_404();
+            redirect(base_url('index.php'));
+        }
+        $this->output->cache($this->config->item('index_cache_ttl'));
+
+        $this->load->model('special_m');
+
+        $result = $this->special_m->get_normal_b(9);
+        $specialdata = array();
+        $count = 0;
+        foreach ($result as &$row) {
+            $specialdata[$count] = array(
+                'name' => $row->name,
+                'url' => $row->url,
+                'image' => base_url('upload/special/' . $row->image),
+                'description' => $row->description
+            );
+            $count++;
+        }
+
+        $this->load->view('specialpage', array('specialdata' => $specialdata));
     }
 
 }
