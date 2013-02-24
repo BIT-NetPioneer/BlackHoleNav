@@ -1,8 +1,8 @@
 *{padding:0; margin:0}
 /*弹出层插件样式开始*/
 .floatBoxBg{display:none;width:100%;height:100%;background:#000;position:fixed !important;/*ie7 ff*/position:absolute;top:0;left:0;filter:alpha(opacity=0);opacity:0; z-index:999;}
-.floatBox{border:#1b315e 5px solid;position:fixed !important;/*ie7 ff*/position:absolute;top:0;left:0;background:#fff; display:none; z-index:1000;}
-.floatBox .dialog-title{height:23px;padding:7px 10px 0;color:#fff;background-attachment: scroll;background:#1b315e;background-repeat: repeat-x;background-position: 0px 0px; cursor:move;}
+.floatBox{border:#aaa 5px solid;position:fixed !important;/*ie7 ff*/position:absolute;top:0;left:0;background:#fff; display:none; z-index:1000;}
+.floatBox .dialog-title{height:23px;padding:7px 10px 0;color:#fff;background-attachment: scroll;background:#aaa;background-repeat: repeat-x;background-position: 0px 0px; cursor:move;}
 .floatBox .dialog-title h4{float:left;padding:0;margin:0;font-size:14px;line-height:16px; font-weight:bold; display:inline;}
 .floatBox .dialog-title span{float:right;cursor:pointer;display:inline;}
 .floatBox .dialog-title span img{cursor:pointer; margin:-5px -5px;}

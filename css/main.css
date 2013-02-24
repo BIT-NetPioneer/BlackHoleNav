@@ -23,6 +23,7 @@
     height: 24px;
     font-weight: bold;
     color: #709F11;
+
 }
 .commonurls{
     padding: 8px 8px 3px;
@@ -159,7 +160,21 @@
     overflow: hidden;
     padding: 8px 3px 5px;
 }
-
+.special-title p{
+    display: inline-block;
+    float: left;
+    line-height: 15px;
+    width: 100px;
+}
+.title-class-more{
+    float: right;
+    padding-right: 5px;
+}
+.title-class-more a{
+    color: #6EA502;
+    text-decoration: none;
+    font-weight: normal;
+}
 #specialcontent{
     padding: 0;
     background-color: #FFFFFF;

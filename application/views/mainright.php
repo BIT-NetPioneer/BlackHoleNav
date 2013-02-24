@@ -1,8 +1,11 @@
 <div id="pageright">
 
     <div id="special" class="block">
-        <div class="title">
+        <div class="title special-title">
             <p>特别推荐</p>
+            <span class="title-class-more">
+                <a href="javascript:void(0)">更多</a>
+            </span>
         </div>
         <div id="specialcontent">
             <div id="slider">
@@ -132,6 +135,22 @@
             $('#ip_add').html(json.ip);
             $('#ua_info').html(json.ua);
             isconnect=1;
+        });
+    });
+    
+    $(function (){
+        $(".title-class-more a").manhuaDialog({					       
+            Event : "click",								//触发响应事件
+            title : "特别推荐",					//弹出层的标题
+            type : "iframe",									//弹出层类型(text、容器ID、URL、Iframe)
+            content : "<?php echo base_url('index.php/nav/specialpage'); ?>",
+            width : 731,									//弹出层的宽度
+            height : 648,									//弹出层的高度	
+            scrollTop : 100,								//层滑动的高度也就是弹出层时离顶部滑动的距离
+            isAuto : false,									//是否自动弹出
+            time : 1000,									//设置弹出层时间，前提是isAuto=true
+            isClose : false,  								//是否自动关闭		
+            timeOut : 5000									//设置自动关闭时间，前提是isClose=true	
         });
     });
     

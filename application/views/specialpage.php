@@ -12,27 +12,27 @@
         ?>
         <div class="wrap">
             <ul class="list-grid">
-                <li class="sp-cell">
+                <li class="sp-cell item-cell">
+                    <a href="http://baidu.com" target="_blank" >
+                        <img alt="10MBs哦，亲" src="http://localhost/BlackHoleNav/upload/special/ead863c45f5b4520f37a5333c89b324e.jpg" />
+                        <p>电车下载1</p>
+                    </a>
+                </li>
+                
+                <li class="sp-cell item-cell">
                     <a href="http://baidu.com" target="_blank">
                         <img src="http://localhost/BlackHoleNav/upload/special/ead863c45f5b4520f37a5333c89b324e.jpg" />
                         <p>电车下载</p>
                     </a>
                 </li>
                 
-                <li class="sp-cell">
-                    <a href="http://baidu.com" target="_blank">
-                        <img src="http://localhost/BlackHoleNav/upload/special/ead863c45f5b4520f37a5333c89b324e.jpg" />
-                        <p>电车下载</p>
-                    </a>
-                </li>
-                
-                <li class="sp-cell">
+                <li class="sp-cell item-cell">
                     <a href="http://baidu.com" target="_blank">
                         <img src="http://localhost/BlackHoleNav/upload/special/3.jpg" />
                         <p>电车下载</p>
                     </a>
                 </li>
-                <li class="sp-cell">
+                <li class="sp-cell item-cell">
                     <a href="http://baidu.com" target="_blank">
                         <img src="http://localhost/BlackHoleNav/upload/special/2.jpg" />
                         <p>电车下载</p>

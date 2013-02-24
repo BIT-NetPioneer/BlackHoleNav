@@ -42,13 +42,15 @@ class Nav extends CI_Controller {
             'header',
             'main',
             'footer',
-            'jquery.autocomplete'
+            'jquery.autocomplete',
+            'manhuaDialog.1.0'
         );
 
         $jses = array(
             $this->config->item('jquery'),
             'jquery.autocomplete.min',
             's3Slider',
+            'manhuaDialog.1.0',
             'title'
         );
 
