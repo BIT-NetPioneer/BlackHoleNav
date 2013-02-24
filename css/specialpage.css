@@ -1,0 +1,50 @@
+body{
+    background: #EEEEEE;
+}
+
+.wrap { 
+    display: block;
+    width: 800px;
+    margin: 40px auto;
+}
+
+.list-grid{
+    width: 800px;
+    height: 600px;
+    display: block;
+}
+
+.sp-cell{
+    width: 240px;
+    height: 200px;
+    margin: 10px 12px;
+    float: left;
+    border: 1px solid #C0C0C0;
+
+    -moz-border-radius:3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow:0px 0px 5px #AAA;
+    -webkit-box-shadow:0px 0px 5px #AAA;
+    box-shadow:0px 0px 5px #AAA;
+}
+
+.sp-cell img{
+    border: 0px;
+}
+
+.sp-cell a{
+    text-decoration: none;
+}
+.sp-cell p{
+    font-size: 12px;
+    line-height: 12px;
+    margin: 2px 6px;
+    color: black;
+    width: 228px;
+    color: #404040;
+}
+
+.nothing-cell{
+    border-style: dashed;
+}

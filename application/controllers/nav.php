@@ -205,6 +205,10 @@ class Nav extends CI_Controller {
     function test() {
         var_dump($this->input->get());
     }
+    
+    function specialpage(){
+        $this->load->view('specialpage');
+    }
 
 }
 
