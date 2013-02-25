@@ -47,7 +47,7 @@ try {
     } else if ($timeOfNow < $date_info[$year]['SUMMER_VACATION_START']) {
 // in 2nd term
         $flag = 1;
-        $d = ceil(($timeOfNow - $date_info[$year - 1]['TERM_2ND_START']) / 86400);
+        $d = ceil(($timeOfNow - $date_info[$year]['TERM_2ND_START']) / 86400);
         $w = ceil($d / 7);
 
         // SUMMER VACATION
@@ -221,5 +221,5 @@ $datestr = date("Y年m月d日") . " 今年第{$yw}周";
                 </dl>
             </div>
         </div>
-        <script charset="gbk" src="<?php echo base_url('js/opensug.js');?>"></script>
+        <script charset="gbk" src="<?php echo base_url('js/opensug.js'); ?>"></script>
         <div id="wrap">
