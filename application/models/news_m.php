@@ -24,14 +24,15 @@ class News_m extends CI_Model {
      * @param integer $source 新闻来源：1-教务处新闻，2-校园新闻，3-校园公告
      * @return array ActiveRecord结果集
      */
-    function get_by_source($source) {
+    function get_by_source($source = 0, $limit = 5) {
         $this->db->where('`status` > 0');
-        $this->db->where('source', $source);
-        $this->db->limit(5);
+        if ($source != 0)
+            $this->db->where('source', $source);
+        $this->db->limit($limit);
         $this->db->order_by('date', 'desc');
         $this->db->order_by('id', 'asc');
 
-        $fields = array('title', 'url', 'status');
+        $fields = array('title', 'url', 'source', 'date', 'status');
         $this->db->select($fields);
 
         $query = $this->db->get('news');
@@ -63,12 +64,11 @@ class News_m extends CI_Model {
             $this->db->insert('news', $data);
         }
     }
-    
-    
+
     /**
      * 清楚全部新闻
      */
-    function empty_news(){
+    function empty_news() {
         $this->db->empty_table('news');
     }
 
