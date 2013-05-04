@@ -37,11 +37,11 @@
                     </div>
                     <div class="url-class-area">
                         <?php foreach ($hoturl as &$url): ?>
-                            <span class="urlspan2">
-                                <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="if(isconnect) $(this).attr('href','<?php echo base_url(); ?>index.php/c/jmpc?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
+                            <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="if(isconnect) $(this).attr('href','<?php echo base_url(); ?>index.php/c/jmpc?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
+                                <span class="urlspan2">
                                     <?php echo $url['name']; ?>
-                                </a>
-                            </span>
+                                </span>
+                            </a>
                         <?php endforeach; ?>
                     </div>
                 </li>
@@ -52,11 +52,11 @@
                         </div>
                         <div class="url-class-area">
                             <?php foreach ($class['urls'] as &$url): ?>
-                                <span class="urlspan2 <?php echo $url['style']; ?>" title="<?php echo $url['content']; ?>">
-                                    <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="if(isconnect) $(this).attr('href','<?php echo base_url(); ?>index.php/c/jmp?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
+                                <a href="<?php echo $url['url']; ?>" target="_blank" onmousedown="if(isconnect) $(this).attr('href','<?php echo base_url(); ?>index.php/c/jmp?uid=<?php echo urlencode($url['uid']); ?>&url=<?php echo urlencode($url['url']); ?>')">
+                                    <span class="urlspan2 <?php echo $url['style']; ?>" title="<?php echo $url['content']; ?>">
                                         <?php echo $url['name']; ?>
-                                    </a>
-                                </span>
+                                    </span>
+                                </a>
                             <?php endforeach; ?>
                         </div>
                         <div class="clear"> </div>
