@@ -8,7 +8,11 @@ $date_info = array();
  * TERM_2ND_START 学年第二学期开始的时间
  * SUMMER_VACATION_START 学年暑假开始的时间
  */
+<<<<<<< HEAD
 
+=======
+$date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 1, 28, 2013);
+>>>>>>> master
 $date_info[2013]['TERM_2ND_START'] = mktime(0, 0, 0, 2, 25, 2013);
 $date_info[2013]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 1, 2013);
 $date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 26, 8, 2013);
