@@ -2,11 +2,19 @@
 // 定义时间点，按照年份
 $date_info = array();
 
-$date_info[2012]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2012);
+/*
+ * TERM_1ST_START 学年第一学期开始的时间
+ * WINTER_VACATION_START 寒假开始的时间
+ * TERM_2ND_START 学年第二学期开始的时间
+ * SUMMER_VACATION_START 学年暑假开始的时间
+ */
 $date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 1, 28, 2013);
 $date_info[2013]['TERM_2ND_START'] = mktime(0, 0, 0, 2, 25, 2013);
 $date_info[2013]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 1, 2013);
-$date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 9, 3, 2013);
+$date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 26, 8, 2013);
+$date_info[2014]['WINTER_VACATION_START'] = mktime(0, 0, 0, 1, 20, 2014);
+$date_info[2014]['TERM_2ND_START'] = mktime(0, 0, 0, 3, 3, 2014);
+$date_info[2014]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 7, 2014);
 
 $year = date('Y');
 $dayOfYear = date("z") + 1;
