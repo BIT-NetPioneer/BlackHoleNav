@@ -11,7 +11,7 @@ $date_info = array();
 $date_info[2013]['WINTER_VACATION_START'] = mktime(0, 0, 0, 1, 28, 2013);
 $date_info[2013]['TERM_2ND_START'] = mktime(0, 0, 0, 2, 25, 2013);
 $date_info[2013]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 1, 2013);
-$date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 26, 8, 2013);
+$date_info[2013]['TERM_1ST_START'] = mktime(0, 0, 0, 8, 23, 2013);
 $date_info[2014]['WINTER_VACATION_START'] = mktime(0, 0, 0, 1, 20, 2014);
 $date_info[2014]['TERM_2ND_START'] = mktime(0, 0, 0, 3, 3, 2014);
 $date_info[2014]['SUMMER_VACATION_START'] = mktime(0, 0, 0, 7, 7, 2014);
@@ -59,7 +59,7 @@ try {
         $w = ceil($d / 7);
 
         // SUMMER VACATION
-        if (($date_info[$year]['SUMMER_VACATION_START'] - $timeOfNow) < 2592000) {
+        if (($date_info[$year]['SUMMER_VACATION_START'] - $timeOfNow) < 2592000) {    
             $flag = 11;
             $d2 = ceil(($date_info[$year]['SUMMER_VACATION_START'] - $timeOfNow) / 86400);
         }
