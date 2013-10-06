@@ -332,8 +332,8 @@ class Task extends CI_Controller {
      * @todo 错误记录
      */
     function get_news_from_bit($check = 0) {
-        if (!$check)
-            show_404();
+        //if (!$check)
+        //  show_404();
 
         $this->load->helper('htmldom');
 
@@ -357,21 +357,32 @@ class Task extends CI_Controller {
             foreach ($html->find('a[class=biaozhun]') as $element) {
                 if ($i1 < 5) {
                     //echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/xww/" . $element->href . '</br>';
-                    $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/xww/{$element->href}", $addtime, 2);
+                    $url_s = trim($element->href);
+                    if (substr($url_s, 0, 5) != "http:") {
+                        $url_s = "http://www.bit.edu.cn/ggfw/tzgg17/" . $url_s;
+                    }
+                    $this->news_m->insert_news(trim($element->innertext), $url_s, $addtime, 2);
                     $i1++;
-                }else
+                }
+                else
                     break;
             }
 
             $html = file_get_html("http://www.bit.edu.cn/ggfw/tzgg17/index.htm", false, $context);
             if (!$html)
                 return false;
-            foreach ($html->find('a[class=huizi]') as $element) {
+            //foreach ($html->find('a[class=huizi]') as $element) {
+            foreach ($html->find('div[class=list01_lf] a') as $element) {
                 if ($i2 < 5) {
-                    //echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/ggfw/tzgg17/" . $element->href . '</br>';
-                    $this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/ggfw/tzgg17/{$element->href}", $addtime, 3);
+                    $url_s = trim($element->href);
+                    if (substr($url_s, 0, 5) != "http:") {
+                        $url_s = "http://www.bit.edu.cn/ggfw/tzgg17/" . $url_s;
+                    }
+                    //echo trim($element->title) . '---' . $url_s . '</br>';
+                    $this->news_m->insert_news(trim($element->title), $url_s, $addtime, 3);
                     $i2++;
-                }else
+                }
+                else
                     break;
             }
 
@@ -410,9 +421,15 @@ class Task extends CI_Controller {
             foreach ($html->find('#AutoNumber5 a[class=middle]') as $element) {
                 if (substr($element->href, 6, 4) == 'view') {
                     $news_title = mb_convert_encoding(strip_tags($element->innertext), 'UTF-8', 'GBK, UTF-8');
-                    $news_url = 'http://jwc.bit.edu.cn' . $element->href;
+
+                    $url_s = trim($element->href);
+                    if (substr($url_s, 0, 5) != "http:") {
+                        $url_s = "http://jwc.bit.edu.cn/" . $url_s;
+                    }
+
+                    //$news_url = 'http://jwc.bit.edu.cn' . $element->href;
                     //echo $news_title . '---' . $news_url . "<br/>";
-                    $this->news_m->insert_news(trim($news_title), $news_url, $addtime, 1);
+                    $this->news_m->insert_news(trim($news_title), $url_s, $addtime, 1);
                     $i++;
                 }
                 if ($i == 5)
@@ -510,7 +527,8 @@ class Task extends CI_Controller {
                     echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/xww/" . $element->href . '</br>';
                     //$this->news_m->insert_news(trim($element->innertext), "http://www.bit.edu.cn/xww/{$element->href}", $addtime, 2);
                     $i1++;
-                }else
+                }
+                else
                     break;
             }
 
@@ -521,7 +539,8 @@ class Task extends CI_Controller {
                 if ($i2 < 5) {
                     echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/ggfw/tzgg17/" . $element->href . '</br>';
                     $i2++;
-                }else
+                }
+                else
                     break;
             }
 
