@@ -36,7 +36,7 @@ function search_option_dd_set(){
             break;
         case 'search-option-ip':
             $('#search_selects-ip').addClass('cur-option');
-            change_search_cur("校内IP",'http://star.bit.edu.cn/ipsearch/ip.php','ip','select_lan_ip');
+            change_search_cur("校内IP",'http://nav.bitnp.net/ip/s.php','ip','select_lan_ip');
             break;
     }
     $('.keywords').focus();
@@ -103,7 +103,7 @@ function search_select_set(){
             change_search_cur('必应','http://cn.bing.com/maps/default.aspx','q','select_bing_map');
             break;
         case 'select_lan_ip':
-            change_search_cur("校内IP",'http://star.bit.edu.cn/ipsearch/ip.php','ip','select_lan_ip');
+            change_search_cur("校内IP",'http://nav.bitnp.net/ip/s.php','ip','select_lan_ip');
             break;
         case 'select_ip138_ip':
             change_search_cur('ip138','http://www.ip138.com/ips138.asp','ip','select_ipcn_ip');

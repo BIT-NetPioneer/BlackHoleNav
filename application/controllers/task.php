@@ -332,8 +332,8 @@ class Task extends CI_Controller {
      * @todo 错误记录
      */
     function get_news_from_bit($check = 0) {
-        //if (!$check)
-        //  show_404();
+        if (!$check)
+          show_404();
 
         $this->load->helper('htmldom');
 
@@ -359,7 +359,7 @@ class Task extends CI_Controller {
                     //echo trim($element->innertext) . '---' . "http://www.bit.edu.cn/xww/" . $element->href . '</br>';
                     $url_s = trim($element->href);
                     if (substr($url_s, 0, 5) != "http:") {
-                        $url_s = "http://www.bit.edu.cn/ggfw/tzgg17/" . $url_s;
+                        $url_s = "http://www.bit.edu.cn/xww/" . $url_s;
                     }
                     $this->news_m->insert_news(trim($element->innertext), $url_s, $addtime, 2);
                     $i1++;
@@ -424,7 +424,7 @@ class Task extends CI_Controller {
 
                     $url_s = trim($element->href);
                     if (substr($url_s, 0, 5) != "http:") {
-                        $url_s = "http://jwc.bit.edu.cn/" . $url_s;
+                        $url_s = "http://jwc.bit.edu.cn" . $url_s;
                     }
 
                     //$news_url = 'http://jwc.bit.edu.cn' . $element->href;
