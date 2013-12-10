@@ -55,6 +55,7 @@ $browsers = array(
 					'Opera'				=> 'Opera',
 					'MSIE'				=> 'Internet Explorer',
 					'Internet Explorer'	=> 'Internet Explorer',
+                                        'Trident/7.0'                   => 'Internet Explorer',
 					'Shiira'			=> 'Shiira',
 					'Firefox'			=> 'Firefox',
 					'Chimera'			=> 'Chimera',
